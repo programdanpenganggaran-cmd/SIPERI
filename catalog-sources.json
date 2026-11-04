@@ -1,0 +1,513 @@
+{
+  "retrievedOn": "2026-11-02",
+  "note": "Tahun adalah tahun profil sumber, bukan tahun setiap dokumen. Akses tujuan belum diuji.",
+  "sources": [
+    {
+      "url": "https://linktr.ee/PenyusunanPaguAnggaran2022",
+      "year": 2022,
+      "stage": "Pagu Anggaran",
+      "resources": [
+        {
+          "title": "1. Pagu Anggaran & Kontrol Pagu",
+          "url": "https://drive.google.com/drive/folders/1z7UFm-4D5tnhf1vdf12O0WFKHtXmWPk3?usp=sharing"
+        },
+        {
+          "title": "2. SBK/Template RAB",
+          "url": "https://drive.google.com/drive/folders/1Lke-ZKIS2iT3YNHZt-2N3axjDazeZeVN?usp=sharing"
+        },
+        {
+          "title": "3. Peraturan",
+          "url": "https://drive.google.com/drive/folders/1T_IjoFctSZtd8pnu5dMK3oe47s7eRStE?usp=sharing"
+        },
+        {
+          "title": "4. Pedoman Penyusunan RKAKL",
+          "url": "https://drive.google.com/drive/folders/1yQTQp4kB187uCCV1_Bif-Op8UqAyW0ju?usp=sharing"
+        },
+        {
+          "title": "5. Struktur Program Dukungan Manajemen",
+          "url": "https://drive.google.com/drive/folders/13izZoEhoBc601adgwb3aLA7BXXbqxh6Y?usp=sharing"
+        },
+        {
+          "title": "6. Dokumen Kelengkapan Pusat & Daerah",
+          "url": "https://drive.google.com/drive/folders/17sSt_VnaBUEGpOvoFM-FupXGNBGBHYyS?usp=sharing"
+        },
+        {
+          "title": "7. Berita Acara Penelitian",
+          "url": "https://drive.google.com/drive/folders/1QqS89lnmLboiodpeTlwK1aa2q37FPJk7?usp=sharing"
+        },
+        {
+          "title": "8. Hasil Reviu APIP Irjen",
+          "url": "https://drive.google.com/drive/folders/1ycfm7pBoXorZHkh2747vgawH_Kqtt4-F?usp=sharing"
+        },
+        {
+          "title": "9. Pelaporan Progress",
+          "url": "https://drive.google.com/drive/folders/11chGWavT2eF3528fXNJX7RbAKyieY-7d?usp=sharing"
+        },
+        {
+          "title": "10. Bahan Paparan",
+          "url": "https://drive.google.com/drive/folders/1-Q2tLdR8LPTICcur0kQ9Gygn-fgecfTL?usp=sharing"
+        },
+        {
+          "title": "11. Informasi",
+          "url": "https://drive.google.com/drive/folders/1v60kgpODOg2pbTrqzOwgCWvJdgbO73eU?usp=sharing"
+        },
+        {
+          "title": "12. Pertanyaan-Pertanyaan",
+          "url": "https://drive.google.com/drive/folders/1h1dMv3qPumaEzvmobH2GOTNM0MLYwdCG?usp=sharing"
+        }
+      ]
+    },
+    {
+      "url": "https://linktr.ee/PenyusunanPaguAlokasi2022",
+      "year": 2022,
+      "stage": "Pagu Alokasi",
+      "resources": [
+        {
+          "title": "1. Pagu Alokasi Anggaran dan Kontrol Pagu 2022",
+          "url": "https://drive.google.com/drive/folders/1-iaCp5Gvn5MsaE-kHvK8fGY8qH62uUIE?usp=sharing"
+        },
+        {
+          "title": "2. SBK/Template RAB",
+          "url": "https://drive.google.com/drive/folders/1bJH8Ltd5qvZnDo7CaiWx0MMWTxTC8iZz?usp=sharing"
+        },
+        {
+          "title": "3. Peraturan",
+          "url": "https://drive.google.com/drive/folders/1QqSs5icm1owzogsl5foozUR56ADuYTqp?usp=sharing"
+        },
+        {
+          "title": "4. Pedoman Penyusunan RKAKL Pagu Alokasi Anggaran 2022",
+          "url": "https://drive.google.com/drive/folders/148aZ28GbgVsOYR0Lqzyo0xz7WtaeJCch?usp=sharing"
+        },
+        {
+          "title": "5. Struktur Program Dukungan Manajemen",
+          "url": "https://drive.google.com/drive/folders/1m5FfuUYa1FU0W-n6cllPS0FvXc3_3PbB?usp=sharing"
+        },
+        {
+          "title": "6. Dokumen Kelengkapan Pusat dan Daerah",
+          "url": "https://drive.google.com/drive/folders/1IQNRPnaDyztmMIz6-bjZgeRxbE0WFr5f?usp=sharing"
+        },
+        {
+          "title": "7. Berita Acara Penelitian",
+          "url": "https://drive.google.com/drive/folders/1KMsEH8xJk4_-OHDynWRx-SMaWl4KZvlC?usp=sharing"
+        },
+        {
+          "title": "8. Hasil Reviu Apip_Irjen",
+          "url": "https://drive.google.com/drive/folders/16dmr62VFMPeeLeTPmeJpx8ntkZDGyCc2?usp=sharing"
+        },
+        {
+          "title": "9. Pelaporan Progres",
+          "url": "https://drive.google.com/drive/folders/1rx1FU_iJgrg086p5436ijTdv8WT3GjJb?usp=sharing"
+        },
+        {
+          "title": "10. Bahan Paparan",
+          "url": "https://drive.google.com/drive/folders/1QCgYlmrG6HsAHQjWGEab8DODZYixbQwh?usp=sharing"
+        },
+        {
+          "title": "Informasi (background zoom, Qr Code, pembagian kelompok)",
+          "url": "https://drive.google.com/drive/folders/14eTVTD5Zx464Mac01TUmMoDqPwHIeObN?usp=sharing"
+        },
+        {
+          "title": "Question and Answer",
+          "url": "https://drive.google.com/drive/folders/1kJmnGmezmqI2-VLoaGToRBeF75BOvGG4?usp=sharing"
+        }
+      ]
+    },
+    {
+      "url": "https://linktr.ee/penyusunanpaguanggaran2023",
+      "year": 2023,
+      "stage": "Pagu Anggaran",
+      "resources": [
+        {
+          "title": "DISTRIBUSI PAGU 2023",
+          "url": "https://onedrive.live.com/view.aspx?resid=856686903A6C208D!143&ithint=file%2cxlsx&authkey=!AGvB-Vl372hfUhw"
+        },
+        {
+          "title": "TEMPLATE 2023",
+          "url": "https://drive.google.com/drive/folders/1WwFfFnOjH8DIgIB2GFndV-EvcM15fijl"
+        },
+        {
+          "title": "REFERENSI KODEFIKASI RO",
+          "url": "https://drive.google.com/drive/folders/1lGmdOQdXcw2FkRb4aCFsF06OiDymPKHn"
+        },
+        {
+          "title": "DISTRIBUSI TPNBP 2023",
+          "url": "https://docs.google.com/spreadsheets/d/1mKmMegzUglViO7Gj3R5E2UpcKzHgkB7E/edit?usp=sharing&ouid=107469119321844733150&rtpof=true&sd=true"
+        },
+        {
+          "title": "STRUKTUR ANGGARAN KRO/RO DUKMAN DAERAH",
+          "url": "https://drive.google.com/drive/folders/1fwPwqWvbO4PfvSxHhy88qtfPZ4i1mBv7"
+        },
+        {
+          "title": "PRIORITAS NASIONAL",
+          "url": "https://drive.google.com/drive/folders/1RjrIweYyorKQnmxaumq3j9YhzzEGBVqg"
+        },
+        {
+          "title": "BAHAN PAPARAN",
+          "url": "https://drive.google.com/drive/folders/1wrKfNIKBgHgR05rbXw6lKIo4foRH8L72"
+        },
+        {
+          "title": "DOKUMEN KELANGKAPAN PUSAT DAN DAERAH",
+          "url": "https://drive.google.com/drive/folders/1X3Nf1I8cxS6AzzBayMkVkWVuPYMkplOd"
+        },
+        {
+          "title": "HASIL REVIU APIP - ITJEN",
+          "url": "https://drive.google.com/drive/folders/1tqLWuPI-s35UjRDYG7XpXogWjO7kIEHE"
+        },
+        {
+          "title": "BERITA ACARA PENELITIAN",
+          "url": "https://drive.google.com/drive/folders/146cNJUc_cv0no8644RbHqkI1yz4rztkG"
+        },
+        {
+          "title": "BAHAN KONTROL PAGU",
+          "url": "https://drive.google.com/drive/folders/1MNeG-gmzgHP5ZXgVhd46Mf9NeuxAdt-v"
+        },
+        {
+          "title": "INFORMASI",
+          "url": "https://drive.google.com/drive/folders/1NG-p9xF93t4ytJezeSLIfISGi4CmBPxq"
+        },
+        {
+          "title": "DOKUMENTASI",
+          "url": "https://drive.google.com/drive/folders/1EVcrmcJezwehvMAR7J6FW_YSCUEb62eB"
+        }
+      ]
+    },
+    {
+      "url": "https://linktr.ee/PaguAlokasiAnggaran2023",
+      "year": 2023,
+      "stage": "Pagu Alokasi",
+      "resources": [
+        {
+          "title": "DISTRIBUSI PAGU",
+          "url": "https://1drv.ms/x/s!AoKiJFOcwkfagX2INs3jNijYkFKl?e=LdJ403"
+        },
+        {
+          "title": "KONTROL PAGU ALOKASI 2023",
+          "url": "https://docs.google.com/spreadsheets/d/1OokL803E6HOIIgEhTc6yQfijHc_2Owt0/edit#gid=377338887"
+        },
+        {
+          "title": "PAGU PER ESELON II",
+          "url": "https://drive.google.com/drive/folders/1p5wUurVERp0NO9iAstiH8L3wKrsifG5g"
+        },
+        {
+          "title": "TEMPLATE TOR RAB",
+          "url": "https://drive.google.com/drive/folders/1WwFfFnOjH8DIgIB2GFndV-EvcM15fijl?usp=sharing"
+        },
+        {
+          "title": "MAJOR PROJECT",
+          "url": "https://drive.google.com/drive/folders/1Xv_6sB1p8vvy87OPeMB06sG7OLNMV8lc"
+        },
+        {
+          "title": "DISTRIBUSI TPNBP",
+          "url": "https://drive.google.com/drive/folders/13zi_bNVA3VN66f4xZpDyEXManWKV7A-C"
+        },
+        {
+          "title": "KORIDOR PERTUMBUHAN DAN PEMERATAAN",
+          "url": "https://drive.google.com/drive/folders/1aePvOjbG4ZDGFg1KrhH6PrpMbuBgxmyV"
+        },
+        {
+          "title": "BAHAN PAPARAN",
+          "url": "https://drive.google.com/drive/folders/1OYNhZAmeISkwfOlzZCQ4hv0N39yJBvxC"
+        },
+        {
+          "title": "DOKUMEN KELENGKAPAN PUSAT DAN DAERAH",
+          "url": "https://drive.google.com/drive/folders/1MEYMuB0iHcJY8wZ2SRht-VckLCCfE6m4"
+        },
+        {
+          "title": "BERITA ACARA PENELITIAN",
+          "url": "https://drive.google.com/drive/folders/1sNkDGWEKwvJCfLN4Y7o_3dPrdSuva94W"
+        },
+        {
+          "title": "HASIL REVIU APIP - ITJEN",
+          "url": "https://drive.google.com/drive/folders/1Zyzci9h1VaZHBfKcf05FZ--MqYeHAg8-"
+        },
+        {
+          "title": "INFORMASI",
+          "url": "https://drive.google.com/drive/folders/1fuZA7x_rcTmw0EIeUtymkEQvD-XwkHWq"
+        },
+        {
+          "title": "DOKUMENTASI",
+          "url": "https://drive.google.com/drive/folders/1_J-m04_aCVTiy9NLRGBFuIxYIVtTvdvI"
+        }
+      ]
+    },
+    {
+      "url": "https://linktr.ee/pa_atrbpn_2024",
+      "year": 2024,
+      "stage": "Pagu Anggaran",
+      "resources": [
+        {
+          "title": "REFERENSI KRO DAN RO",
+          "url": "https://drive.google.com/drive/folders/1hpXczAPX2dm9CvjCpdGSiYTGHBEWwP57?usp=sharing"
+        },
+        {
+          "title": "DISTRIBUSI PAGU UPDATE SPPR",
+          "url": "https://1drv.ms/x/s!Ao0gbDqQhmaFggRXpJf5pTqugt9m?e=r0l7Yy"
+        },
+        {
+          "title": "KONTROL PAGU ANGGARAN 2024",
+          "url": "https://drive.google.com/drive/folders/1Ku9IoBUx7ifitKyC8RjNfs97UU9ho9w_?usp=sharing"
+        },
+        {
+          "title": "PAGU PER ESELON II",
+          "url": "https://drive.google.com/drive/folders/160Xh0zgPW1odjjpsmmaDXJjuVkgMm_l8?usp=sharing"
+        },
+        {
+          "title": "TEMPLATE TOR RAB",
+          "url": "https://drive.google.com/drive/folders/1DAPBqKrcIhusQMvFhOtfgyVQmkTCWJFE"
+        },
+        {
+          "title": "MAJOR PROJECT",
+          "url": "https://drive.google.com/drive/folders/1ud6j7jNMi7ry0NkZz_KmTQDn0-Ui9j5g?usp=sharing"
+        },
+        {
+          "title": "DISTRIBUSI TPNBP",
+          "url": "https://drive.google.com/drive/folders/1WEEdl13ETloWm1aEIb6dLGjQNWd5xqJp?usp=sharing"
+        },
+        {
+          "title": "ADK DAN DOKUMEN PERBAIKAN TPNBP",
+          "url": "https://drive.google.com/drive/folders/1kUmjaL-v_PUTBf-78t_bOQbVwABKZzZu?usp=sharing"
+        },
+        {
+          "title": "BAHAN PAPARAN",
+          "url": "https://drive.google.com/drive/folders/10ePWOev6BG20UWvp7lIN77S7ivDZhQJt?usp=sharing"
+        },
+        {
+          "title": "DOKUMEN KELENGKAPAN PUSAT DAN DAERAH",
+          "url": "https://drive.google.com/drive/folders/1qeYuLjQXrwIjDsCAGjIh-CQKjv3GUneA?usp=sharing"
+        },
+        {
+          "title": "BERITA ACARA",
+          "url": "https://drive.google.com/drive/folders/1pgRsS5e7l8FaG_UmO4IcLjVGpcg0uYFV?usp=sharing"
+        },
+        {
+          "title": "HASIL REVIU APIP-ITJEN",
+          "url": "https://drive.google.com/drive/folders/1u9hgiSzf1r2EhgFqZbIC_WwNVSTvOQB8?usp=sharing"
+        },
+        {
+          "title": "INFORMASI",
+          "url": "https://drive.google.com/drive/folders/1N0NJ-6ZIO5APh_7Ohjud4ZVt6yFYMfuB?usp=sharing"
+        },
+        {
+          "title": "DOKUMENTASI",
+          "url": "https://drives.atrbpn.go.id/d/e0089c47238a4324a045/"
+        }
+      ]
+    },
+    {
+      "url": "https://linktr.ee/paa_2024_atrbpn",
+      "year": 2024,
+      "stage": "Pagu Alokasi",
+      "resources": [
+        {
+          "title": "TPNBP 2024",
+          "url": "https://drive.google.com/drive/folders/1qB8j-IVPjqRXKsl8FWrltB8LhhdUFeeK?usp=drive_link"
+        },
+        {
+          "title": "REFERENSI KRO & RO",
+          "url": "https://drive.google.com/drive/folders/1hpXczAPX2dm9CvjCpdGSiYTGHBEWwP57?usp=drive_link"
+        },
+        {
+          "title": "Distribusi Pagu",
+          "url": "https://drive.google.com/drive/folders/1AqdzAmQQDU-wnzBdBQ5AL1BbUvLUZCq3"
+        },
+        {
+          "title": "Kontrol Pagu",
+          "url": "https://drive.google.com/drive/folders/1vWGMmQ7RQytR8U3r0L35CI7pFhnOMzld"
+        },
+        {
+          "title": "TEMPLATE TOR RAB 2024",
+          "url": "https://drive.google.com/drive/folders/1DAPBqKrcIhusQMvFhOtfgyVQmkTCWJFE?usp=drive_link"
+        },
+        {
+          "title": "Materi",
+          "url": "https://drive.google.com/drive/folders/12fK0Dja5a2bOTIY3dYyOLBizQbz3wkd4"
+        },
+        {
+          "title": "REVIU APIP-ITJEN",
+          "url": "https://drive.google.com/drive/folders/16eqa2coroxqQu4BKSTm0es772N2vh8y9"
+        },
+        {
+          "title": "Pemberkasan",
+          "url": "https://drive.google.com/drive/folders/1DGHuVqVkmY7NnhhG738QX18QnPGOfUjs"
+        },
+        {
+          "title": "Informasi",
+          "url": "https://drive.google.com/drive/folders/18uPo4BoGyXOKhXhQpOS_sQjyFe3nyXIk"
+        },
+        {
+          "title": "Dokumentasi",
+          "url": "https://drive.google.com/drive/folders/1_f99bx1_SHZYvqGOKLGonD4s8niapWIg"
+        }
+      ]
+    },
+    {
+      "url": "https://linktr.ee/pa_atrbpn_2025",
+      "year": 2025,
+      "stage": "Pagu Anggaran",
+      "resources": [
+        {
+          "title": "INFORMASI - Google Drive",
+          "url": "https://drive.google.com/drive/folders/1pBYEpAWvAmSrPC2_nm1dccGnr87Wb1KK?usp=drive_link"
+        },
+        {
+          "title": "TPNBP 2027 - Google Drive",
+          "url": "https://drive.google.com/drive/folders/1QBxK0dokqXa7TKkPvqmy9zxnv1JKrABP?usp=drive_link"
+        },
+        {
+          "title": "DISTRIBUSI PAGU ANGGARAN - Google Drive",
+          "url": "https://drive.google.com/drive/folders/1rhqQBXXmGqC4u_UywRsKHqWwYJmRYOVE?usp=drive_link"
+        },
+        {
+          "title": "TEMPLATE TOR & RAB - Google Drive",
+          "url": "https://drive.google.com/drive/folders/1sBWbHtQF4yxsm_N6N9wjPU3aGxh15ew_?usp=drive_link"
+        },
+        {
+          "title": "BAHAN MATERI - Google Drive",
+          "url": "https://drive.google.com/drive/folders/1mPH-sLy84upep-TU94uZ7EacxQxzDg7E?usp=drive_link"
+        },
+        {
+          "title": "KELENGKAPAN DOKUMEN - Google Drive",
+          "url": "https://drive.google.com/drive/folders/1nNQbEvrHPOQS0280oljanGxIlZl3Ubez?usp=drive_link"
+        },
+        {
+          "title": "BA PENELITIAN - Google Drive",
+          "url": "https://drive.google.com/drive/folders/174NFnw1q9wE9JCRWYn-S1MZTraBbwgVD?usp=drive_link"
+        },
+        {
+          "title": "REVIU APIP - ITJEN - Google Drive",
+          "url": "https://drive.google.com/drive/folders/1NNDSU7V1lh2O0s65hdGzsRJMmKYWgzFG?usp=drive_link"
+        },
+        {
+          "title": "ADMINISTRASI - Google Drive",
+          "url": "https://drive.google.com/drive/folders/1qqub0pVUspklT63MTfdK2_cXh2KpmDFq?usp=drive_link"
+        },
+        {
+          "title": "DOKUMENTASI - Google Drive",
+          "url": "https://drive.google.com/drive/folders/1vbyVA-pfPd1WkapGCAPQ55YvHg6tzyvY?usp=drive_link"
+        },
+        {
+          "title": "TPNBP 2025",
+          "url": "https://docs.google.com/spreadsheets/d/1D-ec369RBgbjt4W1iEEoAbKWWDjzqxKJ/edit?gid=113967426#gid=113967426"
+        },
+        {
+          "title": "DISTRIBUSI PAGU",
+          "url": "https://docs.google.com/spreadsheets/d/1ANbc8HUFUvPgPf8CHYInzPyX8yzJHZeI/edit?gid=264851336#gid=264851336"
+        },
+        {
+          "title": "TEMPLATE TOR RAB",
+          "url": "https://bit.ly/TEMPLATE2025"
+        },
+        {
+          "title": "REKAP RO YANG BELUM MUNCUL",
+          "url": "https://docs.google.com/spreadsheets/d/1bj8E2lk8TGj78tLpzITQOG2nlsCf_JeE/edit?gid=606680104#gid=606680104"
+        },
+        {
+          "title": "REVIU APIP-ITJEN",
+          "url": "https://drive.google.com/drive/folders/1fvqapVyQiMteu_M24vuUtWZY6F0C1cgy"
+        },
+        {
+          "title": "BAHAN PAPARAN",
+          "url": "https://drive.google.com/drive/folders/1im8-D0X6Fq0huHJQCjRZp7qs_KAxmclS"
+        },
+        {
+          "title": "KELENGKAPAN DOKUMEN + BERITA ACARA",
+          "url": "https://drive.google.com/drive/folders/1DM_fwHh7q3s9xKlbGmAn7BVdd6yGioqn"
+        },
+        {
+          "title": "INFORMASI",
+          "url": "https://drive.google.com/drive/folders/1NnMOjrDdPkd0lL_UAek889ChGFHO6y69"
+        },
+        {
+          "title": "DOKUMENTASI",
+          "url": "https://drive.google.com/drive/folders/1TBseahiAJq3gxn9YMvkhk9tQ6x-bA44t"
+        }
+      ]
+    },
+    {
+      "url": "https://linktr.ee/paa_atrbpn_2025",
+      "year": 2025,
+      "stage": "Pagu Alokasi",
+      "resources": [
+        {
+          "title": "TPNBP 2025",
+          "url": "https://docs.google.com/spreadsheets/d/1D-ec369RBgbjt4W1iEEoAbKWWDjzqxKJ/edit?gid=113967426#gid=113967426"
+        },
+        {
+          "title": "DISTRIBUSI PAGU",
+          "url": "https://docs.google.com/spreadsheets/d/11YW5dhAT-L1yX-iivg6kpU18XQ8s5m2RRw4YnTR-1Ng/edit?gid=925786445#gid=925786445"
+        },
+        {
+          "title": "TEMPLATE TOR RAB",
+          "url": "https://drive.google.com/drive/folders/1f7RiEVGpFOHRWtXSX5ULpH7AP5j2axI4"
+        },
+        {
+          "title": "REKAP RO/LOKUS YANG BELUM MUNCUL",
+          "url": "https://docs.google.com/spreadsheets/d/15mVscfZjSb93tIIffB9Eor4QaNOOZvC8qnO6bVbuh7o/edit?gid=1736351139#gid=1736351139"
+        },
+        {
+          "title": "REVIU APIP-ITJEN",
+          "url": "https://drive.google.com/drive/folders/1CEJ_Ih-e9SU76hM7ecPr75slKlj1U-c9"
+        },
+        {
+          "title": "MATERI",
+          "url": "https://drive.google.com/drive/folders/1UUNr4Xa7frT2Go_sFskvlCh_HI8_gt8D"
+        },
+        {
+          "title": "KELENGKAPAN DOKUMEN & BERITA ACARA",
+          "url": "https://drive.google.com/drive/folders/1yTPpvoxlVPjUutCQVZsq0p2lZMiLOmQI"
+        },
+        {
+          "title": "INFORMASI",
+          "url": "https://drive.google.com/drive/folders/1EdoRwmEfrBBnUCmeARD0S-MgC8J-GKcZ"
+        },
+        {
+          "title": "DOKUMENTASI",
+          "url": "https://drive.google.com/drive/folders/1ZRu4Z6YvslT78lkqiMOwOgDYA-gkGhtF"
+        }
+      ]
+    },
+    {
+      "url": "https://linktr.ee/pa_atrbpn_2026",
+      "year": 2026,
+      "stage": "Pagu Anggaran",
+      "resources": [
+        {
+          "title": "INFORMASI",
+          "url": "https://drive.google.com/drive/folders/1cgYlOcJgDreOU9O__3h_1d484Yauh6gd"
+        },
+        {
+          "title": "TPNBP 2026",
+          "url": "https://drive.google.com/drive/folders/1q0RqTS5YVCXr49U_SgXnlTkU7a5pPhsP"
+        },
+        {
+          "title": "DISTRIBUSI PAGU ANGGARAN",
+          "url": "https://docs.google.com/spreadsheets/d/1FyMymgURZuDrBOxvLs1srijdl-V2Y52MaxRwb-a464g/edit?gid=55825466#gid=55825466"
+        },
+        {
+          "title": "TEMPLATE TOR & RAB",
+          "url": "https://drive.google.com/drive/folders/1_qBBp1TPjNBijjTnZF7VFDmtpfZBp6nd"
+        },
+        {
+          "title": "BAHAN MATERI",
+          "url": "https://drive.google.com/drive/folders/1r4QFSP3EuBahYDnm980_liFZ4vsDgngG"
+        },
+        {
+          "title": "KELENGKAPAN DOKUMEN & BERITA ACARA",
+          "url": "https://drive.google.com/drive/folders/1eowT4ElBeZIbL1EvdSJ5NDiytBV-R9Mv"
+        },
+        {
+          "title": "REVIU APIP - ITJEN",
+          "url": "https://drive.google.com/drive/folders/1ukuibmNR93gk07Iqawh4rmmsqh-0IfXx"
+        },
+        {
+          "title": "ADMINISTRASI",
+          "url": "https://drive.google.com/drive/folders/1LBpqjZV5MjkEi5VME-SOUoyLtMxdkFoE"
+        },
+        {
+          "title": "DOKUMENTASI",
+          "url": "https://drive.google.com/drive/folders/1VL-THtOhvcB4AF1TJO99pLnq4u-mbDA_"
+        }
+      ]
+    }
+  ]
+}

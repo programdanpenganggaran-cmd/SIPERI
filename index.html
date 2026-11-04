@@ -1,58 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SIPERI &mdash; Sistem Informasi Penyusunan, Revisi, dan Realisasi Anggaran</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="navbar">
-      <div class="logo">SIPERI</div>
-      <nav>
-        <ul>
-          <li><a href="index.html">Beranda</a></li>
-          <li><a href="arsip-data.html">Arsip Data</a></li>
-          <li><a href="dashboard.html">Dashboard POK PUSDATIN</a></li>
-        </ul>
-      </nav>
-    </div>
-    <header class="hero" style="background-image: url('images/hero-home.png');">
-      <div>
-        <h1>SIPERI</h1>
-        <p>Sistem Informasi Penyusunan, Revisi, dan Realisasi Anggaran</p>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Katalog penyusunan PAGU SiPERI Kementerian ATR/BPN. Temukan dokumen berdasarkan tahun sumber dan tahap anggaran.">
+  <title>SiPERI | Akses anggaran dan dokumen</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Lewati ke isi utama</a>
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" href="#beranda"><img src="atr-bpn.png" alt="Logo Kementerian ATR/BPN" width="64" height="64"><span class="brand-copy">SiPERI<small>Kementerian ATR/BPN</small></span></a>
+    <p class="nav-label">Ruang kerja anggaran</p>
+    <nav aria-label="Navigasi utama">
+      <a href="#beranda" data-page="beranda">Beranda</a>
+      <a href="#pagu" data-page="pagu">Penyusunan PAGU</a>
+      <a href="#revisi" data-page="revisi">Revisi Anggaran</a>
+      <a href="#pok" data-page="pok">POK SEKJEN</a>
+      <a href="#realisasi" data-page="realisasi">Realisasi Anggaran</a>
+      <a href="https://script.google.com/macros/s/AKfycbw67r8qagn2VoEDXt9mXUvNV7gotQjPf9GcFMiVT2XFrWuTU4eGTQ4xqb6TgK4Qf_DR/exec">PANTAU ATR/BPN</a>
+      <a href="#arsip" data-page="arsip">Arsip dokumen</a>
+    </nav>
+    <div class="sidebar-note"><strong>Satu ruang untuk anggaran.</strong><p>Pilih layanan, temukan dokumen, lalu buka sumber dengan akun yang memiliki akses.</p></div>
+  </aside>
+  <main id="main" tabindex="-1">
+    <header class="topbar"><span>Sistem Informasi Penyusunan, Revisi, dan Realisasi Anggaran</span><span class="preview">Purwarupa portal</span></header>
+    <section class="intro" aria-labelledby="page-title">
+      <div class="institution"><img src="atr-bpn.png" alt="" width="48" height="48"><span>Kementerian Agraria dan Tata Ruang /<br>Badan Pertanahan Nasional</span></div>
+      <p class="eyebrow">Penyusunan PAGU</p>
+      <h1 id="page-title">Dokumen anggaran,<br>lebih mudah ditemukan.</h1>
+      <p>Temukan referensi, template, dan kelengkapan penyusunan anggaran dalam satu tempat.</p>
+      <form id="search-form" role="search">
+        <label for="search">Cari di katalog SiPERI</label>
+        <div class="search-line"><input type="search" id="search" autocomplete="off"><button type="submit">Cari dokumen</button></div>
+        <p class="search-hint">Mencari judul dan kata kunci tautan, belum mencakup isi file.</p>
+      </form>
+    </section>
+    <section id="monitoring-shortcut" class="monitoring-shortcut"><div><p class="eyebrow">Untuk kantah dan unit kerja</p><h2>PANTAU ATR/BPN</h2><p>Peta Anggaran Terintegrasi Antar Unit. Buka aplikasi untuk memantau anggaran dan realisasi.</p></div><a href="https://script.google.com/macros/s/AKfycbw67r8qagn2VoEDXt9mXUvNV7gotQjPf9GcFMiVT2XFrWuTU4eGTQ4xqb6TgK4Qf_DR/exec">Buka PANTAU ATR/BPN</a></section>
+    <section class="workspace-heading" id="workspace-heading"><div><p class="eyebrow">Mulai dari kebutuhanmu</p><h2>Layanan anggaran dalam satu ruang kerja.</h2></div><p>Alur pengelolaan anggaran, dari penyusunan hingga pelaporan.</p></section>
+    <section id="home-services" class="home-services" aria-label="Layanan SiPERI">
+      <a href="#pagu"><span>01 / Perencanaan</span><h2>Penyusunan PAGU</h2><p>Pagu Anggaran dan Pagu Alokasi, dari referensi sampai kelengkapan.</p></a>
+      <a href="#revisi"><span>02 / Perubahan anggaran</span><h2>Revisi Anggaran</h2><p>Usulan, penelitian, reviu, penelaahan, dan informasi progres.</p></a>
+      <a href="#pok"><span>03 / Pelaksanaan kegiatan</span><h2>POK SEKJEN</h2><p>Dokumen Petunjuk Operasional Kegiatan menurut unit kerja.</p></a>
+      <a href="#realisasi"><span>04 / Pelaporan</span><h2>Realisasi Anggaran</h2><p>Dokumen bulanan dan arsip realisasi tahun sebelumnya.</p></a>
+    </section>
+    <section id="page-note" class="page-note" hidden aria-label="Informasi layanan"></section>
+    <section id="katalog" class="catalog" aria-labelledby="catalog-title">
+      <div class="section-heading"><div><p class="eyebrow">Katalog dokumen</p><h2 id="catalog-title">Pagu Anggaran · 2026</h2></div><div class="catalog-actions"><button id="share" class="secondary" type="button">Bagikan halaman</button><button id="reset" class="secondary" type="button">Reset filter</button></div></div>
+      <div id="share-panel" class="share-panel" hidden><label for="share-url">Tautan dengan tahun, tahap, dan pencarian yang dipilih</label><input id="share-url" type="url" readonly><p role="status">Salin tautan ini untuk dibagikan ke grup.</p></div>
+      <div class="filters">
+        <div><label for="year">Tahun sumber</label><select id="year"><option value="2026">2026</option><option value="2025">2025</option><option value="2024">2024</option><option value="2023">2023</option><option value="2022">2022</option><option value="all">Semua tahun</option></select></div>
+        <div id="stage-filter"><label for="stage">Tahap penyusunan</label><select id="stage"><option>Pagu Anggaran</option><option>Pagu Alokasi</option><option value="all">Semua tahap</option></select></div>
+        <div><label for="category">Kelompok dokumen</label><select id="category"><option value="all">Semua kelompok</option><option>Pagu & TPNBP</option><option>Template & referensi</option><option>Kelengkapan & reviu</option><option>Materi & informasi</option></select></div>
       </div>
-    </header>
-    <main>
-      <section>
-        <h2>Menu Utama</h2>
-        <div class="cards">
-          <div class="card">
-            <h3>1. Penyusunan PAGU</h3>
-            <p>Penyusunan pagu indikatif dan pagu alokasi Kementerian ATR/BPN.</p>
-          </div>
-          <div class="card">
-            <h3>2. Revisi Anggaran</h3>
-            <p>Permintaan revisi dan pergeseran anggaran untuk program/kegiatan.</p>
-          </div>
-          <div class="card">
-            <h3>3. Realisasi Anggaran</h3>
-            <p>Pelaporan realisasi anggaran serta analisis deviasi pagu vs realisasi.</p>
-          </div>
-        </div>
-      </section>
-      <section>
-        <h2>Kenapa SIPERI?</h2>
-        <p>
-          SIPERI hadir untuk memudahkan proses perencanaan dan penganggaran di
-          lingkungan Kementerian ATR/BPN. Dengan antarmuka sederhana dan data
-          terintegrasi, penyusunan pagu, revisi, dan realisasi dapat dikelola
-          secara transparan dan akuntabel.
-        </p>
-      </section>
-    </main>
-    <footer>
-      <p>&copy; 2026 Biro Perencanaan &amp; Kerja Sama, Kementerian ATR/BPN.</p>
-    </footer>
-  </body>
+      <div class="results-bar"><p id="status" role="status" aria-live="polite">Memuat katalog...</p><span>Urutan sesuai sumber</span></div>
+      <div id="catalog-loading" class="catalog-loading" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div id="error" class="notice" hidden><h3>Katalog belum dapat dimuat</h3><p>Periksa koneksi, lalu coba kembali.</p><button id="retry" type="button">Muat ulang katalog</button></div>
+      <div id="empty" class="notice" hidden><h3>Belum ada hasil yang cocok</h3><p>Coba kata yang lebih singkat, ubah tahap, atau pilih semua tahun. Tautan 2021 belum tersedia dalam katalog ini.</p><button id="clear-search" type="button">Cari di semua tahun dan tahap</button></div>
+      <ul id="results" class="results" aria-label="Dokumen dan akses kerja"></ul>
+      <details class="sources"><summary>Lihat halaman sumber katalog</summary><p>Tahun mengikuti halaman sumber. Periksa periode pada dokumen sebelum digunakan. Beberapa halaman dapat memuat dokumen dari tahun lain.</p><ul id="source-list"></ul></details>
+    </section>
+    <footer><div class="footer-identity"><strong>SiPERI</strong><span>Biro Perencanaan dan Kerja Sama</span><span class="footer-unit">Bagian Penganggaran</span></div><span>Ruang kerja penyusunan, revisi, dan realisasi anggaran. Hak akses dokumen mengikuti sumber.</span><a href="#arsip">Telusuri arsip</a></footer>
+  </main>
+</div>
+</body>
 </html>
