@@ -164,6 +164,13 @@ async function load() {
   } finally { elements.retry.disabled = false; document.getElementById('catalog-loading').hidden = true; }
 }
 document.getElementById('search-form').addEventListener('submit', event => {event.preventDefault(); render(); document.getElementById('katalog').scrollIntoView({block:'start'});});
+document.getElementById('scroll-data').addEventListener('click', event => {
+  event.preventDefault();
+  const target = document.getElementById('katalog');
+  const reduce = !window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  target.focus({preventScroll:true});
+  target.scrollIntoView({behavior:reduce ? 'auto' : 'smooth',block:'start'});
+});
 elements.search.addEventListener('input', render);
 for (const name of ['year','stage','category']) elements[name].addEventListener('change', () => {render();updateAddress();});
 elements.search.addEventListener('input', updateAddress);

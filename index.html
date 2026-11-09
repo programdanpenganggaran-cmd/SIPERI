@@ -26,17 +26,19 @@
     <div class="sidebar-note"><strong>Satu ruang untuk anggaran.</strong><p>Pilih layanan, temukan dokumen, lalu buka sumber dengan akun yang memiliki akses.</p></div>
   </aside>
   <main id="main" tabindex="-1">
-    <header class="topbar"><span>Sistem Informasi Penyusunan, Revisi, dan Realisasi Anggaran</span><span class="preview">Purwarupa portal</span></header>
+    <header class="topbar"><span class="portal-context">Sistem Informasi Penyusunan, Revisi,<br>dan Realisasi Anggaran</span>
+      <form id="search-form" role="search">
+        <label for="search">Cari di SiPERI</label>
+        <div class="search-line"><input type="search" id="search" autocomplete="off" aria-describedby="search-scope"><button type="submit">Cari</button></div>
+        <span id="search-scope" class="search-scope">Pencarian judul dan kata kunci</span>
+      </form>
+    </header>
     <section class="intro" aria-labelledby="page-title">
       <div class="institution"><img src="atr-bpn.png" alt="" width="48" height="48"><span>Kementerian Agraria dan Tata Ruang /<br>Badan Pertanahan Nasional</span></div>
       <p class="eyebrow">Penyusunan PAGU</p>
       <h1 id="page-title">Dokumen anggaran,<br>lebih mudah ditemukan.</h1>
       <p>Temukan referensi, template, dan kelengkapan penyusunan anggaran dalam satu tempat.</p>
-      <form id="search-form" role="search">
-        <label for="search">Cari di katalog SiPERI</label>
-        <div class="search-line"><input type="search" id="search" autocomplete="off"><button type="submit">Cari dokumen</button></div>
-        <p class="search-hint">Mencari judul dan kata kunci tautan, belum mencakup isi file.</p>
-      </form>
+      <a class="scroll-cue" id="scroll-data" href="#katalog"><span>Lihat data di bawah</span><span class="scroll-chevron" aria-hidden="true">⌄</span></a>
     </section>
     <section id="monitoring-shortcut" class="monitoring-shortcut"><div><p class="eyebrow">Untuk kantah dan unit kerja</p><h2>PANTAU ATR/BPN</h2><p>Peta Anggaran Terintegrasi Antar Unit. Buka aplikasi untuk memantau anggaran dan realisasi.</p></div><a href="https://script.google.com/macros/s/AKfycbw67r8qagn2VoEDXt9mXUvNV7gotQjPf9GcFMiVT2XFrWuTU4eGTQ4xqb6TgK4Qf_DR/exec">Buka PANTAU ATR/BPN</a></section>
     <section class="workspace-heading" id="workspace-heading"><div><p class="eyebrow">Mulai dari kebutuhanmu</p><h2>Layanan anggaran dalam satu ruang kerja.</h2></div><p>Alur pengelolaan anggaran, dari penyusunan hingga pelaporan.</p></section>
@@ -47,7 +49,7 @@
       <a href="#realisasi"><span>04 / Pelaporan</span><h2>Realisasi Anggaran</h2><p>Dokumen bulanan dan arsip realisasi tahun sebelumnya.</p></a>
     </section>
     <section id="page-note" class="page-note" hidden aria-label="Informasi layanan"></section>
-    <section id="katalog" class="catalog" aria-labelledby="catalog-title">
+    <section id="katalog" class="catalog" aria-labelledby="catalog-title" tabindex="-1">
       <div class="section-heading"><div><p class="eyebrow">Katalog dokumen</p><h2 id="catalog-title">Pagu Anggaran · 2026</h2></div><div class="catalog-actions"><button id="share" class="secondary" type="button">Bagikan halaman</button><button id="reset" class="secondary" type="button">Reset filter</button></div></div>
       <div id="share-panel" class="share-panel" hidden><label for="share-url">Tautan dengan tahun, tahap, dan pencarian yang dipilih</label><input id="share-url" type="url" readonly><p role="status">Salin tautan ini untuk dibagikan ke grup.</p></div>
       <div class="filters">
