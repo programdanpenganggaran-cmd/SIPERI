@@ -42,18 +42,13 @@
       <a class="scroll-cue" id="scroll-data" href="#katalog" aria-label="Gulir ke katalog dokumen" title="Lihat katalog dokumen"><span class="scroll-mouse" aria-hidden="true"><span></span></span><span class="scroll-arrows" aria-hidden="true"><i></i><i></i></span></a>
     </section>
     <section id="pocket-book" class="pocket-book" hidden aria-labelledby="book-title">
-      <header class="book-banner"><div><p class="eyebrow">Perpustakaan SiPERI · Edisi 11/2026</p><h2 id="book-title">Buku Saku Revisi Anggaran</h2><p>Survival Revisi Anggaran K/L</p><p class="book-author">Novriansyah Rosyid Hermawan</p></div><a class="book-download" href="buku-saku-revisi-2026.pdf" download>Unduh PDF asli</a></header>
+      <header class="book-banner"><div><p class="eyebrow">Perpustakaan SiPERI · Edisi 11/2026</p><h2 id="book-title">Buku Saku Revisi Anggaran</h2><p class="book-author">Novriansyah Rosyid Hermawan · 96 halaman</p></div><div class="book-actions"><button type="button" id="book-toggle-toc" aria-expanded="false" aria-controls="book-index">Daftar isi</button><button type="button" id="book-fullscreen">Layar penuh</button><a class="book-download" href="buku-saku-revisi-2026.pdf" download>Unduh PDF</a></div></header>
       <div class="book-layout">
-        <aside class="book-index" aria-label="Daftar isi buku"><h3>Jelajahi buku</h3><label for="book-search">Cari di isi buku</label><input type="search" id="book-search" autocomplete="off"><p id="book-search-status" role="status">Memuat daftar isi...</p><nav id="book-toc" aria-label="Bab buku saku"></nav><button id="book-retry" type="button" hidden>Coba muat kembali</button></aside>
+        <aside id="book-index" class="book-index" aria-label="Daftar isi buku" hidden><h3>Jelajahi buku</h3><label for="book-search">Cari di isi buku</label><input type="search" id="book-search" autocomplete="off"><p id="book-search-status" role="status">Memuat daftar isi...</p><nav id="book-toc" aria-label="Bab buku saku"></nav><button id="book-retry" type="button" hidden>Coba muat kembali</button></aside>
         <article class="book-reader" aria-labelledby="book-page-title">
-          <div class="book-reader-toolbar"><div class="book-modes" aria-label="Mode baca"><button type="button" id="book-text-mode" aria-pressed="true">Teks HTML</button><button type="button" id="book-pdf-mode" aria-pressed="false">Halaman asli</button></div><a id="book-open-pdf" href="buku-saku-revisi-2026.pdf#page=1" target="_blank" rel="noopener">Buka PDF</a></div>
-          <p class="book-extraction-note">Teks HTML diekstrak dari buku yang diberikan. Untuk tabel, ilustrasi, dan susunan lengkap, gunakan “Halaman asli”. Rujukan aturan mengikuti naskah buku.</p>
-          <p id="book-page-label" class="eyebrow"></p><h3 id="book-page-title" tabindex="-1">Memuat buku...</h3>
-          <pre id="book-page-text" class="book-page-text"></pre>
-          <img id="book-cover" class="book-cover" src="book-cover.webp" alt="Sampul Survival Revisi Anggaran K/L, karya Novriansyah Rosyid Hermawan, edisi 11/2026" width="776" height="1100" hidden>
-          <div id="book-image-note" class="book-image-note" hidden>Halaman ini berupa ilustrasi atau tidak memiliki teks yang dapat diekstrak. Pilih “Halaman asli” untuk membacanya.</div>
-          <iframe id="book-pdf-frame" class="book-pdf-frame" title="Halaman asli Buku Saku Revisi Anggaran" hidden></iframe>
-          <div class="book-pager"><button type="button" id="book-prev">Sebelumnya</button><label for="book-page-select">Halaman PDF <select id="book-page-select"></select></label><button type="button" id="book-next">Berikutnya</button></div>
+          <div class="book-reader-toolbar"><h3 id="book-page-title">Buku Saku Revisi Anggaran</h3><a id="book-open-pdf" href="buku-saku-revisi-2026.pdf#page=1">Buka PDF langsung</a></div>
+          <iframe id="book-pdf-frame" class="book-pdf-frame" src="about:blank" title="Buku Saku Revisi Anggaran lengkap, 96 halaman"></iframe>
+          <p id="book-reader-status" role="status" class="book-reader-status">Gunakan toolbar PDF untuk zoom dan berpindah halaman. Jika PDF tidak tampil di perangkatmu, pilih “Buka PDF langsung”.</p>
         </article>
       </div>
     </section>

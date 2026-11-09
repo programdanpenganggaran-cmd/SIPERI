@@ -33,6 +33,7 @@ function route() {
   document.getElementById('monitoring-shortcut').hidden = page !== 'beranda';
   document.getElementById('book-shortcut').hidden = !['beranda','revisi'].includes(page);
   document.getElementById('pocket-book').hidden = page !== 'buku-saku';
+  document.getElementById('main').classList?.toggle('reading-book',page === 'buku-saku');
   document.getElementById('katalog').hidden = page === 'buku-saku';
   document.getElementById('search-form').hidden = page === 'buku-saku';
   document.getElementById('scroll-data').hidden = page === 'buku-saku';

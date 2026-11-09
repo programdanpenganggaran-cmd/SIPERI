@@ -6,7 +6,6 @@
   let book = null;
   let loading = null;
   let page = 1;
-  let mode = 'text';
   const el = id => document.getElementById(id);
   const fold = value => value.toLocaleLowerCase('id').normalize('NFKD').replace(/\s+/g,' ');
   function isBook() { return location.hash.split('?')[0] === '#buku-saku'; }
@@ -42,25 +41,11 @@
     const params = new URLSearchParams(location.hash.split('?')[1] || '');
     const requested = Number(params.get('halaman') || 1);
     page = Number.isInteger(requested) && requested >= 1 && requested <= book.pageCount ? requested : 1;
-    const current = book.pages[page-1];
     const chapter = [...chapters].reverse().find(([start]) => start <= page);
-    el('book-page-label').textContent = `Halaman PDF ${page} dari ${book.pageCount}`;
-    el('book-page-title').textContent = chapter ? chapter[1] : current.title;
-    el('book-page-text').textContent = current.text;
-    el('book-page-text').hidden = mode !== 'text' || !current.text;
-    el('book-image-note').hidden = mode !== 'text' || !!current.text;
-    el('book-cover').hidden = mode !== 'text' || page !== 1;
-    if(page === 1) el('book-image-note').hidden = true;
-    el('book-pdf-frame').hidden = mode !== 'pdf';
+    el('book-page-title').textContent = chapter ? chapter[1] : 'Buku Saku Revisi Anggaran';
     const pdf = `buku-saku-revisi-2026.pdf#page=${page}&view=FitH`;
     el('book-open-pdf').href = pdf;
-    if(mode === 'pdf') el('book-pdf-frame').src = pdf;
-    else el('book-pdf-frame').removeAttribute('src');
-    el('book-text-mode').setAttribute('aria-pressed',String(mode === 'text'));
-    el('book-pdf-mode').setAttribute('aria-pressed',String(mode === 'pdf'));
-    el('book-prev').disabled = page === 1;
-    el('book-next').disabled = page === book.pageCount;
-    el('book-page-select').value = String(page);
+    if(el('book-pdf-frame').getAttribute('src') !== pdf) el('book-pdf-frame').setAttribute('src',pdf);
     renderIndex();
   }
   async function load() {
@@ -75,9 +60,6 @@
         const data = await response.json();
         if(!Array.isArray(data.pages) || data.pages.length !== data.pageCount) throw Error('Data buku tidak lengkap');
         book = data;
-        for(let number=1;number<=book.pageCount;number++) {
-          const option = document.createElement('option');option.value=String(number);option.textContent=String(number);el('book-page-select').append(option);
-        }
         if(isBook()) renderPage();
       } catch(error) {
         el('book-search-status').textContent='Buku belum dapat dimuat. Periksa koneksi atau buka PDF asli.';
@@ -89,11 +71,20 @@
   }
   window.renderPocketBook = load;
   el('book-search').addEventListener('input',renderIndex);
-  el('book-prev').addEventListener('click',()=>{if(book)navigate(page-1);});
-  el('book-next').addEventListener('click',()=>{if(book)navigate(page+1);});
-  el('book-page-select').addEventListener('change',event=>{if(book)navigate(Number(event.target.value));});
-  el('book-text-mode').addEventListener('click',()=>{mode='text';if(book)renderPage();});
-  el('book-pdf-mode').addEventListener('click',()=>{mode='pdf';if(book)renderPage();});
+  el('book-toggle-toc').addEventListener('click',()=>{
+    const expanded = el('book-index').hidden;
+    el('book-index').hidden = !expanded;
+    el('book-toggle-toc').setAttribute('aria-expanded',String(expanded));
+  });
+  el('book-fullscreen').addEventListener('click',async()=>{
+    const reader = el('pocket-book');
+    try {
+      if(document.fullscreenElement) await document.exitFullscreen();
+      else if(reader.requestFullscreen) await reader.requestFullscreen();
+      else el('book-reader-status').textContent='Layar penuh tidak tersedia. Pilih Buka PDF langsung untuk membaca selebar layar.';
+    } catch(error) {el('book-reader-status').textContent='Layar penuh belum dapat dibuka. Pilih Buka PDF langsung untuk membaca selebar layar.';}
+  });
+  document.addEventListener('fullscreenchange',()=>{el('book-fullscreen').textContent=document.fullscreenElement?'Keluar layar penuh':'Layar penuh';});
   el('book-retry').addEventListener('click',load);
   window.addEventListener('hashchange',load);
   load();
