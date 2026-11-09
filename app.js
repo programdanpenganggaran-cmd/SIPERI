@@ -132,6 +132,7 @@ function render() {
     (elements.stage.value === 'all' || item.stage === elements.stage.value) &&
     (elements.category.value === 'all' || item.category === elements.category.value) &&
     terms.every(term => item.search.includes(term)));
+  window.siperiCatalog = [...resources, ...serviceResources];
   elements.results.replaceChildren();
   for (const item of matches) {
     const row = textElement('li', '', 'result');

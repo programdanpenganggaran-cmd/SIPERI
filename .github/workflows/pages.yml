@@ -23,6 +23,7 @@ jobs:
           node-version: 24
       - run: node check.cjs
       - run: node book-check.cjs
+      - run: node bot-check.cjs
       - run: node prepare.cjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
