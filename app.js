@@ -4,7 +4,16 @@ let sources = [];
 let resources = [];
 let serviceResources = [];
 let page = 'beranda';
+let knowledgeTopic = 'all';
+const knowledgeTopics = {
+  regulasi: /peraturan|pedoman|referensi|kodefikasi|struktur/i,
+  biaya: /\bsbk\b|\bsbm\b/i,
+  template: /template|\btor\b|\brab\b/i,
+  pembahasan: /penelaahan|berita acara|penelitian|reviu|review/i,
+  materi: /materi|paparan|informasi|dokumentasi/i
+};
 const pageInfo = {
+  pengetahuan: ['Pusat Pengetahuan Anggaran', 'Pengetahuan bersama, pekerjaan lebih mudah.', 'Jelajahi rujukan, contoh dokumen, dan panduan anggaran menurut kebutuhan.'],
   'buku-saku': ['Buku Saku Revisi Anggaran', 'Panduan revisi, siap dijelajahi.', 'Baca buku, telusuri topik, dan temukan halaman yang dibutuhkan.'],
   monitoring: ['PANTAU ATR/BPN', 'Pantau anggaran unit kerjamu.', 'Buka aplikasi Peta Anggaran Terintegrasi Antar Unit untuk memantau anggaran dan realisasi.'],
   beranda: ['Ruang kerja anggaran', 'Satu portal. Seluruh kebutuhan anggaran.', 'Temukan dokumen penyusunan, revisi, POK, dan realisasi tanpa berpindah portal.'],
@@ -18,6 +27,7 @@ function route() {
   const [requested, queryString = ''] = location.hash.slice(1).split('?');
   const params = new URLSearchParams(queryString);
   page = Object.hasOwn(pageInfo, requested) ? requested : 'beranda';
+  knowledgeTopic = page === 'pengetahuan' && Object.hasOwn(knowledgeTopics,params.get('topik')) ? params.get('topik') : 'all';
   const [label, title, description] = pageInfo[page];
   document.querySelector('.intro .eyebrow').textContent = label;
   document.getElementById('page-title').textContent = title;
@@ -32,6 +42,12 @@ function route() {
   document.getElementById('workspace-heading').hidden = page !== 'beranda';
   document.getElementById('monitoring-shortcut').hidden = page !== 'beranda';
   document.getElementById('book-shortcut').hidden = !['beranda','revisi'].includes(page);
+  document.getElementById('knowledge-center').hidden = page !== 'pengetahuan';
+  document.getElementById('knowledge-shortcut').hidden = page !== 'beranda';
+  document.querySelectorAll('[data-knowledge-topic]').forEach(link=>{
+    if(link.dataset.knowledgeTopic === knowledgeTopic) link.setAttribute('aria-current','page');
+    else link.removeAttribute('aria-current');
+  });
   document.getElementById('pocket-book').hidden = page !== 'buku-saku';
   document.getElementById('main').classList?.toggle('reading-book',page === 'buku-saku');
   document.getElementById('katalog').hidden = page === 'buku-saku';
@@ -67,6 +83,7 @@ function animatePage() {
 }
 function currentHash() {
   const params = new URLSearchParams();
+  if(page === 'pengetahuan' && knowledgeTopic !== 'all') params.set('topik',knowledgeTopic);
   if(elements.year.value !== 'all') params.set('tahun',elements.year.value);
   if(page === 'pagu' && elements.stage.value !== 'all') params.set('tahap',elements.stage.value);
   if(elements.category.value !== 'all') params.set('kelompok',elements.category.value);
@@ -109,7 +126,7 @@ function render() {
   if (!resources.length) return;
   const query = normalize(elements.search.value).replace(/\breview\b/g, 'reviu').replace(/\bprogress\b/g, 'progres');
   const terms = query.split(' ').filter(Boolean);
-  const pool = [...resources, ...serviceResources].filter(item => page === 'beranda' || (page === 'arsip' ? item.year && item.year < 2026 : item.service === page));
+  const pool = [...resources, ...serviceResources].filter(item => page === 'beranda' || (page === 'pengetahuan' ? (knowledgeTopic === 'all' ? Object.values(knowledgeTopics).some(pattern=>pattern.test(item.title)) : knowledgeTopics[knowledgeTopic].test(item.title)) : (page === 'arsip' ? item.year && item.year < 2026 : item.service === page)));
   const matches = pool.filter(item =>
     (elements.year.value === 'all' || item.year === Number(elements.year.value)) &&
     (elements.stage.value === 'all' || item.stage === elements.stage.value) &&
