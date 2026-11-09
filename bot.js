@@ -1,92 +1,130 @@
 'use strict';
 (() => {
-  const API = window.SIPERI_BOT_CONFIG?.apiUrl || '';
+  const config = window.SIPERI_BOT_CONFIG || {};
+  const API = config.apiUrl || '';
   const $ = id => document.getElementById(id);
   const dialog = $('bot-dialog');
-  let mode = 'catalog';
-  let pending = false;
-  let controller = null;
-  const history = [];
-  if(window.visualViewport) {
-    const fit = () => dialog.style.setProperty('--bot-viewport-height',window.visualViewport.height+'px');
-    window.visualViewport.addEventListener('resize',fit);fit();
+  let mode = 'catalog', pending = false, controller = null, opener = null;
+  let widgetId = null, verificationToken = '', turnstileLoading = null;
+  if (window.visualViewport) {
+    const fit = () => dialog.style.setProperty('--bot-viewport-height', window.visualViewport.height + 'px');
+    window.visualViewport.addEventListener('resize', fit); fit();
   }
-  const normalize = text => text.toLocaleLowerCase('id').replace(/[^a-z0-9]+/g,' ').trim();
-  function line(text, kind='assistant') {
-    const item = document.createElement('div');item.className='bot-message bot-message-'+kind;
-    const label=document.createElement('strong');label.textContent=kind==='user'?'Kamu':kind==='error'?'Perlu diperiksa':'Asisten SiPERI';
-    const body=document.createElement('p');body.textContent=text;item.append(label,body);$('bot-messages').append(item);
-    while($('bot-messages').children.length>12) $('bot-messages').firstElementChild.remove();
-    item.scrollIntoView({block:'nearest'});
+  const status = text => { $('bot-status').textContent = text; };
+  const normalize = text => text.toLocaleLowerCase('id').replace(/[^a-z0-9]+/g, ' ').trim();
+  function line(text, kind = 'assistant') {
+    const item = document.createElement('div'); item.className = 'bot-message bot-message-' + kind;
+    const label = document.createElement('strong'); label.textContent = kind === 'user' ? 'Kamu' : kind === 'error' ? 'Perlu diperiksa' : 'Asisten SiPERI';
+    const body = document.createElement('p'); body.textContent = text; item.append(label, body); $('bot-messages').append(item);
+    while ($('bot-messages').children.length > 12) $('bot-messages').firstElementChild.remove();
+    item.scrollIntoView({ block: 'nearest' });
     return item;
   }
-  function sourceLink(source, parent) {
-    let url;try {url=new URL(source.url,location.href);}catch{return;}
-    if(!['https:','http:'].includes(url.protocol)) return;
-    const link=document.createElement('a');link.href=url.href;link.textContent=source.title+(source.page?' · hal. '+source.page:'');parent.append(link);
+  function sourceLink(source, parent, number) {
+    let url; try { url = new URL(source.url, location.href); } catch { return; }
+    if (!['https:', 'http:'].includes(url.protocol)) return;
+    const link = document.createElement('a'); link.href = url.href;
+    link.textContent = (number ? `[${number}] ` : '') + source.title + (source.page ? ' · hal. PDF ' + source.page : '');
+    parent.append(link);
   }
   function searchCatalog(question) {
-    const stop=new Set(['apa','apakah','bagaimana','yang','untuk','dengan','dan','di','ke','dari','saya','cari','tolong','dokumen']);
-    const terms=normalize(question).split(' ').filter(t=>t&&!stop.has(t));
-    const items=window.siperiCatalog||[];
-    if(!items.length){$('bot-status').textContent='Katalog belum dimuat. Tunggu sebentar lalu coba lagi.';return;}
-    if(!terms.length){line('Gunakan kata seperti revisi, SBK, TOR, nama unit, atau tahun dokumen.');return;}
-    const results=items.map(item=>({item,score:terms.filter(t=>normalize(item.title+' '+(item.year||'')+' '+item.stage).includes(t)).length})).filter(x=>x.score===terms.length).slice(0,8);
-    const message=line(results.length?'Berikut tautan yang sesuai. Periksa tahun dan isi sumber sebelum digunakan.':'Belum ada judul yang cocok. Coba kata lebih singkat, atau jelajahi Pusat Pengetahuan. Pencarian ini belum membaca seluruh isi PDF.');
-    for(const {item} of results) sourceLink({title:item.title+' · '+(item.year||'periode belum dikonfirmasi'),url:item.url},message);
-    $('bot-status').textContent=results.length?`${results.length} rujukan ditampilkan, maksimal 8 hasil.`:'Tidak ada hasil yang cocok.';
+    const stop = new Set(['apa', 'apakah', 'bagaimana', 'yang', 'untuk', 'dengan', 'dan', 'di', 'ke', 'dari', 'saya', 'cari', 'tolong', 'dokumen']);
+    const terms = normalize(question).split(' ').filter(t => t && !stop.has(t));
+    const items = window.siperiCatalog || [];
+    if (!items.length) { status('Katalog belum dimuat. Tunggu sebentar lalu coba lagi.'); return; }
+    if (!terms.length) { line('Gunakan kata seperti revisi, SBK, TOR, nama unit, atau tahun dokumen.'); return; }
+    const results = items.filter(item => terms.every(t => normalize(item.title + ' ' + (item.year || '') + ' ' + item.stage).includes(t))).slice(0, 8);
+    const message = line(results.length ? 'Berikut tautan yang sesuai. Periksa tahun dan isi sumber sebelum digunakan.' : 'Belum ada judul yang cocok. Coba kata lebih singkat, atau jelajahi Pusat Pengetahuan. Pencarian ini belum membaca seluruh isi PDF.');
+    for (const item of results) sourceLink({ title: item.title + ' · ' + (item.year || 'periode belum dikonfirmasi'), url: item.url }, message);
+    status(results.length ? `${results.length} rujukan ditampilkan, maksimal 8 hasil.` : 'Tidak ada hasil yang cocok.');
   }
   function setPending(value) {
-    pending=value;$('bot-send').disabled=value;$('bot-question').disabled=value;
-    document.querySelectorAll('input[name="bot-mode"]').forEach(input=>input.disabled=value||(input.value==='ai'&&!API));
+    pending = value; $('bot-send').disabled = value; $('bot-question').readOnly = value;
+    $('bot-form').setAttribute('aria-busy', String(value));
+    document.querySelectorAll('input[name="bot-mode"]').forEach(input => input.disabled = value || (input.value === 'ai' && (!API || !config.turnstileSiteKey)));
   }
-  async function askAI(question) {
-    if(!API){$('bot-status').textContent='AI belum diaktifkan. Gunakan Cari rujukan untuk menelusuri dokumen.';return;}
-    if(/\b\d{16}\b/.test(question)){line('Hapus nomor identitas 16 digit dari pertanyaan sebelum mengirim.','error');return;}
-    const code=$('bot-code').value.trim();
-    try {if(code) sessionStorage.setItem('siperi-faq-code',code);else sessionStorage.removeItem('siperi-faq-code');}catch{}
-    controller=new AbortController();const timeout=setTimeout(()=>controller?.abort(),28000);
-    setPending(true);$('bot-status').textContent='Meminta jawaban ke FAQ AI...';
+  function loadTurnstile() {
+    if (window.turnstile) return Promise.resolve();
+    if (turnstileLoading) return turnstileLoading;
+    turnstileLoading = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'; script.async = true;
+      script.onload = resolve;
+      script.onerror = () => { script.remove(); turnstileLoading = null; reject(Error('Verifikasi belum termuat. Periksa koneksi lalu pilih Ulangi verifikasi. Cari rujukan tetap tersedia.')); };
+      document.head.append(script);
+    });
+    return turnstileLoading;
+  }
+  async function mountVerification() {
+    if (!API || !config.turnstileSiteKey) return;
     try {
-      const response=await fetch(API,{method:'POST',headers:{'content-type':'application/json',...(code?{'x-demo-access-code':code}:{})},body:JSON.stringify({question,history:history.slice(-8),learn_opt_in:false}),signal:controller.signal});
-      const data=await response.json().catch(()=>({}));
-      if(!response.ok) {
-        if(response.status===401&&!/Gemini/i.test(data.error||'')) {
-          $('bot-access').open=true;
-          throw Error('Kode akses AI belum diisi atau tidak sesuai. Masukkan kode dari pengelola, lalu kirim ulang. Pencarian rujukan tetap bisa digunakan.');
-        }
-        if(data.code==='GEMINI_AUTH_FAILED'||/Gemini.*(?:401|403)/i.test(data.error||'')) throw Error('Server FAQ belum dapat mengakses Gemini. Pengelola perlu memeriksa API key dan izin model di Netlify. Ini bukan kesalahan pertanyaanmu.');
-        if(response.status===429)throw Error('Batas penggunaan AI sedang tercapai. Coba lagi nanti atau gunakan Cari rujukan.');
-        throw Error(data.error||'Layanan AI belum dapat menjawab. Coba lagi nanti.');
-      }
-      if(typeof data.reply!=='string'||!data.reply.trim())throw Error('Server belum memberikan jawaban teks.');
-      const item=line(data.reply);
-      if(Array.isArray(data.sources))for(const source of data.sources.slice(0,6)) sourceLink(source,item);
-      if(data.warning){const warning=document.createElement('small');warning.textContent=data.warning;item.append(warning);}
-      history.push({role:'user',text:question},{role:'model',text:data.reply});
-      $('bot-status').textContent=data.grounded?'Jawaban AI diterima dengan rujukan. Periksa sumbernya.':'Jawaban AI diterima; belum didukung rujukan yang cocok.';
-    }catch(error){
-      if(error.name==='AbortError') {$('bot-status').textContent='Permintaan dihentikan atau melewati waktu tunggu.';if(dialog.open)line('Jawaban belum diterima. Coba lagi atau gunakan Cari rujukan.','error');}
-      else {line(error.message||'Koneksi gagal. Coba lagi.','error');$('bot-status').textContent='AI belum berhasil menjawab. Pencarian rujukan tetap tersedia.';}
-    }finally{clearTimeout(timeout);controller=null;setPending(false);}
+      await loadTurnstile();
+      if (mode !== 'ai' || !dialog.open || widgetId !== null) return;
+      widgetId = window.turnstile.render($('bot-verification-widget'), {
+        sitekey: config.turnstileSiteKey, action: 'siperi-ai', theme: 'light', size: 'compact', language: 'id',
+        callback: token => { verificationToken = token; if (!pending && mode === 'ai') status('Verifikasi berhasil. Pertanyaan siap dikirim.'); },
+        'expired-callback': () => { verificationToken = ''; if (!pending && mode === 'ai') status('Verifikasi kedaluwarsa. Pilih Ulangi verifikasi.'); },
+        'error-callback': () => { verificationToken = ''; if (!pending && mode === 'ai') status('Verifikasi belum berhasil. Pilih Ulangi verifikasi atau gunakan Cari rujukan.'); }
+      });
+    } catch (error) { status(error.message); }
   }
-  function openBot() {
-    dialog.showModal();$('bot-launcher').setAttribute('aria-expanded','true');$('bot-question').focus();
+  function resetVerification() {
+    verificationToken = '';
+    if (widgetId !== null && window.turnstile) window.turnstile.reset(widgetId);
   }
-  $('bot-launcher').addEventListener('click',openBot);
-  $('bot-open-from-library').addEventListener('click',openBot);
-  $('bot-close').addEventListener('click',()=>dialog.close());
-  dialog.addEventListener('close',()=>{controller?.abort();$('bot-launcher').setAttribute('aria-expanded','false');$('bot-launcher').focus();});
-  $('bot-library').addEventListener('click',()=>dialog.close());
-  document.querySelectorAll('input[name="bot-mode"]').forEach(input=>input.addEventListener('change',()=>{
-    mode=input.value;$('bot-access').hidden=mode!=='ai';$('bot-send').textContent=mode==='ai'?'Kirim':'Cari';
-    $('bot-status').textContent=mode==='ai'?'AI uji coba memerlukan kode akses. Pertanyaan dikirim ke layanan FAQ PP.':'Pencarian rujukan siap digunakan.';
-  }));
-  $('bot-form').addEventListener('submit',async event=>{
-    event.preventDefault();const question=$('bot-question').value.trim();if(!question||pending)return;
-    if(question.length>1500){$('bot-status').textContent='Maksimal 1.500 karakter.';return;}
-    line(question,'user');if(mode==='ai')await askAI(question);else searchCatalog(question);
+  $('bot-retry-verify').addEventListener('click', () => {
+    status('Memuat ulang verifikasi...');
+    if (widgetId !== null) resetVerification(); else mountVerification();
   });
-  try {$('bot-code').value=sessionStorage.getItem('siperi-faq-code')||'';}catch{}
+  async function askAI(question) {
+    if (!API) { status('AI belum diaktifkan. Gunakan Cari rujukan.'); return; }
+    if (/\b\d{16}\b/.test(question)) { status('Hapus nomor identitas 16 digit sebelum mengirim.'); return; }
+    if (!verificationToken) { status('Selesaikan verifikasi pengunjung di atas, lalu kirim kembali. Pertanyaanmu tetap tersimpan.'); await mountVerification(); return; }
+    controller = new AbortController(); const timeout = setTimeout(() => controller?.abort(), 35000);
+    setPending(true); status('Menyusun jawaban dari rujukan SiPERI...');
+    line(question, 'user');
+    try {
+      const response = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ question, turnstileToken: verificationToken }), signal: controller.signal });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw Error(data.error || 'Layanan AI belum dapat menjawab. Coba lagi nanti atau gunakan Cari rujukan.');
+      if (typeof data.reply !== 'string' || !data.reply.trim()) throw Error('Server belum memberikan jawaban teks.');
+      const item = line(data.reply);
+      if (Array.isArray(data.sources)) data.sources.slice(0, 6).forEach((source, index) => sourceLink(source, item, index + 1));
+      if (data.warning) { const note = document.createElement('small'); note.textContent = data.warning; item.append(note); }
+      status(data.grounded ? 'Jawaban AI diterima. Buka sumber untuk memeriksa penjelasan.' : 'Rujukan belum cukup untuk jawaban yang pasti. Coba pertanyaan lebih spesifik.');
+    } catch (error) {
+      if (dialog.open) {
+        const message = error.name === 'AbortError' ? 'Jawaban belum diterima dalam waktu tunggu. Coba lagi atau gunakan Cari rujukan.' : error.message || 'Koneksi gagal. Coba lagi.';
+        line(message, 'error');
+        status(message + ' Pertanyaan tetap tersimpan.');
+      }
+    } finally {
+      clearTimeout(timeout); controller = null; setPending(false);
+      if (dialog.open && mode === 'ai') resetVerification();
+    }
+  }
+  function openBot(event) {
+    opener = event.currentTarget; dialog.showModal(); $('bot-launcher').setAttribute('aria-expanded', 'true'); $('bot-question').focus();
+    if (mode === 'ai') mountVerification();
+  }
+  $('bot-launcher').addEventListener('click', openBot);
+  $('bot-open-from-library').addEventListener('click', openBot);
+  $('bot-close').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('close', () => {
+    controller?.abort(); verificationToken = '';
+    if (widgetId !== null && window.turnstile) { window.turnstile.remove(widgetId); widgetId = null; }
+    $('bot-launcher').setAttribute('aria-expanded', 'false'); (opener || $('bot-launcher')).focus();
+  });
+  $('bot-library').addEventListener('click', () => dialog.close());
+  document.querySelectorAll('input[name="bot-mode"]').forEach(input => input.addEventListener('change', () => {
+    mode = input.value; $('bot-verification').hidden = mode !== 'ai'; $('bot-send').textContent = mode === 'ai' ? 'Kirim' : 'Cari';
+    status(mode === 'ai' ? 'Pertanyaan dikirim ke Cloudflare Workers AI. Selesaikan verifikasi pengunjung untuk melanjutkan.' : 'Pencarian rujukan siap digunakan.');
+    if (mode === 'ai') mountVerification();
+  }));
+  $('bot-form').addEventListener('submit', async event => {
+    event.preventDefault(); const question = $('bot-question').value.trim(); if (!question || pending) return;
+    if (question.length > 1500) { status('Maksimal 1.500 karakter.'); return; }
+    if (mode === 'ai') await askAI(question); else { line(question, 'user'); searchCatalog(question); }
+  });
   setPending(false);
 })();

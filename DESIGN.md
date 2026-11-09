@@ -1,0 +1,31 @@
+# SiPERI
+
+9 November 2026 — Workers AI: mempertahankan ENERGY 3 / RHYTHM 2 / MOTION 1. Pilihan Cari rujukan tetap default agar penelusuran lokal tidak mengirim pertanyaan. Tanya AI memakai persetujuan tindakan melalui pilihan mode, keterangan tujuan pengiriman, widget Turnstile kompak agar muat pada dialog HP, dan tautan sumber bernomor yang cocok dengan jawaban. Pertanyaan tidak dikosongkan saat gagal; input tetap dapat menerima fokus selama menunggu (readOnly, bukan disabled). Fokus dialog kembali ke tombol yang membukanya. Tidak menampilkan indikator koneksi AI sebelum jawaban diterima.
+
+Asisten melayang: pemilik meminta robot 3D berseragam pertanahan. Maskot transparan dibuat dengan image_gen bawaan, prompt: robot kecil ramah, wajah layar navy dengan mata cyan tersenyum, seragam khaki krem berkerah dan dua saku, epaulet cokelat, papan nama polos, tanda pengenal, celana cokelat muda dan sepatu cokelat, melambaikan tangan; tanpa logo/rank/teks rekaan. Aset final bot-pertanahan.webp (31.602 byte), diturunkan dari PNG hasil generasi dengan alpha dipertahankan. Pengguna mengizinkan pembuatan aset ini. Kontrol membuka dialog native dengan Escape, fokus kembali ke pemicu, ukuran sentuh yang cukup, dukungan reduced motion, serta ruang footer agar pemicu tidak menutup tautan terakhir. Pusat Pengetahuan dihapus dari menu kiri; pintu masuk asisten di sudut kanan bawah. Tidak menampilkan status AI berhasil sebelum menerima jawaban.
+
+Pusat Pengetahuan Anggaran: pola perpustakaan dokumen dengan filter topik, pencarian katalog, akses buku saku dan FAQ PP. Pilihan topik memakai nama kebutuhan kerja, bukan struktur folder admin Drive. Hanya memakai tautan yang sudah dipublikasikan dalam katalog SiPERI. FAQ lama tetap layanan terpisah dengan akses kode uji coba; tidak menampilkan chat palsu atau klaim sinkronisasi dokumen privat.
+
+Revisi pembaca atas permintaan pemilik: tampilan isi HTML dihapus. Buku langsung tampil sebagai PDF lengkap; ekstraksi teks hanya dipakai indeks pencarian. Header portal dan pembuka disembunyikan di halaman buku untuk memberi ruang baca. Daftar isi default tertutup, satu toolbar kompak untuk daftar isi/layar penuh/unduh. Navigasi dan zoom utama menggunakan toolbar PDF bawaan, dengan tautan PDF langsung dalam tab yang sama untuk perangkat yang tidak mendukung embed.
+
+Buku saku: nama halaman Buku Saku Revisi Anggaran, naskah Survival Revisi Anggaran K/L karya Novriansyah Rosyid Hermawan edisi 11/2026. Mode teks dan PDF asli menjaga keterbacaan dan keutuhan tabel/ilustrasi. Daftar isi dan pencarian di panel tersendiri, satu kolom pada HP. Warna pembuka diperkuat ke biru tinta/petrol, kartu layanan memiliki penanda warna sesuai kelompok, dan buku menggunakan panel editorial terang dengan aksen emas. Tidak mengubah aturan hukum dalam naskah atau menyatakan verifikasi regulasi baru.
+
+Revisi lanjutan 9 November: satu logo di menu kiri; identitas kementerian di tengah dihapus. Pencarian satu bidang kompak dengan ikon kaca pembesar dan label aksesibel. Penanda katalog berbentuk mouse/chevron CSS, bergerak 3 siklus (4,2 detik) kemudian diam. Kedalaman parallax hanya pada lapisan biru dekoratif di pembuka menggunakan scroll timeline bila didukung; dokumen tidak bergerak. Semua efek baru mengikuti reduced motion. Referensi: https://developer.chrome.com/docs/css-ui/scroll-driven-animations/ dan https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Scroll-driven_animations/Timelines .
+
+Revisi 9 November 2026: pembuka diringkas menjadi identitas, judul 1,65–2,35 rem, ringkasan dan jangkar ke katalog. Pencarian kompak di kanan header pada desktop dan satu baris penuh di HP. Penanda scroll statis memakai teks dan chevron agar data di bawah mudah ditemukan tanpa animasi berulang. Klik jangkar memindahkan fokus ke katalog; gerak halus mengikuti reduced motion.
+
+Portal kerja untuk pengelola anggaran ATR/BPN. Arah disetujui: modern seperti aplikasi kerja dengan warna identitas ATR/BPN. Biru tua dan emas merupakan interpretasi awal; belum dicocokkan dengan pedoman merek resmi.
+
+ENERGY 2 / RHYTHM 2 / MOTION 1.
+
+Pembaruan atas permintaan pemilik: tingkatkan ENERGY menjadi 3, RHYTHM 2, MOTION 1. Logo memakai bitmap yang sudah tertanam di Index.html aplikasi, bukan gambar ulang. Panel layanan menjadi ubin berjarak dengan penanda urutan emas dan sudut akses, agar pilihan layanan lebih mudah dipindai. Bidang judul menggunakan perubahan biru yang halus untuk memberi kedalaman pada identitas; teks berada di bagian gelap dengan kontras terukur. Transisi 160 ms hanya memberi umpan balik hover/fokus dan dinonaktifkan untuk reduced motion.
+
+Pencarian menjadi fokus. Panel biru tua memberi identitas, aksen emas menandai konteks anggaran. Daftar dokumen dibuat padat untuk pekerjaan berulang. Sidebar desktop menjadi navigasi yang membungkus di HP. Tipografi Segoe UI memakai font sistem agar cepat dan terbaca di Windows. Tidak memakai gambar dekoratif atau membuat logo baru.
+
+Iterasi kedua: sidebar biru tua memisahkan navigasi dari area kerja; pencarian memakai panel putih di dalam bidang identitas agar menjadi fokus utama. Empat layanan disajikan satu baris pada desktop lebar, dua kolom pada tablet, dan satu kolom pada HP. Daftar dokumen menjadi baris berkesinambungan untuk memindai banyak hasil. Angka 01–04 hanya urutan layanan, bukan data operasional.
+
+Tahun sumber dan tahap PAGU adalah dimensi berbeda. Judul asli dipertahankan di katalog, label tampilan dirapikan tanpa mengganti tujuan. Tidak menampilkan angka realisasi atau status operasional yang tidak bersumber.
+
+Latar disetujui pemilik: gradasi statis biru keabu-abuan dari #dce7f1 ke #f2f5f8. Tujuannya menghubungkan area kerja dengan identitas sidebar biru serta memperjelas permukaan dokumen putih. Tidak memakai pola atau animasi latar. Header memakai permukaan solid #e7eef5 agar kontras stabil.
+
+Gerakan disetujui pemilik: perpindahan halaman memakai fade dan perpindahan 5 px selama 180 ms untuk orientasi, bukan setiap ketikan pencarian. Tombol merespons tekanan selama 100 ms. Pemuatan katalog menampilkan placeholder dengan denyut maksimal 3,4 detik; setelahnya diam sampai permintaan selesai. Semua animasi ini dinonaktifkan ketika prefers-reduced-motion aktif. MOTION tetap 1.

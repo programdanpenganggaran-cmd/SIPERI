@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="styles.css?v=20261109-bot2">
   <script src="app.js?v=20261109-bot2" defer></script>
   <script src="buku-saku.js?v=20261109-bot2" defer></script>
-  <script src="bot.js?v=20261109-bot1" defer></script>
+  <script src="bot-config.js?v=20261109-ai1" defer></script>
+  <script src="bot.js?v=20261109-ai1" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Lewati ke isi utama</a>
@@ -53,7 +54,7 @@
         <a href="#pengetahuan?topik=pembahasan" data-knowledge-topic="pembahasan">Penelitian & reviu</a>
         <a href="#pengetahuan?topik=materi" data-knowledge-topic="materi">Materi & dokumentasi</a>
       </nav>
-      <div class="knowledge-assistant"><div><h3>Butuh bantuan memahami topik?</h3><p>Asisten di sudut kanan bawah membantu mencari rujukan SiPERI. Layanan jawaban AI sedang disiapkan.</p></div><button id="bot-open-from-library" type="button">Buka asisten</button></div>
+      <div class="knowledge-assistant"><div><h3>Butuh bantuan memahami topik?</h3><p>Asisten di sudut kanan bawah membantu mencari rujukan dan menjelaskan isi Buku Saku Revisi Anggaran, lengkap dengan halaman sumber.</p></div><button id="bot-open-from-library" type="button">Buka asisten</button></div>
       <p class="knowledge-note">Katalog awal memakai tautan yang sudah tersedia di SiPERI. Dokumen privat dari basis pengetahuan Drive belum disalin atau dipublikasikan. Ketersediaan suatu dokumen bukan penetapan bahwa aturannya masih berlaku.</p>
     </section>
     <a id="knowledge-shortcut" class="book-shortcut knowledge-shortcut" href="#pengetahuan"><span><small>Budget Knowledge Center</small><strong>Pusat Pengetahuan Anggaran</strong><span>Regulasi, standar biaya, template, materi, dan akses FAQ PP.</span></span><span class="knowledge-shortcut-action">Jelajahi rujukan <span aria-hidden="true">↗</span></span></a>
@@ -100,13 +101,13 @@
 <dialog id="bot-dialog" class="bot-dialog" aria-labelledby="bot-title">
   <div class="bot-heading"><img src="bot-pertanahan.webp" alt="" width="44" height="58"><div><h2 id="bot-title">Asisten SiPERI</h2><p>Rujukan anggaran, lebih dekat.</p></div><button id="bot-close" type="button" aria-label="Tutup asisten">×</button></div>
   <div class="bot-content">
-    <p class="bot-intro">Halo! Aku bantu mencari dokumen SiPERI. Layanan AI sedang disiapkan. Jangan sertakan data pribadi atau informasi rahasia.</p>
-    <fieldset class="bot-mode"><legend>Pilih bantuan</legend><label><input type="radio" name="bot-mode" value="catalog" checked> Cari rujukan</label><label><input type="radio" name="bot-mode" value="ai" disabled> AI · segera hadir</label></fieldset>
-    <details id="bot-access" class="bot-access" hidden><summary>Kode akses AI uji coba</summary><label for="bot-code">Kode akses dari pengelola</label><input id="bot-code" type="password" autocomplete="off"><p>Kode hanya disimpan selama tab ini terbuka. Jangan masukkan API key Gemini.</p></details>
-    <div id="bot-messages" class="bot-messages" aria-label="Hasil dan percakapan"></div>
+    <p class="bot-intro" id="bot-help">Cari tautan dokumen atau tanyakan isi Buku Saku Revisi Anggaran. Pilihan Tanya AI mengirim pertanyaan ke Cloudflare. Jangan sertakan data pribadi atau informasi rahasia.</p>
+    <fieldset class="bot-mode"><legend>Pilih bantuan</legend><label><input type="radio" name="bot-mode" value="catalog" checked> Cari rujukan</label><label><input type="radio" name="bot-mode" value="ai"> Tanya AI</label></fieldset>
+    <div id="bot-verification" class="bot-verification" hidden><p>Verifikasi pengunjung untuk Tanya AI</p><div id="bot-verification-widget"></div><button id="bot-retry-verify" type="button">Ulangi verifikasi</button></div>
+    <div id="bot-messages" class="bot-messages" role="region" aria-label="Hasil dan percakapan"></div>
     <p id="bot-status" class="bot-status" role="status" aria-live="polite">Pencarian rujukan siap digunakan.</p>
   </div>
-  <form id="bot-form" class="bot-form"><label for="bot-question">Pertanyaan atau kata pencarian</label><div><textarea id="bot-question" rows="2" maxlength="1500" required></textarea><button type="submit" id="bot-send">Cari</button></div><a id="bot-library" href="#pengetahuan">Jelajahi Pusat Pengetahuan</a></form>
+  <form id="bot-form" class="bot-form"><label for="bot-question">Pertanyaan atau kata pencarian</label><div><textarea id="bot-question" rows="2" maxlength="1500" aria-describedby="bot-help bot-status" required></textarea><button type="submit" id="bot-send">Cari</button></div><a id="bot-library" href="#pengetahuan">Jelajahi Pusat Pengetahuan</a></form>
 </dialog>
 </body>
 </html>
