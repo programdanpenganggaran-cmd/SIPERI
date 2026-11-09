@@ -1,3 +1,18 @@
+# Status terbaru: bot Cloudflare, 9 November 2026
+
+- Integrasi dipublikasikan pada commit `3852c23c50450dff0c11e69c7019f32f0d227042`; kedua workflow GitHub Pages selesai sukses. Lightpanda memuat versi publik, membuka dialog, memilih Tanya AI, dan memastikan panel verifikasi ditampilkan. Lightpanda tidak menguji penyelesaian CAPTCHA atau tata letak CSS visual.
+
+- Worker berhasil diterbitkan; GET `/health` produksi melalui WSL mengembalikan HTTP 200 dan configured=true. CORS preflight 204; tanpa token, token palsu, dan origin tidak sesuai ditolak 403. Koneksi Node/PowerShell Windows mengalami kegagalan TLS, sedangkan curl HTTPS WSL berhasil tanpa menonaktifkan validasi sertifikat.
+- Model Gemma 4 Workers AI menjawab dua pertanyaan nyata (definisi revisi; alur dan kelengkapan) dengan penanda halaman sumber. Ini pengujian model dan konteks, bukan bukti ketepatan seluruh jawaban hukum.
+- `cloudflare/check.mjs`: retrieval, CORS, verifikasi hostname/action/token, ukuran kiriman, blok 16 digit, sumber palsu, error penyedia, rate limit, batas global 50 reservasi dan reset UTC diuji dengan mock. Reservasi bersamaan diuji dengan penyimpanan transaksi tiruan; kontrak serialisasi produksi mengikuti Durable Objects.
+- `bot-check.cjs`: pencarian lokal tanpa request AI, verifikasi, sumber bernomor, token kedaluwarsa, error kuota, input tetap tersimpan, aria-busy, blok 16 digit, dan fokus kembali diuji di DOM tiruan. Katalog dan pembaca PDF tetap lulus pemeriksaan masing-masing.
+- Kontras terukur: #526273/#f5f8fb = 5.875366:1; #123453/#ffffff = 12.790661:1; #73501a/#ffffff = 7.263048:1.
+- Host browser dan native computer-use tidak tersedia. Verifikasi Turnstile oleh manusia, tata letak visual 320 px/zoom 200%, keyboard nyata dan keyboard HP belum diuji. Widget kompak, native dialog, fokus, dan ukuran input dipertahankan; ini bukan klaim kepatuhan WCAG menyeluruh.
+- Indeks berisi 304 potongan buku dan metadata katalog yang sudah publik. Tidak mengimpor indeks privat Netlify Blobs. Jawaban memakai maksimal 4 kutipan; nomor kutipan yang valid tidak otomatis membuktikan seluruh penjelasan benar.
+
+Catatan berikut merupakan riwayat pemeriksaan sebelumnya; pernyataan belum deploy di bagian lama tidak menggambarkan status terkini.
+
+
 # Pemeriksaan purwarupa
 
 Pengguna memilih melanjutkan tampilan bot dahulu dan mencari alternatif Netlify karena kredit hampir habis. Endpoint AI bot publik dikosongkan, pilihan AI dinonaktifkan dengan label segera hadir. Bot publik hanya menelusuri katalog browser dan tidak memanggil Netlify. Penanganan error/kredensial disiapkan untuk koneksi berikutnya dan diuji dengan mock. Perubahan backend FAQ pada faq-repair tetap lokal, tidak diterbitkan.
@@ -31,15 +46,3 @@ Belum ada push GitHub atau deployment. Palet adalah interpretasi awal arah ATR/B
 - Gate visual/keyboard antislop masih belum lengkap; tidak ada klaim website siap produksi.
 
 Iterasi visual kedua: pemeriksaan fungsi tetap lulus setelah perubahan hierarki beranda, sidebar gelap, panel pencarian, dan susunan layanan 4/2/1 kolom. Persiapan artefak kembali berhasil. Browser visual dan keyboard belum tersedia untuk verifikasi; status tetap purwarupa.
-# Status terbaru: bot Cloudflare, 9 November 2026
-
-- Worker berhasil diterbitkan; GET `/health` produksi melalui WSL mengembalikan HTTP 200 dan configured=true. CORS preflight 204; tanpa token, token palsu, dan origin tidak sesuai ditolak 403. Koneksi Node/PowerShell Windows mengalami kegagalan TLS, sedangkan curl HTTPS WSL berhasil tanpa menonaktifkan validasi sertifikat.
-- Model Gemma 4 Workers AI menjawab dua pertanyaan nyata (definisi revisi; alur dan kelengkapan) dengan penanda halaman sumber. Ini pengujian model dan konteks, bukan bukti ketepatan seluruh jawaban hukum.
-- `cloudflare/check.mjs`: retrieval, CORS, verifikasi hostname/action/token, ukuran kiriman, blok 16 digit, sumber palsu, error penyedia, rate limit, batas global 50 reservasi dan reset UTC diuji dengan mock. Reservasi bersamaan diuji dengan penyimpanan transaksi tiruan; kontrak serialisasi produksi mengikuti Durable Objects.
-- `bot-check.cjs`: pencarian lokal tanpa request AI, verifikasi, sumber bernomor, token kedaluwarsa, error kuota, input tetap tersimpan, aria-busy, blok 16 digit, dan fokus kembali diuji di DOM tiruan. Katalog dan pembaca PDF tetap lulus pemeriksaan masing-masing.
-- Kontras terukur: #526273/#f5f8fb = 5.875366:1; #123453/#ffffff = 12.790661:1; #73501a/#ffffff = 7.263048:1.
-- Host browser dan native computer-use tidak tersedia. Verifikasi Turnstile oleh manusia, tata letak visual 320 px/zoom 200%, keyboard nyata dan keyboard HP belum diuji. Widget kompak, native dialog, fokus, dan ukuran input dipertahankan; ini bukan klaim kepatuhan WCAG menyeluruh.
-- Indeks berisi 304 potongan buku dan metadata katalog yang sudah publik. Tidak mengimpor indeks privat Netlify Blobs. Jawaban memakai maksimal 4 kutipan; nomor kutipan yang valid tidak otomatis membuktikan seluruh penjelasan benar.
-
-Catatan berikut merupakan riwayat pemeriksaan sebelumnya; pernyataan belum deploy di bagian lama tidak menggambarkan status terkini.
-
