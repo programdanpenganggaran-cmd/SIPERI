@@ -5,6 +5,7 @@ let resources = [];
 let serviceResources = [];
 let page = 'beranda';
 const pageInfo = {
+  'buku-saku': ['Buku Saku Revisi Anggaran', 'Panduan revisi, siap dijelajahi.', 'Baca buku, telusuri topik, dan temukan halaman yang dibutuhkan.'],
   monitoring: ['PANTAU ATR/BPN', 'Pantau anggaran unit kerjamu.', 'Buka aplikasi Peta Anggaran Terintegrasi Antar Unit untuk memantau anggaran dan realisasi.'],
   beranda: ['Ruang kerja anggaran', 'Satu portal. Seluruh kebutuhan anggaran.', 'Temukan dokumen penyusunan, revisi, POK, dan realisasi tanpa berpindah portal.'],
   pagu: ['Penyusunan PAGU', 'Susun anggaran dengan referensi yang tepat.', 'Pilih tahun sumber dan tahap untuk menemukan pagu, template, serta dokumen pendukung.'],
@@ -30,6 +31,12 @@ function route() {
   document.getElementById('home-services').hidden = page !== 'beranda';
   document.getElementById('workspace-heading').hidden = page !== 'beranda';
   document.getElementById('monitoring-shortcut').hidden = page !== 'beranda';
+  document.getElementById('book-shortcut').hidden = !['beranda','revisi'].includes(page);
+  document.getElementById('pocket-book').hidden = page !== 'buku-saku';
+  document.getElementById('katalog').hidden = page === 'buku-saku';
+  document.getElementById('search-form').hidden = page === 'buku-saku';
+  document.getElementById('scroll-data').hidden = page === 'buku-saku';
+  if(page === 'buku-saku' && window.renderPocketBook) window.renderPocketBook();
   document.getElementById('stage-filter').hidden = page !== 'pagu';
   const note = document.getElementById('page-note');
   const notes = {pok:'Dokumen POK tersedia untuk delapan unit kerja. Dashboard angka realisasi belum terhubung ke sumber data; tidak ada angka simulasi yang ditampilkan.',realisasi:'Sumber yang terbaca memuat Januari dan Februari 2026 serta arsip 2025. Bulan lain belum tersedia dalam katalog.',revisi:'Tautan dari website dan Linktree dipertahankan terpisah. Periode yang belum diketahui ditandai, bukan diasumsikan sebagai tahun 2026.'};

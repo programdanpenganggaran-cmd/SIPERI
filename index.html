@@ -7,6 +7,7 @@
   <title>SiPERI | Akses anggaran dan dokumen</title>
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
+  <script src="buku-saku.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Lewati ke isi utama</a>
@@ -18,6 +19,7 @@
       <a href="#beranda" data-page="beranda">Beranda</a>
       <a href="#pagu" data-page="pagu">Penyusunan PAGU</a>
       <a href="#revisi" data-page="revisi">Revisi Anggaran</a>
+      <a href="#buku-saku" data-page="buku-saku">Buku Saku Revisi</a>
       <a href="#pok" data-page="pok">POK SEKJEN</a>
       <a href="#realisasi" data-page="realisasi">Realisasi Anggaran</a>
       <a href="https://script.google.com/macros/s/AKfycbw67r8qagn2VoEDXt9mXUvNV7gotQjPf9GcFMiVT2XFrWuTU4eGTQ4xqb6TgK4Qf_DR/exec">PANTAU ATR/BPN</a>
@@ -39,6 +41,23 @@
       <p>Temukan referensi, template, dan kelengkapan penyusunan anggaran dalam satu tempat.</p>
       <a class="scroll-cue" id="scroll-data" href="#katalog" aria-label="Gulir ke katalog dokumen" title="Lihat katalog dokumen"><span class="scroll-mouse" aria-hidden="true"><span></span></span><span class="scroll-arrows" aria-hidden="true"><i></i><i></i></span></a>
     </section>
+    <section id="pocket-book" class="pocket-book" hidden aria-labelledby="book-title">
+      <header class="book-banner"><div><p class="eyebrow">Perpustakaan SiPERI · Edisi 11/2026</p><h2 id="book-title">Buku Saku Revisi Anggaran</h2><p>Survival Revisi Anggaran K/L</p><p class="book-author">Novriansyah Rosyid Hermawan</p></div><a class="book-download" href="buku-saku-revisi-2026.pdf" download>Unduh PDF asli</a></header>
+      <div class="book-layout">
+        <aside class="book-index" aria-label="Daftar isi buku"><h3>Jelajahi buku</h3><label for="book-search">Cari di isi buku</label><input type="search" id="book-search" autocomplete="off"><p id="book-search-status" role="status">Memuat daftar isi...</p><nav id="book-toc" aria-label="Bab buku saku"></nav><button id="book-retry" type="button" hidden>Coba muat kembali</button></aside>
+        <article class="book-reader" aria-labelledby="book-page-title">
+          <div class="book-reader-toolbar"><div class="book-modes" aria-label="Mode baca"><button type="button" id="book-text-mode" aria-pressed="true">Teks HTML</button><button type="button" id="book-pdf-mode" aria-pressed="false">Halaman asli</button></div><a id="book-open-pdf" href="buku-saku-revisi-2026.pdf#page=1" target="_blank" rel="noopener">Buka PDF</a></div>
+          <p class="book-extraction-note">Teks HTML diekstrak dari buku yang diberikan. Untuk tabel, ilustrasi, dan susunan lengkap, gunakan “Halaman asli”. Rujukan aturan mengikuti naskah buku.</p>
+          <p id="book-page-label" class="eyebrow"></p><h3 id="book-page-title" tabindex="-1">Memuat buku...</h3>
+          <pre id="book-page-text" class="book-page-text"></pre>
+          <img id="book-cover" class="book-cover" src="book-cover.webp" alt="Sampul Survival Revisi Anggaran K/L, karya Novriansyah Rosyid Hermawan, edisi 11/2026" width="776" height="1100" hidden>
+          <div id="book-image-note" class="book-image-note" hidden>Halaman ini berupa ilustrasi atau tidak memiliki teks yang dapat diekstrak. Pilih “Halaman asli” untuk membacanya.</div>
+          <iframe id="book-pdf-frame" class="book-pdf-frame" title="Halaman asli Buku Saku Revisi Anggaran" hidden></iframe>
+          <div class="book-pager"><button type="button" id="book-prev">Sebelumnya</button><label for="book-page-select">Halaman PDF <select id="book-page-select"></select></label><button type="button" id="book-next">Berikutnya</button></div>
+        </article>
+      </div>
+    </section>
+    <a id="book-shortcut" class="book-shortcut" href="#buku-saku"><span><small>Panduan kerja · 2026</small><strong>Buku Saku Revisi Anggaran</strong><span>Dasar, kewenangan, alur revisi, studi kasus, dan checklist dalam satu panduan.</span></span><span class="book-shortcut-action">Baca panduan <span aria-hidden="true">↗</span></span></a>
     <section id="monitoring-shortcut" class="monitoring-shortcut"><div><p class="eyebrow">Untuk kantah dan unit kerja</p><h2>PANTAU ATR/BPN</h2><p>Peta Anggaran Terintegrasi Antar Unit. Buka aplikasi untuk memantau anggaran dan realisasi.</p></div><a href="https://script.google.com/macros/s/AKfycbw67r8qagn2VoEDXt9mXUvNV7gotQjPf9GcFMiVT2XFrWuTU4eGTQ4xqb6TgK4Qf_DR/exec">Buka PANTAU ATR/BPN</a></section>
     <section class="workspace-heading" id="workspace-heading"><div><p class="eyebrow">Mulai dari kebutuhanmu</p><h2>Layanan anggaran dalam satu ruang kerja.</h2></div><p>Alur pengelolaan anggaran, dari penyusunan hingga pelaporan.</p></section>
     <section id="home-services" class="home-services" aria-label="Layanan SiPERI">
