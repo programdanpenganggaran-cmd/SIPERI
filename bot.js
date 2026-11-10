@@ -31,12 +31,13 @@
     const stop = new Set(['apa', 'apakah', 'bagaimana', 'yang', 'untuk', 'dengan', 'dan', 'di', 'ke', 'dari', 'saya', 'cari', 'tolong', 'dokumen']);
     const terms = normalize(question).split(' ').filter(t => t && !stop.has(t));
     const items = window.siperiCatalog || [];
-    if (!items.length) { status('Katalog belum dimuat. Tunggu sebentar lalu coba lagi.'); return; }
-    if (!terms.length) { line('Gunakan kata seperti revisi, SBK, TOR, nama unit, atau tahun dokumen.'); return; }
+    if (!items.length) { status('Katalog belum dimuat. Tunggu sebentar lalu coba lagi.'); return false; }
+    if (!terms.length) { line('Gunakan kata seperti revisi, SBK, TOR, nama unit, atau tahun dokumen.'); return false; }
     const results = items.filter(item => terms.every(t => normalize(item.title + ' ' + (item.year || '') + ' ' + item.stage).includes(t))).slice(0, 8);
     const message = line(results.length ? 'Berikut tautan yang sesuai. Periksa tahun dan isi sumber sebelum digunakan.' : 'Belum ada judul yang cocok. Coba kata lebih singkat, atau jelajahi Pusat Pengetahuan. Pencarian ini belum membaca seluruh isi PDF.');
     for (const item of results) sourceLink({ title: item.title + ' · ' + (item.year || 'periode belum dikonfirmasi'), url: item.url }, message);
     status(results.length ? `${results.length} rujukan ditampilkan, maksimal 8 hasil.` : 'Tidak ada hasil yang cocok.');
+    return true;
   }
   function setPending(value) {
     pending = value; $('bot-send').disabled = value; $('bot-question').readOnly = value;
@@ -83,6 +84,7 @@
     controller = new AbortController(); const timeout = setTimeout(() => controller?.abort(), 35000);
     setPending(true); status('Menyusun jawaban dari rujukan SiPERI...');
     line(question, 'user');
+    $('bot-question').value = '';
     try {
       const response = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ question, turnstileToken: verificationToken }), signal: controller.signal });
       const data = await response.json().catch(() => ({}));
@@ -93,6 +95,7 @@
       if (data.warning) { const note = document.createElement('small'); note.textContent = data.warning; item.append(note); }
       status(data.grounded ? 'Jawaban AI diterima. Buka sumber untuk memeriksa penjelasan.' : 'Rujukan belum cukup untuk jawaban yang pasti. Coba pertanyaan lebih spesifik.');
     } catch (error) {
+      if (!$('bot-question').value) $('bot-question').value = question;
       if (dialog.open) {
         const message = error.name === 'AbortError' ? 'Jawaban belum diterima dalam waktu tunggu. Coba lagi atau gunakan Cari rujukan.' : error.message || 'Koneksi gagal. Coba lagi.';
         line(message, 'error');
@@ -124,7 +127,12 @@
   $('bot-form').addEventListener('submit', async event => {
     event.preventDefault(); const question = $('bot-question').value.trim(); if (!question || pending) return;
     if (question.length > 1500) { status('Maksimal 1.500 karakter.'); return; }
-    if (mode === 'ai') await askAI(question); else { line(question, 'user'); searchCatalog(question); }
+    if (mode === 'ai') await askAI(question); else { line(question, 'user'); if (searchCatalog(question)) $('bot-question').value = ''; }
+  });
+  $('bot-question').addEventListener('keydown', event => {
+    if (event.key !== 'Enter' || event.shiftKey || event.ctrlKey || event.altKey || event.metaKey || event.isComposing || event.keyCode === 229) return;
+    event.preventDefault();
+    if (!pending && !event.repeat) $('bot-form').requestSubmit();
   });
   setPending(false);
 })();

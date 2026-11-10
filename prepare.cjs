@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const directory = path.join(__dirname,'public');
 fs.mkdirSync(directory,{recursive:true});
-for(const file of ['index.html','styles.css','app.js','catalog-sources.json','services.json','atr-bpn.png','buku-saku.js','buku-saku.json','buku-saku-revisi-2026.pdf','book-cover.webp','bot.js','bot-config.js','bot-pertanahan.webp','.nojekyll']) fs.copyFileSync(path.join(__dirname,file),path.join(directory,file));
+for(const file of ['index.html','styles.css','app.js','catalog-sources.json','services.json','atr-bpn.png','buku-saku.js','buku-saku.json','buku-saku-revisi-2026.pdf','book-cover.webp','bot.js','bot-config.js','peri-asn.webp','.nojekyll']) fs.copyFileSync(path.join(__dirname,file),path.join(directory,file));
 console.log('Static website prepared in public/');
 const crypto = require('node:crypto');
 const indexPath = path.join(directory,'index.html');

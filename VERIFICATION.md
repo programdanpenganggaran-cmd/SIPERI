@@ -1,4 +1,10 @@
-# Status terbaru: bot Cloudflare, 9 November 2026
+# Status terbaru: revisi asisten, 10 November 2026
+
+- Maskot `peri-asn.webp` ditinjau visual setelah generasi dan optimasi: RGBA, latar transparan, seluruh karakter/sayap/sepatu terlihat. Tetap memakai ruang tombol yang sama, tanpa animasi berulang baru.
+- Pengujian composer lulus: Enter mengirim, Shift+Enter dan IME tidak ditangkap, tombol modifier tetap normal, repeat/pending tidak mengirim ganda, field kosong saat request berjalan, sukses tetap kosong, kegagalan kuota memulihkan pertanyaan, verifikasi belum selesai mempertahankan pertanyaan. Penelusuran katalog juga mengosongkan input setelah dijalankan.
+- Kontras hint keyboard #526273 di putih: 6.262298:1. Browser/native host masih tidak tersedia; keyboard perangkat nyata, reflow 320 px, dan zoom visual 200% belum diverifikasi pada revisi ini.
+
+## Riwayat integrasi Cloudflare, 9 November 2026
 
 - Integrasi dipublikasikan pada commit `3852c23c50450dff0c11e69c7019f32f0d227042`; kedua workflow GitHub Pages selesai sukses. Lightpanda memuat versi publik, membuka dialog, memilih Tanya AI, dan memastikan panel verifikasi ditampilkan. Lightpanda tidak menguji penyelesaian CAPTCHA atau tata letak CSS visual.
 
