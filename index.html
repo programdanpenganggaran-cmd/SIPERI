@@ -7,17 +7,23 @@
   <title>SiPERI | Akses anggaran dan dokumen</title>
   <link rel="stylesheet" href="styles.css?v=20261109-bot2">
   <script src="app.js?v=20261109-bot2" defer></script>
+  <script src="portal-motion.js?v=20261111" defer></script>
   <script src="buku-saku.js?v=20261109-bot2" defer></script>
   <script src="bot-config.js?v=20261109-ai1" defer></script>
   <script src="bot.js?v=20261109-ai1" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Lewati ke isi utama</a>
+<div class="agency-strip">Biro Perencanaan dan Kerja Sama <span aria-hidden="true">/</span> <strong>Bagian Penganggaran</strong></div>
 <div class="shell">
-  <aside class="sidebar">
-    <a class="brand" href="#beranda"><img src="atr-bpn.png" alt="Logo Kementerian ATR/BPN" width="64" height="64"><span class="brand-copy">SiPERI<small>Kementerian ATR/BPN</small></span></a>
-    <p class="nav-label">Ruang kerja anggaran</p>
-    <nav aria-label="Navigasi utama">
+  <header class="site-navigation">
+    <a class="brand" href="#beranda" aria-label="SiPERI, beranda"><img src="atr-bpn.png" alt="Logo Kementerian ATR/BPN" width="44" height="44"><span class="brand-copy">SiPERI<small>Kementerian ATR/BPN</small></span></a>
+    <nav class="primary-navigation" aria-label="Navigasi utama">
+      <a href="#pagu" data-page="pagu">Penyusunan PAGU</a>
+      <a href="#revisi" data-page="revisi">Revisi Anggaran</a>
+      <a href="#buku-saku" data-page="buku-saku">Buku Saku Revisi</a>
+    </nav>
+    <details class="nav-directory" id="nav-directory"><summary>Menu <span aria-hidden="true">+</span></summary><nav aria-label="Semua layanan SiPERI">
       <a href="#beranda" data-page="beranda">Beranda</a>
       <a href="#pagu" data-page="pagu">Penyusunan PAGU</a>
       <a href="#revisi" data-page="revisi">Revisi Anggaran</a>
@@ -27,9 +33,8 @@
       <a href="#realisasi" data-page="realisasi">Realisasi Anggaran</a>
       <a href="https://script.google.com/macros/s/AKfycbw67r8qagn2VoEDXt9mXUvNV7gotQjPf9GcFMiVT2XFrWuTU4eGTQ4xqb6TgK4Qf_DR/exec">PANTAU ATR/BPN</a>
       <a href="#arsip" data-page="arsip">Arsip dokumen</a>
-    </nav>
-    <div class="sidebar-note"><strong>Satu ruang untuk anggaran.</strong><p>Pilih layanan, temukan dokumen, lalu buka sumber dengan akun yang memiliki akses.</p></div>
-  </aside>
+    </nav></details>
+  </header>
   <main id="main" tabindex="-1">
     <header class="topbar"><span class="portal-context">Sistem Informasi Penyusunan, Revisi,<br>dan Realisasi Anggaran</span>
       <form id="search-form" role="search">
@@ -39,10 +44,18 @@
       </form>
     </header>
     <section class="intro" aria-labelledby="page-title">
+      <div class="document-stream" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <p class="eyebrow">Penyusunan PAGU</p>
       <h1 id="page-title">Dokumen anggaran,<br>lebih mudah ditemukan.</h1>
       <p>Temukan referensi, template, dan kelengkapan penyusunan anggaran dalam satu tempat.</p>
-      <a class="scroll-cue" id="scroll-data" href="#katalog" aria-label="Gulir ke katalog dokumen" title="Lihat katalog dokumen"><span class="scroll-mouse" aria-hidden="true"><span></span></span><span class="scroll-arrows" aria-hidden="true"><i></i><i></i></span></a>
+      <a class="scroll-cue" id="scroll-data" href="#katalog"><span class="scroll-symbol" aria-hidden="true">↓</span><span>Lihat katalog dokumen</span></a>
+    </section>
+    <section class="workspace-heading" id="workspace-heading" data-reveal><p class="eyebrow">Dari rencana sampai realisasi</p><div><h2>Satu alur kerja.<br>Empat pintu masuk.</h2><p>Pilih kebutuhanmu. Referensi dan dokumen pendukung ada di dalamnya.</p></div></section>
+    <section id="home-services" class="home-services" aria-label="Layanan SiPERI" data-reveal>
+      <a href="#pagu"><span class="service-label">01 / Perencanaan</span><h2>Penyusunan<br>PAGU</h2><p>Pagu Anggaran dan Pagu Alokasi, dari referensi sampai kelengkapan.</p><span class="service-open">Buka penyusunan <span aria-hidden="true">↗</span></span></a>
+      <a href="#revisi"><span class="service-label">02 / Perubahan</span><h2>Revisi<br>Anggaran</h2><p>Usulan, penelitian, reviu, penelaahan, dan informasi progres.</p><span class="service-open">Buka revisi <span aria-hidden="true">↗</span></span></a>
+      <a href="#pok"><span class="service-label">03 / Pelaksanaan</span><h2>POK<br>SEKJEN</h2><p>Petunjuk Operasional Kegiatan menurut unit kerja Sekretariat Jenderal.</p><span class="service-open">Lihat dokumen POK <span aria-hidden="true">↗</span></span></a>
+      <a href="#realisasi"><span class="service-label">04 / Pelaporan</span><h2>Realisasi<br>Anggaran</h2><p>Dokumen bulanan dan arsip realisasi tahun sebelumnya.</p><span class="service-open">Telusuri realisasi <span aria-hidden="true">↗</span></span></a>
     </section>
     <section id="knowledge-center" class="knowledge-center" hidden aria-labelledby="knowledge-title">
       <div class="knowledge-heading"><div><p class="eyebrow">Budget Knowledge Center</p><h2 id="knowledge-title">Temukan rujukan sebelum mulai bekerja.</h2><p>Pilih topik atau cari judul pada katalog di bawah. Dokumen tetap dibuka dari sumbernya.</p></div><a href="#buku-saku">Baca Buku Saku Revisi</a></div>
@@ -57,7 +70,7 @@
       <div class="knowledge-assistant"><div><h3>Butuh bantuan memahami topik?</h3><p>Asisten di sudut kanan bawah membantu mencari rujukan dan menjelaskan isi Buku Saku Revisi Anggaran, lengkap dengan halaman sumber.</p></div><button id="bot-open-from-library" type="button">Buka asisten</button></div>
       <p class="knowledge-note">Katalog awal memakai tautan yang sudah tersedia di SiPERI. Dokumen privat dari basis pengetahuan Drive belum disalin atau dipublikasikan. Ketersediaan suatu dokumen bukan penetapan bahwa aturannya masih berlaku.</p>
     </section>
-    <a id="knowledge-shortcut" class="book-shortcut knowledge-shortcut" href="#pengetahuan"><span><small>Budget Knowledge Center</small><strong>Pusat Pengetahuan Anggaran</strong><span>Regulasi, standar biaya, template, materi, dan akses FAQ PP.</span></span><span class="knowledge-shortcut-action">Jelajahi rujukan <span aria-hidden="true">↗</span></span></a>
+    <a id="knowledge-shortcut" class="book-shortcut knowledge-shortcut" href="#pengetahuan" data-reveal><span><small>Budget Knowledge Center</small><strong>Pengetahuan bersama.<br>Pekerjaan lebih mudah.</strong><span>Regulasi, standar biaya, template, materi, dan rujukan anggaran.</span></span><span class="knowledge-shortcut-action">Jelajahi rujukan <span aria-hidden="true">↗</span></span></a>
     <section id="pocket-book" class="pocket-book" hidden aria-labelledby="book-title">
       <header class="book-banner"><div><p class="eyebrow">Perpustakaan SiPERI · Edisi 11/2026</p><h2 id="book-title">Buku Saku Revisi Anggaran</h2><p class="book-author">Novriansyah Rosyid Hermawan · 96 halaman</p></div><div class="book-actions"><button type="button" id="book-toggle-toc" aria-expanded="false" aria-controls="book-index">Daftar isi</button><button type="button" id="book-fullscreen">Layar penuh</button><a class="book-download" href="buku-saku-revisi-2026.pdf" download>Unduh PDF</a></div></header>
       <div class="book-layout">
@@ -69,15 +82,8 @@
         </article>
       </div>
     </section>
-    <a id="book-shortcut" class="book-shortcut" href="#buku-saku"><span><small>Panduan kerja · 2026</small><strong>Buku Saku Revisi Anggaran</strong><span>Dasar, kewenangan, alur revisi, studi kasus, dan checklist dalam satu panduan.</span></span><span class="book-shortcut-action">Baca panduan <span aria-hidden="true">↗</span></span></a>
-    <section id="monitoring-shortcut" class="monitoring-shortcut"><div><p class="eyebrow">Untuk kantah dan unit kerja</p><h2>PANTAU ATR/BPN</h2><p>Peta Anggaran Terintegrasi Antar Unit. Buka aplikasi untuk memantau anggaran dan realisasi.</p></div><a href="https://script.google.com/macros/s/AKfycbw67r8qagn2VoEDXt9mXUvNV7gotQjPf9GcFMiVT2XFrWuTU4eGTQ4xqb6TgK4Qf_DR/exec">Buka PANTAU ATR/BPN</a></section>
-    <section class="workspace-heading" id="workspace-heading"><div><p class="eyebrow">Mulai dari kebutuhanmu</p><h2>Layanan anggaran dalam satu ruang kerja.</h2></div><p>Alur pengelolaan anggaran, dari penyusunan hingga pelaporan.</p></section>
-    <section id="home-services" class="home-services" aria-label="Layanan SiPERI">
-      <a href="#pagu"><span>01 / Perencanaan</span><h2>Penyusunan PAGU</h2><p>Pagu Anggaran dan Pagu Alokasi, dari referensi sampai kelengkapan.</p></a>
-      <a href="#revisi"><span>02 / Perubahan anggaran</span><h2>Revisi Anggaran</h2><p>Usulan, penelitian, reviu, penelaahan, dan informasi progres.</p></a>
-      <a href="#pok"><span>03 / Pelaksanaan kegiatan</span><h2>POK SEKJEN</h2><p>Dokumen Petunjuk Operasional Kegiatan menurut unit kerja.</p></a>
-      <a href="#realisasi"><span>04 / Pelaporan</span><h2>Realisasi Anggaran</h2><p>Dokumen bulanan dan arsip realisasi tahun sebelumnya.</p></a>
-    </section>
+    <a id="book-shortcut" class="book-shortcut" href="#buku-saku" data-reveal><span><small>Panduan kerja · 2026</small><strong>Buku Saku<br>Revisi Anggaran</strong><span>Dasar, kewenangan, alur revisi, studi kasus, dan checklist dalam satu panduan.</span><span class="book-shortcut-action">Baca panduan <span aria-hidden="true">↗</span></span></span><img class="book-preview" src="book-cover.webp" width="776" height="1100" loading="lazy" alt="Sampul Buku Saku Revisi Anggaran"></a>
+    <section id="monitoring-shortcut" class="monitoring-shortcut" data-reveal><div><p class="eyebrow">Untuk kantah dan unit kerja</p><h2>PANTAU ATR/BPN</h2><p>Peta Anggaran Terintegrasi Antar Unit. Buka aplikasi untuk memantau anggaran dan realisasi.</p></div><a href="https://script.google.com/macros/s/AKfycbw67r8qagn2VoEDXt9mXUvNV7gotQjPf9GcFMiVT2XFrWuTU4eGTQ4xqb6TgK4Qf_DR/exec">Buka aplikasi <span aria-hidden="true">↗</span></a></section>
     <section id="page-note" class="page-note" hidden aria-label="Informasi layanan"></section>
     <section id="katalog" class="catalog" aria-labelledby="catalog-title" tabindex="-1">
       <div class="section-heading"><div><p class="eyebrow">Katalog dokumen</p><h2 id="catalog-title">Pagu Anggaran · 2026</h2></div><div class="catalog-actions"><button id="share" class="secondary" type="button">Bagikan halaman</button><button id="reset" class="secondary" type="button">Reset filter</button></div></div>

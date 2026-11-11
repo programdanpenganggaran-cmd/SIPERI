@@ -1,5 +1,12 @@
 # Status terbaru: revisi asisten, 10 November 2026
 
+## Redesign 11 November 2026
+
+- Referensi DeepBook ditangkap dengan Firecrawl dan pikselnya ditinjau. Header horizontal native menu, pembuka hitam/biru, layanan gelap, area baca putih dan footer biru diterapkan di CSS portal; tidak mengimpor library Webflow atau aset pihak ketiga.
+- Pemeriksaan katalog, PDF, asisten dan motion lulus. Motion test mencakup fallback tanpa observer, konten tetap terlihat, reveal sekali, reduced-motion berubah saat berjalan, menu ditutup lewat tautan/Escape, serta pemulihan fokus.
+- Kontras diukur: putih/#1e6ef3 4.585364:1; #bcc3cc/#101113 10.629800:1; #606975/putih 5.563120:1; #9bc1ff/#191919 9.599351:1. Border kontrol #858d98/putih 3.354279:1, dipakai untuk batas bidang, bukan warna teks.
+- Pemeriksaan tangkapan layar produksi desktop dan ponsel dilakukan setelah deployment; hasil dicatat pada pembaruan berikutnya. Pengujian unit bukan pengganti keyboard perangkat nyata atau kepatuhan WCAG menyeluruh.
+
 - Maskot `peri-asn.webp` ditinjau visual setelah generasi dan optimasi: RGBA, latar transparan, seluruh karakter/sayap/sepatu terlihat. Tetap memakai ruang tombol yang sama, tanpa animasi berulang baru.
 - Pengujian composer lulus: Enter mengirim, Shift+Enter dan IME tidak ditangkap, tombol modifier tetap normal, repeat/pending tidak mengirim ganda, field kosong saat request berjalan, sukses tetap kosong, kegagalan kuota memulihkan pertanyaan, verifikasi belum selesai mempertahankan pertanyaan. Penelusuran katalog juga mengosongkan input setelah dijalankan.
 - Kontras hint keyboard #526273 di putih: 6.262298:1. Browser/native host masih tidak tersedia; keyboard perangkat nyata, reflow 320 px, dan zoom visual 200% belum diverifikasi pada revisi ini.

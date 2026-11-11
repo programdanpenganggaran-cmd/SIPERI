@@ -9,7 +9,7 @@ for(const file of ['buku-saku.js','buku-saku.json','buku-saku-revisi-2026.pdf'])
 types['.pdf']='application/pdf';
 files['/book-cover.webp']='book-cover.webp';
 types['.webp']='image/webp';
-files['/bot.js']='bot.js';files['/bot-config.js']='bot-config.js';files['/peri-asn.webp']='peri-asn.webp';
+files['/bot.js']='bot.js';files['/bot-config.js']='bot-config.js';files['/peri-asn.webp']='peri-asn.webp';files['/portal-motion.js']='portal-motion.js';
 http.createServer((req,res)=>{
   const file = files[new URL(req.url,'http://localhost').pathname];
   if(!file){res.writeHead(404);res.end('Not found');return;}

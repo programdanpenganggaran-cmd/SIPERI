@@ -50,6 +50,7 @@ function route() {
   });
   document.getElementById('pocket-book').hidden = page !== 'buku-saku';
   document.getElementById('main').classList?.toggle('reading-book',page === 'buku-saku');
+  document.getElementById('main').classList?.toggle('is-home',page === 'beranda');
   document.getElementById('katalog').hidden = page === 'buku-saku';
   document.getElementById('search-form').hidden = page === 'buku-saku';
   document.getElementById('scroll-data').hidden = page === 'buku-saku';

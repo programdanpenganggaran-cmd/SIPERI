@@ -24,6 +24,7 @@ jobs:
       - run: node check.cjs
       - run: node book-check.cjs
       - run: node bot-check.cjs
+      - run: node portal-motion-check.cjs
       - run: node cloudflare/build-knowledge.mjs
       - run: node cloudflare/check.mjs
       - run: node prepare.cjs
