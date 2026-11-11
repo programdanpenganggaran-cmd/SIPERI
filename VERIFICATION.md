@@ -7,6 +7,7 @@
 - Kontras terukur: #eef3fb/#0e1520 16.435949:1; #a8b5c8/#19283c 7.168669:1; #9ac2ff/#19283c 8.180071:1; batas kontrol #718096/#141e2b 4.183041:1 (syarat non-teks 3:1); warning #ffe0a0/#2c2316 12.082969:1. Hasil ini pasangan tertentu, bukan audit seluruh WCAG.
 - Daftar aset statis awal (HTML/CSS/JS, katalog, logo, maskot dan sampul) berjumlah 243.584 byte mentah; ini penjumlahan file, bukan pengukuran waterfall browser, LCP, CLS, INP atau fps. PDF diakses terpisah saat pembaca dibuka. Tidak menambah dependency atau aset gambar baru.
 - Pemeriksaan katalog, pembaca buku, asisten dan animasi tetap lulus. Tangkapan render baru ditinjau setelah deployment; keyboard/perangkat nyata dan CWV belum diukur.
+- Hasil produksi 6999c38 ditinjau melalui Firecrawl: beranda desktop 1440×2700 dan katalog PAGU 2026 pada viewport 320×900/tangkapan penuh 320×3044. Panel perpustakaan, buku dan katalog tidak lagi membentuk bidang putih besar; filter, metadata, judul, tombol dan footer terlihat pada kedua konfigurasi. Gambar sampul asli tetap terang. Review tambahan memeriksa label/error, hover dan selected reader; tidak ditemukan pasangan teks gelap di permukaan gelap pada kode yang diperiksa.
 
 ## Redesign 11 November 2026
 
