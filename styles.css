@@ -351,7 +351,7 @@ footer :focus-visible { outline-color: #fff; }
   main > footer { padding-top: 38px; padding-bottom: 140px; flex-direction: column; gap: 24px; }
   .bot-launcher { right: 12px; width: 76px; min-height: 101px; }
   .bot-launcher img { width: 76px; height: 101px; }
-  .bot-launcher-label { right: 66px; top: 24px; font-size: .7rem; padding: 8px 10px; }
+  .bot-launcher-label { display: none; }
   .bot-dialog { inset: auto 10px max(10px,env(safe-area-inset-bottom)) auto; width: 420px; max-width: calc(100vw - 20px); height: calc(100dvh - 26px); max-height: min(calc(100dvh - 26px),calc(var(--bot-viewport-height,100dvh) - 26px)); border-radius: 10px; }
   .bot-heading { padding: 12px 14px; }
   .bot-heading h2 { font-size: 1rem; }
