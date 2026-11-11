@@ -1,5 +1,9 @@
 # SiPERI
 
+## Akses Data Bedah DIPA, 11 November 2026
+
+Panel layanan pada beranda, tepat setelah empat pintu masuk utama, memberi akses Data Bedah DIPA tanpa menambah kepadatan menu. Memakai pola monitoring-shortcut, token navy/biru dan ukuran sentuh yang sudah ada; ENERGY 3 / RHYTHM 3 / MOTION 2 tetap. Label memerlukan akun Google menjelaskan hasil pemeriksaan tautan, bukan klaim siapa yang memiliki izin. Aplikasi dibuka langsung dalam tab yang sama agar autentikasi tidak bergantung pada iframe. Tidak menyalin data aplikasi ke portal. URL pengguna berakhiran /exe memberi 404; /exec mengarah ke login Google, maka digunakan /exec. Isi dan hak akses setelah login belum diperiksa.
+
 ## Adaptasi pola komponen, 11 November 2026
 
 Design Read: tetap portal anggaran navy untuk Kantah, Kanwil, dan pengelola anggaran. ENERGY 3 / RHYTHM 3 / MOTION 2 tidak berubah. Kajian Arc UI, Arc MCP, dan beUI Native dicatat di UI_REFERENCES.md. Perubahan kali ini berfokus pada kenyamanan membaca chat, bukan mengganti sistem visual.

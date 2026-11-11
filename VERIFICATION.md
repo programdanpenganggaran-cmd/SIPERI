@@ -1,5 +1,11 @@
 # Status terbaru: redesign SiPERI, 11 November 2026
 
+## Data Bedah DIPA di beranda
+
+Tautan /exe diperiksa dan memberi 404; /exec mengarah ke login Google. Panel beranda menggunakan /exec dengan keterangan memerlukan akun Google, tanpa iframe atau penyalinan data. Isi aplikasi dan izin setelah login belum diuji. Chrome lokal 1280x900 dan 320x900: panel terlihat hanya di beranda, tersembunyi pada Revisi, batas panel berada di viewport, tautan dapat difokuskan dengan keyboard dan target setinggi 48px. Tangkapan ponsel ditinjau. Pemeriksaan katalog, buku, bot, motion dan build lulus. Token warna panel memakai pasangan navy/teks/aksi yang sudah diukur sebelumnya.
+
+Delivery Gate cakupan ini: Hard PASS (tujuan nyata, label login, keyboard dan reflow teruji); Purpose PASS (akses layanan beranda dengan pola panel yang sudah ada); Liveliness PASS (identitas dan dials tetap); Craftsmanship PASS (HTML/CSS/route langsung, tanpa dependensi dan tanpa klaim akses dokumen setelah login).
+
 ## Kajian komponen dan scroll asisten
 
 - Arc UI, Arc MCP, dan beUI Native diperiksa dari sumber GitHub pada SHA yang dicatat di UI_REFERENCES.md. Arc UI tidak diimpor karena lisensi tidak jelas dan reset global berbenturan dengan tema; Arc MCP adalah alat deployment, bukan komponen; beUI Native memakai React Native. Tidak menjalankan CLI repositori, memasang dependency, atau memberikan kredensial baru.

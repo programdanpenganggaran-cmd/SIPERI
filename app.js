@@ -40,6 +40,7 @@ function route() {
   });
   document.getElementById('home-services').hidden = page !== 'beranda';
   document.getElementById('workspace-heading').hidden = page !== 'beranda';
+  document.getElementById('dipa-shortcut').hidden = page !== 'beranda';
   document.getElementById('monitoring-shortcut').hidden = page !== 'beranda';
   document.getElementById('book-shortcut').hidden = !['beranda','revisi'].includes(page);
   document.getElementById('knowledge-center').hidden = page !== 'pengetahuan';
