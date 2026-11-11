@@ -59,9 +59,9 @@ main { min-width: 0; }
 .topbar { max-width: var(--container); margin: 0 auto; padding: 26px 0 0; display: flex; align-items: center; justify-content: space-between; gap: 24px; color: #abb2bc; font-size: .7rem; }
 .topbar form { width: 290px; flex: 0 1 290px; }
 .search-line { display: flex; gap: 0; }
-.search-line input { min-height: 44px; height: 44px; border: 1px solid #56606c; border-right: 0; border-radius: 4px 0 0 4px; background: #101215; color: #fff; font-size: .8rem; }
+.search-line input { min-height: 44px; height: 44px; border: 1px solid #788492; border-right: 0; border-radius: 4px 0 0 4px; background: #101215; color: #fff; font-size: .8rem; }
 .search-line input::placeholder { color: #aab1bc; }
-.search-line button { min-width: 46px; min-height: 44px; padding: 10px 13px; background: #24282e; border: 1px solid #56606c; border-left: 0; border-radius: 0 4px 4px 0; color: #fff; }
+.search-line button { min-width: 46px; min-height: 44px; padding: 10px 13px; background: #24282e; border: 1px solid #788492; border-left: 0; border-radius: 0 4px 4px 0; color: #fff; }
 .search-line button:hover { background: #303945; }
 .search-symbol { display: inline-block; width: 14px; height: 14px; border: 1.8px solid currentColor; border-radius: 50%; position: relative; }
 .search-symbol::after { content: ''; position: absolute; width: 6px; height: 2px; background: currentColor; transform: rotate(45deg); top: 10px; left: 10px; }

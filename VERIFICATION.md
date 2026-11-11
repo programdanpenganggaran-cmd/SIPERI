@@ -1,4 +1,4 @@
-# Status terbaru: revisi asisten, 10 November 2026
+# Status terbaru: redesign SiPERI, 11 November 2026
 
 ## Redesign 11 November 2026
 
@@ -7,6 +7,8 @@
 - Kontras diukur: putih/#1e6ef3 4.585364:1; #bcc3cc/#101113 10.629800:1; #606975/putih 5.563120:1; #9bc1ff/#191919 9.599351:1. Border kontrol #858d98/putih 3.354279:1, dipakai untuk batas bidang, bukan warna teks.
 - Tangkapan Firecrawl produksi ditinjau pada desktop 1440×1700 dan PAGU 2026 pada 320×900 (tangkapan penuh 320×3042): navigasi, judul, tombol, filter, sembilan hasil, dan footer tampil tanpa terpotong pada area yang ditangkap. Label sapaan maskot disembunyikan pada HP untuk mengurangi tutupan atas kontrol. Ini pemeriksaan piksel pada dua konfigurasi, bukan bukti seluruh ukuran/keadaan.
 - Review kode memperbaiki outline maskot agar terlihat di latar gelap/terang, fokus kembali ke summary saat tautan menu mengarah ke halaman yang sama, dan dialog bot dapat digulir menyeluruh ketika visual viewport kurang dari 500px. Mock menguji perpindahan kelas compact saat viewport berubah. Keyboard fisik, penyelesaian CAPTCHA, keyboard HP dan zoom browser 200% belum diuji langsung.
+- Beranda 320×1000 juga ditinjau: judul/uraian terbungkus, tautan katalog dan menu terlihat, label balon maskot tidak lagi menutup kontrol. Header dan toolbar pembaca PDF pada halaman 22 ditinjau pada 1440×1100; viewer asli masih memuat halaman dalam tangkapan sehingga pemeriksaan ini tidak mengklaim isi PDF telah selesai dirender. File PDF dan logika pembaca tidak diganti.
+- Border pencarian gelap diperkuat ke #788492: 4.926093:1 terhadap #101215 dan 3.888756:1 terhadap latar tombol #24282e, memenuhi batas 3:1 untuk tanda kontrol. Teks di dalamnya memakai warna lain yang lebih terang.
 
 - Maskot `peri-asn.webp` ditinjau visual setelah generasi dan optimasi: RGBA, latar transparan, seluruh karakter/sayap/sepatu terlihat. Tetap memakai ruang tombol yang sama, tanpa animasi berulang baru.
 - Pengujian composer lulus: Enter mengirim, Shift+Enter dan IME tidak ditangkap, tombol modifier tetap normal, repeat/pending tidak mengirim ganda, field kosong saat request berjalan, sukses tetap kosong, kegagalan kuota memulihkan pertanyaan, verifikasi belum selesai mempertahankan pertanyaan. Penelusuran katalog juga mengosongkan input setelah dijalankan.
