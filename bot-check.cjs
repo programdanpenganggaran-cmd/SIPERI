@@ -1,6 +1,6 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
 class Element {
- constructor(){this.children=[];this.handlers={};this.value='';this.hidden=false;this.attributes={};this.open=false;this.disabled=false;this.textContent='';}
+ constructor(){this.children=[];this.handlers={};this.value='';this.hidden=false;this.attributes={};this.open=false;this.disabled=false;this.textContent='';this.classes=new Set();this.styles={};this.style={setProperty:(key,value)=>this.styles[key]=value};this.classList={toggle:(name,on)=>on?this.classes.add(name):this.classes.delete(name)};}
  append(...children){this.children.push(...children);}
  setAttribute(k,v){this.attributes[k]=v;}
  addEventListener(k,f){this.handlers[k]=f;}
@@ -34,5 +34,6 @@ const key=options=>{const event={key:'Enter',prevented:false,preventDefault(){th
  el('bot-close').handlers.click();assert.equal(el('bot-dialog').open,false);assert.equal(el('bot-launcher').attributes['aria-expanded'],'false');assert.equal(el('bot-launcher').focused,true);
  const html=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');assert.ok(!html.includes('data-page="pengetahuan"'));assert.ok(html.includes('aria-labelledby="bot-title"'));assert.ok(html.includes('aria-describedby="bot-help bot-keyboard-help bot-status"'));assert.ok(html.includes('enterkeyhint="send"'));assert.ok(html.includes('peri-asn.webp'));assert.ok(!html.includes('bot-code'));
  delete context.window.SIPERI_BOT_CONFIG;vm.runInContext(code,context);assert.equal(radios[1].disabled,true);
+ const viewport={height:320,addEventListener:(name,callback)=>viewport.resize=callback};context.window.visualViewport=viewport;vm.runInContext(code,context);assert.equal(el('bot-dialog').styles['--bot-viewport-height'],'320px');assert.equal(el('bot-dialog').classes.has('bot-compact'),true);viewport.height=900;viewport.resize();assert.equal(el('bot-dialog').classes.has('bot-compact'),false);
  console.log('PASS bot: Enter sends, Shift+Enter/IME preserved, repeat/pending guard, input clears on send, failure restores draft, verification, references, local search and dialog focus.');
 })().catch(error=>{console.error(error);process.exitCode=1;});

@@ -4,7 +4,10 @@
   if (directory) {
     directory.addEventListener('click', event => {
       const link = event.target.closest?.('a');
-      if (link && directory.contains(link)) directory.open = false;
+      if (link && directory.contains(link)) {
+        directory.open = false;
+        directory.querySelector('summary')?.focus();
+      }
     });
     directory.addEventListener('keydown', event => {
       if (event.key !== 'Escape' || !directory.open) return;

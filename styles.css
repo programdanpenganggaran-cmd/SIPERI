@@ -214,6 +214,8 @@ footer :focus-visible { outline-color: #fff; }
 .bot-launcher:focus-visible { outline-color: #1e6ef3; }
 .bot-dialog { position: fixed; inset: auto 22px 22px auto; margin: 0; width: 420px; max-width: calc(100vw - 32px); height: min(680px,calc(100dvh - 44px)); max-height: min(calc(100dvh - 32px),calc(var(--bot-viewport-height,100dvh) - 32px)); padding: 0; border: 1px solid #677385; border-radius: 12px; box-shadow: 0 18px 70px #0006; background: #fff; color: #15171a; overflow: hidden; z-index: 60; }
 .bot-dialog[open] { display: flex; flex-direction: column; }
+.bot-dialog.bot-compact[open] { overflow-y: auto; overscroll-behavior: contain; }
+.bot-dialog.bot-compact .bot-content { flex: 0 0 auto; overflow: visible; }
 .bot-dialog::backdrop { background: #0006; }
 .bot-heading { display: flex; align-items: center; gap: 12px; background: #15171a; color: #fff; padding: 15px 18px; flex-shrink: 0; }
 .bot-heading img { object-fit: contain; }
@@ -249,6 +251,10 @@ footer :focus-visible { outline-color: #fff; }
 .bot-form[aria-busy=true] button { cursor: wait; }
 .bot-keyboard-help { font-size: .7rem; color: #565e69; line-height: 1.6; margin: 7px 0 0; }
 .bot-form > a { font-size: .7rem; display: inline-flex; align-items: center; min-height: 36px; margin-top: 5px; }
+@media (max-height:500px) {
+  .bot-dialog[open] { overflow-y: auto; overscroll-behavior: contain; }
+  .bot-content { flex: 0 0 auto; overflow: visible; }
+}
 @media (prefers-reduced-motion:no-preference) {
   button, .home-services > a, .primary-navigation a, .book-shortcut-action, .knowledge-shortcut-action { transition: background-color 160ms ease, border-color 160ms ease; }
   .document-stream i { animation: document-flow 4s ease-out 1 both; }

@@ -7,7 +7,10 @@
   let mode = 'catalog', pending = false, controller = null, opener = null;
   let widgetId = null, verificationToken = '', turnstileLoading = null;
   if (window.visualViewport) {
-    const fit = () => dialog.style.setProperty('--bot-viewport-height', window.visualViewport.height + 'px');
+    const fit = () => {
+      dialog.style.setProperty('--bot-viewport-height', window.visualViewport.height + 'px');
+      dialog.classList.toggle('bot-compact', window.visualViewport.height < 500);
+    };
     window.visualViewport.addEventListener('resize', fit); fit();
   }
   const status = text => { $('bot-status').textContent = text; };
