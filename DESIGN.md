@@ -1,5 +1,11 @@
 # SiPERI
 
+## Adaptasi pola komponen, 11 November 2026
+
+Design Read: tetap portal anggaran navy untuk Kantah, Kanwil, dan pengelola anggaran. ENERGY 3 / RHYTHM 3 / MOTION 2 tidak berubah. Kajian Arc UI, Arc MCP, dan beUI Native dicatat di UI_REFERENCES.md. Perubahan kali ini berfokus pada kenyamanan membaca chat, bukan mengganti sistem visual.
+
+Pola Message Scroller beUI Native menjadi referensi perilaku, diimplementasikan mandiri dengan DOM browser. Jawaban mengikuti bagian bawah hanya ketika pengguna berada dekat akhir percakapan. Saat membaca pesan lama, posisi tetap dipertahankan; tombol Ke pesan terbaru memberi jalan kembali yang jelas. Mengirim pertanyaan baru melanjutkan mengikuti pesan. Tombol memakai ukuran sentuh 44px, fokus yang terlihat, dan warna navy yang sudah terukur. Scroll langsung tanpa animasi agar tidak berebut gerakan dengan pengguna dan tetap nyaman pada reduced motion. Tidak memasang React Native, reset CSS Arc UI, atau server Arc MCP.
+
 ## Revisi palet gelap, 11 November 2026
 
 Metode: dokumen utama skill awwwards yang diberikan pengguna sudah dibaca. Folder pendamping references tidak disertakan dan tidak ditemukan pada skill lokal; penerapan memakai prinsip dalam dokumen utama, tanpa skor Awwwards, prediksi penghargaan, atau klaim metrik browser yang belum diukur.

@@ -4,6 +4,28 @@
   const API = config.apiUrl || '';
   const $ = id => document.getElementById(id);
   const dialog = $('bot-dialog');
+  let followingMessages = true;
+  const scrollContainer = () => window.getComputedStyle(dialog).overflowY === 'auto' ? dialog : $('bot-content');
+  function syncMessages() {
+    if (!dialog.open) return;
+    $('bot-latest').hidden = followingMessages;
+    if (followingMessages) {
+      const messages = $('bot-messages');
+      while (messages.children.length > 12 && !messages.firstElementChild.contains(document.activeElement)) messages.firstElementChild.remove();
+      const container = scrollContainer();
+      container.scrollTop = container.scrollHeight;
+    }
+  }
+  function followLatest() {
+    followingMessages = true;
+    syncMessages();
+  }
+  for (const container of [$('bot-content'), dialog]) container.addEventListener('scroll', () => {
+    if (!dialog.open || container !== scrollContainer()) return;
+    followingMessages = container.scrollHeight - container.clientHeight - container.scrollTop <= 56;
+    $('bot-latest').hidden = followingMessages;
+  }, { passive: true });
+  $('bot-latest').addEventListener('click', () => { followLatest(); $('bot-question').focus({ preventScroll: true }); });
   let mode = 'catalog', pending = false, controller = null, opener = null;
   let widgetId = null, verificationToken = '', turnstileLoading = null;
   if (window.visualViewport) {
@@ -13,14 +35,13 @@
     };
     window.visualViewport.addEventListener('resize', fit); fit();
   }
-  const status = text => { $('bot-status').textContent = text; };
+  const status = text => { $('bot-status').textContent = text; syncMessages(); };
   const normalize = text => text.toLocaleLowerCase('id').replace(/[^a-z0-9]+/g, ' ').trim();
   function line(text, kind = 'assistant') {
     const item = document.createElement('div'); item.className = 'bot-message bot-message-' + kind;
     const label = document.createElement('strong'); label.textContent = kind === 'user' ? 'Kamu' : kind === 'error' ? 'Perlu diperiksa' : 'Asisten SiPERI';
     const body = document.createElement('p'); body.textContent = text; item.append(label, body); $('bot-messages').append(item);
-    while ($('bot-messages').children.length > 12) $('bot-messages').firstElementChild.remove();
-    item.scrollIntoView({ block: 'nearest' });
+    syncMessages();
     return item;
   }
   function sourceLink(source, parent, number) {
@@ -85,6 +106,7 @@
     if (/\b\d{16}\b/.test(question)) { status('Hapus nomor identitas 16 digit sebelum mengirim.'); return; }
     if (!verificationToken) { status('Selesaikan verifikasi pengunjung di atas, lalu kirim kembali. Pertanyaanmu tetap tersimpan.'); await mountVerification(); return; }
     controller = new AbortController(); const timeout = setTimeout(() => controller?.abort(), 35000);
+    followLatest();
     setPending(true); status('Menyusun jawaban dari rujukan SiPERI...');
     line(question, 'user');
     $('bot-question').value = '';
@@ -130,7 +152,7 @@
   $('bot-form').addEventListener('submit', async event => {
     event.preventDefault(); const question = $('bot-question').value.trim(); if (!question || pending) return;
     if (question.length > 1500) { status('Maksimal 1.500 karakter.'); return; }
-    if (mode === 'ai') await askAI(question); else { line(question, 'user'); if (searchCatalog(question)) $('bot-question').value = ''; }
+    if (mode === 'ai') await askAI(question); else { followLatest(); line(question, 'user'); if (searchCatalog(question)) $('bot-question').value = ''; }
   });
   $('bot-question').addEventListener('keydown', event => {
     if (event.key !== 'Enter' || event.shiftKey || event.ctrlKey || event.altKey || event.metaKey || event.isComposing || event.keyCode === 229) return;

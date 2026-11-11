@@ -107,13 +107,14 @@
 <button id="bot-launcher" class="bot-launcher" type="button" aria-label="Buka asisten SiPERI" aria-haspopup="dialog" aria-controls="bot-dialog" aria-expanded="false"><span class="bot-launcher-label">Butuh bantuan?</span><img src="peri-asn.webp" alt="" width="90" height="119"></button>
 <dialog id="bot-dialog" class="bot-dialog" aria-labelledby="bot-title">
   <div class="bot-heading"><img src="peri-asn.webp" alt="" width="44" height="58"><div><h2 id="bot-title">Asisten SiPERI</h2><p>Rujukan anggaran, lebih dekat.</p></div><button id="bot-close" type="button" aria-label="Tutup asisten">×</button></div>
-  <div class="bot-content">
+  <div class="bot-content" id="bot-content" role="region" aria-label="Isi bantuan dan percakapan" tabindex="0">
     <p class="bot-intro" id="bot-help">Cari tautan dokumen atau tanyakan isi Buku Saku Revisi Anggaran. Pilihan Tanya AI mengirim pertanyaan ke Cloudflare. Jangan sertakan data pribadi atau informasi rahasia.</p>
     <fieldset class="bot-mode"><legend>Pilih bantuan</legend><label><input type="radio" name="bot-mode" value="catalog" checked> Cari rujukan</label><label><input type="radio" name="bot-mode" value="ai"> Tanya AI</label></fieldset>
     <div id="bot-verification" class="bot-verification" hidden><p>Verifikasi pengunjung untuk Tanya AI</p><div id="bot-verification-widget"></div><button id="bot-retry-verify" type="button">Ulangi verifikasi</button></div>
     <div id="bot-messages" class="bot-messages" role="region" aria-label="Hasil dan percakapan"></div>
     <p id="bot-status" class="bot-status" role="status" aria-live="polite">Pencarian rujukan siap digunakan.</p>
   </div>
+  <button id="bot-latest" class="bot-latest" type="button" aria-controls="bot-messages" hidden>Ke pesan terbaru <span aria-hidden="true">↓</span></button>
   <form id="bot-form" class="bot-form"><label for="bot-question">Pertanyaan atau kata pencarian</label><div><textarea id="bot-question" rows="2" maxlength="1500" enterkeyhint="send" aria-describedby="bot-help bot-keyboard-help bot-status" required></textarea><button type="submit" id="bot-send">Cari</button></div><p id="bot-keyboard-help" class="bot-keyboard-help">Enter untuk kirim · Shift+Enter untuk baris baru</p><a id="bot-library" href="#pengetahuan">Jelajahi Pusat Pengetahuan</a></form>
 </dialog>
 </body>

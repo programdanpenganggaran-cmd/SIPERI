@@ -1,5 +1,21 @@
 # Status terbaru: redesign SiPERI, 11 November 2026
 
+## Kajian komponen dan scroll asisten
+
+- Arc UI, Arc MCP, dan beUI Native diperiksa dari sumber GitHub pada SHA yang dicatat di UI_REFERENCES.md. Arc UI tidak diimpor karena lisensi tidak jelas dan reset global berbenturan dengan tema; Arc MCP adalah alat deployment, bukan komponen; beUI Native memakai React Native. Tidak menjalankan CLI repositori, memasang dependency, atau memberikan kredensial baru.
+- Sumber beUI terpilih diarsipkan dengan LICENSE MIT untuk referensi pengembangan. Allowlist prepare.cjs tidak memuat folder references maupun UI_REFERENCES.md; arsip dapat ditelusuri di repository, bukan dimuat sebagai aset situs atau dimasukkan ke indeks jawaban bot.
+- Perilaku Message Scroller diimplementasikan mandiri di bot.js. Saat membaca pesan lama, jawaban tidak menggulir atau memangkas riwayat yang sedang dibaca. Mengirim pertanyaan atau memilih Ke pesan terbaru melanjutkan mengikuti akhir percakapan. Scroll dibatasi pada panel/dialog, tanpa scrollIntoView yang dapat menggerakkan halaman portal. Tidak ada animasi scroll baru.
+- bot-check.cjs lulus dengan metrik DOM tiruan: balasan asinkron saat membaca pesan lama, perlindungan riwayat lebih dari 12 pesan, tombol terbaru dan fokus tanpa menggeser halaman, ambang 56px untuk mengikuti kembali, sumber/catatan selesai sebelum gulir akhir, panel normal dan dialog compact. Enter/IME, kirim ganda, teks kosong setelah kirim, pemulihan teks saat gagal, verifikasi, dan penelusuran lokal tetap lulus.
+- Chrome headless lokal memakai Playwright dan profil terisolasi, tanpa akun pengguna: viewport 1280x900, 320x850, dan 390x450. Setiap konfigurasi membuka asisten, mengirim empat penelusuran TOR dengan Enter, menerima respons AI simulasi setelah menggulir ke atas, memastikan posisi baca/halaman tetap, mengaktifkan tombol terbaru lewat Enter, dan menutup dengan Escape serta fokus kembali ke launcher. Tidak ada pageerror, tidak ada overflow horizontal halaman pada keadaan ini, tombol 44px terlihat di dalam viewport termasuk compact. Tangkapan ketiganya ditinjau. Respons AI disimulasikan melalui route browser; tidak memakai model atau melewati verifikasi produksi.
+- Kontras baru: tautan tombol #9ac2ff terhadap #141e2b 9.225286:1 dan #1b2e48 7.534225:1. Batas kontrol #718096 terhadap #141e2b 4.183041:1 memenuhi syarat non-teks 3:1; warna ini tidak dipakai untuk teks tombol. Hover/fokus memakai token yang sudah diukur. Zoom 200%, pembaca layar, dan keyboard HP nyata belum diuji pada revisi ini.
+
+Delivery Gate untuk perubahan ini:
+
+- Hard Gate PASS: kontrol native bernama, Tab/fokus/Enter/Escape dan respons nyata di Chrome diuji sebagaimana daftar di atas; keadaan gagal dan input dilindungi di mock; sumber dan angka bukan rekaan; tidak ada aset visual baru atau navigasi palsu.
+- Purpose Gate PASS: tombol terbaru menyediakan jalan kembali dari pesan lama, panah menandai arah bawah; tidak menambah glow, font, ilustrasi, animasi berulang, atau efek dekoratif. Alasan dan arah tercatat di DESIGN.md.
+- Liveliness PASS: arah dan dials yang disetujui tetap dipertahankan; perubahan perilaku tidak mengganti palet navy, hierarki isi, motif dokumen atau maskot ASN.
+- Craftsmanship PASS: implementasi berada langsung di HTML/CSS/JS, hanya satu kontrol ditambahkan dengan perilaku teruji, tanpa dependency baru. Hasil dibatasi pada konfigurasi dan simulasi yang disebut di atas, bukan klaim audit WCAG lengkap atau uji AI produksi.
+
 ## Palet gelap sesuai masukan pengguna
 
 - Skill awwwards yang dilampirkan dibaca; konsep, token, signature moment, dan batas penerapan dicatat sebelum pengubahan tema di DESIGN.md. Folder references pendamping tidak tersedia; tidak ada skor/prediksi penghargaan atau klaim metrik performa Awwwards.
