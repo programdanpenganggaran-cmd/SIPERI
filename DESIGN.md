@@ -1,5 +1,17 @@
 # SiPERI
 
+## Revisi palet gelap, 11 November 2026
+
+Metode: dokumen utama skill awwwards yang diberikan pengguna sudah dibaca. Folder pendamping references tidak disertakan dan tidak ditemukan pada skill lokal; penerapan memakai prinsip dalam dokumen utama, tanpa skor Awwwards, prediksi penghargaan, atau klaim metrik browser yang belum diukur.
+
+Fase 0, konsep: SiPERI adalah ruang kendali anggaran yang menyatukan layanan dan rujukan dalam satu alur yang tenang, jelas, dan mudah dibaca. Audiens Kantah, Kanwil, dan pengelola anggaran; karakter editorial-teknis, bukan presentasi hiburan. Keluhan utama adalah area putih besar yang memutus suasana pembuka.
+
+Fase 1, sistem: canvas #070b12; permukaan #0e1520; panel #141e2b; hover #19283c; pemisah #2b3a4f; border kontrol #718096; teks utama #eef3fb; sekunder #a8b5c8; tautan/fokus #9ac2ff; aksi #1e6ef3. Semua area kerja, peringatan, filter, chat, dan chrome PDF mengikuti peran ini. Footer kembali ke navy dengan garis biru agar aksen tidak mendominasi. Satu transisi tonal navy pada pembuka perpustakaan memberi orientasi antarbagian. Tipografi sistem dan ukuran sentuh dipertahankan. Halaman PDF dan sampul asli tidak diberi filter/inversi warna.
+
+Fase 2, signature moment: aliran dokumen yang sudah ada menjadi satu gerakan utama. Dashes dan penanda biru bergerak turun sekali selama 4–4,5 detik pada pembuka; setelahnya diam. Reveal bagian tetap pendukung, bukan pertunjukan baru. Pada HP jumlah/motif tetap sederhana, tidak mengubah scroll; reduced-motion menampilkan komposisi statis yang sama. Tidak menambah GSAP, Lenis, WebGL, preloader, atau aset gambar baru untuk revisi warna.
+
+Fase 3–6: perubahan dikerjakan pada CSS dan tema widget verifikasi, kemudian diperiksa untuk kontras, status kosong/error/hover/fokus, regresi fungsi, berat aset, dan tangkapan render desktop/ponsel. Keyboard perangkat dan Core Web Vitals tidak disimpulkan dari screenshot atau unit test. ENERGY 3 / RHYTHM 3 / MOTION 2 tetap berlaku. Bagian berikut adalah riwayat arahan sebelumnya.
+
 ## Arah aktif, 11 November 2026
 
 Referensi yang dipilih pemilik: https://deepbook-v2-wip.webflow.io/builder-hub . Firecrawl menangkap halaman pada 11 November 2026, viewport 1440×1000 dan tangkapan penuh 1440×10004. Piksel pembuka dan susunan halaman penuh ditinjau dari tangkapan; HTML asli dan stylesheet Webflow dibaca untuk bukti. Capture lokal di `tools/design-reference/` untuk analisis, bukan aset publik. Referensi memakai latar #000, teks #fff, aksen #1e6ef3, permukaan charcoal, nav mengambang, judul besar, bagian putih yang kontras, dan footer biru. Branding mengidentifikasi TWKEverett, h1 105px dan h2 56px pada viewport tangkapan. Itu nilai referensi, bukan klaim ukuran semua perangkat. Spasi dasar 4px/radius 4px dilaporkan ekstraktor; jarak lain merupakan penyesuaian implementasi.

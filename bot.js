@@ -65,7 +65,7 @@
       await loadTurnstile();
       if (mode !== 'ai' || !dialog.open || widgetId !== null) return;
       widgetId = window.turnstile.render($('bot-verification-widget'), {
-        sitekey: config.turnstileSiteKey, action: 'siperi-ai', theme: 'light', size: 'compact', language: 'id',
+        sitekey: config.turnstileSiteKey, action: 'siperi-ai', theme: 'dark', size: 'compact', language: 'id',
         callback: token => { verificationToken = token; if (!pending && mode === 'ai') status('Verifikasi berhasil. Pertanyaan siap dikirim.'); },
         'expired-callback': () => { verificationToken = ''; if (!pending && mode === 'ai') status('Verifikasi kedaluwarsa. Pilih Ulangi verifikasi.'); },
         'error-callback': () => { verificationToken = ''; if (!pending && mode === 'ai') status('Verifikasi belum berhasil. Pilih Ulangi verifikasi atau gunakan Cari rujukan.'); }

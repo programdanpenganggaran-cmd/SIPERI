@@ -24,6 +24,7 @@ const key=options=>{const event={key:'Enter',prevented:false,preventDefault(){th
  const submissions=el('bot-form').submitCount;
  el('bot-question').value='Dua baris';for(const options of [{shiftKey:true},{ctrlKey:true},{altKey:true},{metaKey:true},{isComposing:true},{keyCode:229},{key:'a'}])assert.equal(key(options).prevented,false);assert.equal(el('bot-form').submitCount,submissions);assert.equal(el('bot-question').value,'Dua baris');assert.equal(key({repeat:true}).prevented,true);assert.equal(el('bot-form').submitCount,submissions);
  radios[1].handlers.change();await Promise.resolve();await submit('Apa itu revisi?');assert.equal(requests.length,1);assert.ok(el('bot-status').textContent.includes('Jawaban AI diterima'));assert.equal(el('bot-question').readOnly,false);assert.equal(el('bot-form').attributes['aria-busy'],'false');assert.equal(resets,1);
+ assert.equal(widgetOptions.theme,'dark');
  assert.equal(el('bot-question').value,'');
  const body=JSON.parse(requests[0].body);assert.equal(body.turnstileToken,'VERIFIED_TOKEN');assert.ok(!body.history);assert.ok(!requests[0].headers['x-demo-access-code']);
  await submit('Pertanyaan berikutnya');assert.equal(requests.length,1);assert.ok(el('bot-status').textContent.includes('Selesaikan verifikasi'));

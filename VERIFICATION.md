@@ -1,5 +1,13 @@
 # Status terbaru: redesign SiPERI, 11 November 2026
 
+## Palet gelap sesuai masukan pengguna
+
+- Skill awwwards yang dilampirkan dibaca; konsep, token, signature moment, dan batas penerapan dicatat sebelum pengubahan tema di DESIGN.md. Folder references pendamping tidak tersedia; tidak ada skor/prediksi penghargaan atau klaim metrik performa Awwwards.
+- Area putih pada katalog, perpustakaan, filter, toolbar/index buku, fullscreen, dan asisten diganti permukaan navy bertingkat. `color-scheme: dark`, tautan/fokus terang, kontrol dan warning disesuaikan bersama. Turnstile memakai tema dark dan opsi itu diperiksa melalui bot-check.cjs. Halaman/sampul PDF tidak diinversi.
+- Kontras terukur: #eef3fb/#0e1520 16.435949:1; #a8b5c8/#19283c 7.168669:1; #9ac2ff/#19283c 8.180071:1; batas kontrol #718096/#141e2b 4.183041:1 (syarat non-teks 3:1); warning #ffe0a0/#2c2316 12.082969:1. Hasil ini pasangan tertentu, bukan audit seluruh WCAG.
+- Daftar aset statis awal (HTML/CSS/JS, katalog, logo, maskot dan sampul) berjumlah 243.584 byte mentah; ini penjumlahan file, bukan pengukuran waterfall browser, LCP, CLS, INP atau fps. PDF diakses terpisah saat pembaca dibuka. Tidak menambah dependency atau aset gambar baru.
+- Pemeriksaan katalog, pembaca buku, asisten dan animasi tetap lulus. Tangkapan render baru ditinjau setelah deployment; keyboard/perangkat nyata dan CWV belum diukur.
+
 ## Redesign 11 November 2026
 
 - Referensi DeepBook ditangkap dengan Firecrawl dan pikselnya ditinjau. Header horizontal native menu, pembuka hitam/biru, layanan gelap, area baca putih dan footer biru diterapkan di CSS portal; tidak mengimpor library Webflow atau aset pihak ketiga.
