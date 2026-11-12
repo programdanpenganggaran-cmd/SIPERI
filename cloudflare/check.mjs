@@ -24,6 +24,17 @@ try {
   const oversized = new Request('https://example.test/chat',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:'x'.repeat(12001)});
   assert.equal((await worker.fetch(oversized,env)).status,413);
   assert.equal(calls,0);
+  env.ALLOWED_ORIGINS = origin + ',https://siperi.id,https://www.siperi.id';
+  for (const customOrigin of ['https://siperi.id', 'https://www.siperi.id']) {
+    const preflight = await worker.fetch(new Request('https://example.test/chat', {method:'OPTIONS',headers:{Origin:customOrigin}}),env);
+    assert.equal(preflight.status,204);
+    assert.equal(preflight.headers.get('Access-Control-Allow-Origin'),customOrigin);
+    assert.equal((await worker.fetch(request(undefined, {}, {headers:{Origin:customOrigin}}),env)).status,403);
+    verified.hostname = new URL(customOrigin).hostname;
+    const customReply = await worker.fetch(request('Siapa pemenang piala dunia?',{}, {headers:{Origin:customOrigin}}),env);
+    assert.equal(customReply.status,200);
+  }
+  verified.hostname = new URL(origin).hostname;
   verified.hostname='wrong.test'; assert.equal((await worker.fetch(request(),env)).status,403); verified.hostname=new URL(origin).hostname;
   verified.action='wrong-action'; assert.equal((await worker.fetch(request(),env)).status,403); verified.action='siperi-ai';
   verified.success=false; assert.equal((await worker.fetch(request(),env)).status,403); verified.success=true;

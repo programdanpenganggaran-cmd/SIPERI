@@ -13,6 +13,7 @@
   ],
   "vars": {
     "ALLOWED_ORIGIN": "https://programdanpenganggaran-cmd.github.io",
+    "ALLOWED_ORIGINS": "https://programdanpenganggaran-cmd.github.io,https://siperi.id,https://www.siperi.id",
     "AI_MODEL": "@cf/google/gemma-4-26b-a4b-it"
   }
 }

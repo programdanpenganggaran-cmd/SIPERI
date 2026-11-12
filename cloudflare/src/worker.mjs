@@ -40,9 +40,11 @@ async function boundedJSON(request) {
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin');
+    const allowedOrigins = (env.ALLOWED_ORIGINS || env.ALLOWED_ORIGIN || '').split(',').map(value => value.trim()).filter(Boolean);
+    const allowedOrigin = allowedOrigins.includes(origin);
     const headers = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', Vary: 'Origin', 'X-Content-Type-Options': 'nosniff' };
     const reply = (body, status = 200) => Response.json(body, { status, headers });
-    if (origin && origin !== env.ALLOWED_ORIGIN) return reply({ error: 'Origin tidak diizinkan.' }, 403);
+    if (origin && !allowedOrigin) return reply({ error: 'Origin tidak diizinkan.' }, 403);
     if (origin) headers['Access-Control-Allow-Origin'] = origin;
     const url = new URL(request.url);
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: { ...headers, 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'content-type' } });
@@ -50,7 +52,7 @@ export default {
     if (url.pathname === '/health' && request.method === 'GET') return reply({ service: 'siperi-assistant', configured: ready, knowledge_version: knowledgeVersion });
     if (url.pathname !== '/chat') return reply({ error: 'Endpoint tidak ditemukan.' }, 404);
     if (request.method !== 'POST') return reply({ error: 'Gunakan POST.' }, 405);
-    if (origin !== env.ALLOWED_ORIGIN) return reply({ error: 'Buka asisten melalui website SiPERI.' }, 403);
+    if (!allowedOrigin) return reply({ error: 'Buka asisten melalui website SiPERI.' }, 403);
     if (!ready) return reply({ code: 'AI_NOT_CONFIGURED', error: 'AI belum siap. Gunakan Cari rujukan.' }, 503);
     try {
       const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
@@ -64,7 +66,7 @@ export default {
         method: 'POST', body: new URLSearchParams({ secret: env.TURNSTILE_SECRET_KEY, response: body.turnstileToken, remoteip: ip }), signal: AbortSignal.timeout(7000)
       });
       const verified = await verification.json();
-      if (!verified.success || verified.hostname !== new URL(env.ALLOWED_ORIGIN).hostname || verified.action !== 'siperi-ai') return reply({ code: 'VERIFY_REQUIRED', error: 'Verifikasi kedaluwarsa atau belum berhasil. Ulangi verifikasi lalu kirim kembali.' }, 403);
+      if (!verified.success || verified.hostname !== new URL(origin).hostname || verified.action !== 'siperi-ai') return reply({ code: 'VERIFY_REQUIRED', error: 'Verifikasi kedaluwarsa atau belum berhasil. Ulangi verifikasi lalu kirim kembali.' }, 403);
       const sources = retrieve(question);
       if (!sources.length) return reply({ reply: 'Belum ditemukan rujukan yang cukup untuk pertanyaan ini. Sebutkan topik, istilah, atau tahun yang dimaksud; kamu juga bisa menggunakan Cari rujukan.', sources: [], grounded: false, warning });
       const messages = promptFor(question, sources);
