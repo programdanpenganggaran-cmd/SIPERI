@@ -4,11 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#070b12">
-  <meta name="description" content="Katalog penyusunan PAGU SiPERI Kementerian ATR/BPN. Temukan dokumen berdasarkan tahun sumber dan tahap anggaran.">
-  <title>SiPERI | Akses anggaran dan dokumen</title>
-  <link rel="stylesheet" href="styles.css?v=20261109-bot2">
-  <script src="app.js?v=20261109-bot2" defer></script>
-  <script src="portal-motion.js?v=20261111" defer></script>
+  <meta name="description" content="SiPERI ATR/BPN, Sistem Informasi Penyusunan, Revisi, dan Realisasi Anggaran. Akses PAGU, POK, Buku Saku Revisi, dan dokumen kelengkapan anggaran.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://siperi.id/">
+  <meta property="og:title" content="SiPERI ATR/BPN | Portal Anggaran">
+  <meta property="og:description" content="Akses penyusunan PAGU, revisi anggaran, POK, realisasi, dan Buku Saku Revisi Anggaran.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://siperi.id/">
+  <title>SiPERI ATR/BPN | Penyusunan, Revisi, dan Realisasi Anggaran</title>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"SiPERI ATR/BPN","alternateName":"Sistem Informasi Penyusunan, Revisi, dan Realisasi Anggaran","url":"https://siperi.id/","inLanguage":"id"}</script>
+  <link rel="stylesheet" href="styles.css?v=20261116">
+  <script src="app.js?v=20261116" defer></script>
+  <script src="portal-motion.js?v=20261116" defer></script>
   <script src="buku-saku.js?v=20261109-bot2" defer></script>
   <script src="bot-config.js?v=20261109-ai1" defer></script>
   <script src="bot.js?v=20261109-ai1" defer></script>
@@ -45,6 +52,7 @@
       </form>
     </header>
     <section class="intro" aria-labelledby="page-title">
+      <button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false" hidden>Jeda animasi</button>
       <div class="document-stream" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <p class="eyebrow">Penyusunan PAGU</p>
       <h1 id="page-title">Dokumen anggaran,<br>lebih mudah ditemukan.</h1>
@@ -53,10 +61,10 @@
     </section>
     <section class="workspace-heading" id="workspace-heading" data-reveal><p class="eyebrow">Dari rencana sampai realisasi</p><div><h2>Satu alur kerja.<br>Empat pintu masuk.</h2><p>Pilih kebutuhanmu. Referensi dan dokumen pendukung ada di dalamnya.</p></div></section>
     <section id="home-services" class="home-services" aria-label="Layanan SiPERI" data-reveal>
-      <a href="#pagu"><span class="service-label">01 / Perencanaan</span><h2>Penyusunan<br>PAGU</h2><p>Pagu Anggaran dan Pagu Alokasi, dari referensi sampai kelengkapan.</p><span class="service-open">Buka penyusunan <span aria-hidden="true">↗</span></span></a>
-      <a href="#revisi"><span class="service-label">02 / Perubahan</span><h2>Revisi<br>Anggaran</h2><p>Usulan, penelitian, reviu, penelaahan, dan informasi progres.</p><span class="service-open">Buka revisi <span aria-hidden="true">↗</span></span></a>
-      <a href="#pok"><span class="service-label">03 / Pelaksanaan</span><h2>POK<br>SEKJEN</h2><p>Petunjuk Operasional Kegiatan menurut unit kerja Sekretariat Jenderal.</p><span class="service-open">Lihat dokumen POK <span aria-hidden="true">↗</span></span></a>
-      <a href="#realisasi"><span class="service-label">04 / Pelaporan</span><h2>Realisasi<br>Anggaran</h2><p>Dokumen bulanan dan arsip realisasi tahun sebelumnya.</p><span class="service-open">Telusuri realisasi <span aria-hidden="true">↗</span></span></a>
+      <a href="#pagu"><span class="service-label">Perencanaan</span><h2>Penyusunan<br>PAGU</h2><p>Pagu Anggaran dan Pagu Alokasi, dari referensi sampai kelengkapan.</p><span class="service-art art-budget" aria-hidden="true"><span class="art-base"></span><i></i><i></i><i></i><b></b></span><span class="service-open">Buka penyusunan <span aria-hidden="true">↗</span></span></a>
+      <a href="#revisi"><span class="service-label">Perubahan</span><h2>Revisi<br>Anggaran</h2><p>Usulan, penelitian, reviu, penelaahan, dan informasi progres.</p><span class="service-art art-revision" aria-hidden="true"><span class="art-base"></span><i></i><i></i><b></b></span><span class="service-open">Buka revisi <span aria-hidden="true">↗</span></span></a>
+      <a href="#pok"><span class="service-label">Pelaksanaan</span><h2>POK<br>SEKJEN</h2><p>Petunjuk Operasional Kegiatan menurut unit kerja Sekretariat Jenderal.</p><span class="service-art art-folders" aria-hidden="true"><span class="art-base"></span><i></i><i></i><i></i></span><span class="service-open">Lihat dokumen POK <span aria-hidden="true">↗</span></span></a>
+      <a href="#realisasi"><span class="service-label">Pelaporan</span><h2>Realisasi<br>Anggaran</h2><p>Dokumen bulanan dan arsip realisasi tahun sebelumnya.</p><span class="service-art art-report" aria-hidden="true"><span class="art-base"></span><i></i><i></i><i></i><b></b></span><span class="service-open">Telusuri realisasi <span aria-hidden="true">↗</span></span></a>
     </section>
     <section id="dipa-shortcut" class="monitoring-shortcut dipa-shortcut" aria-labelledby="dipa-title" data-reveal><div><p class="eyebrow">Memerlukan akun Google</p><h2 id="dipa-title">Data Bedah DIPA</h2><p>Akses aplikasi Data Bedah DIPA dengan akun Google yang memiliki izin.</p></div><a href="https://script.google.com/macros/s/AKfycbw4dh3iqWKy_ld4yWdGWhA4vHYOmqsLrGZPt1dTU9DmJj9hQcdYYTs3hyPweLWEzVSKmA/exec">Buka Data Bedah DIPA <span aria-hidden="true">↗</span></a></section>
     <section id="knowledge-center" class="knowledge-center" hidden aria-labelledby="knowledge-title">

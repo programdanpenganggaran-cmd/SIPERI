@@ -1,5 +1,11 @@
 # SiPERI
 
+## Revisi gerakan dan navigasi, 16 November 2026
+
+Arahan pemilik: navigasi/logo lebih kecil, animasi lebih kuat dan berulang, ilustrasi di empat layanan. ENERGY 3 / RHYTHM 3 / MOTION 3. Header maksimal 960px dan tinggi 60px, logo 32px, kontrol menu tetap 44px. Aliran garis bergerak berulang dengan aksen biru dan rentang jelas, teks berdiri di atas permukaan navy yang stabil. Empat ilustrasi CSS menggambarkan lembar anggaran, pergantian dokumen, folder POK, dan batang laporan tanpa angka simulasi. Gerakan terus berjalan saat terlihat, dengan tombol jeda global, penghormatan reduced-motion, dan jeda saat tab tidak aktif.
+
+Referensi DeepBook diperiksa ulang melalui Firecrawl. Sumber memperlihatkan canvas data-bars dan aset Lottie data-loop=1 pada ilustrasi. REA README, lisensi MIT, skill reverse-engineer-anything dan panduan JavaScript dibaca. Prinsipnya menelusuri sumber dan membandingkan perilaku teramati; panduannya juga mengarahkan analisis repositori bersumber lengkap memakai alat sumber biasa. Rekonstruksi SiPERI memakai CSS dan browser QA. Tidak menjalankan MCP REA atau menyatakan ilustrasi ini salinan aset DeepBook.
+
 ## Akses Data Bedah DIPA, 11 November 2026
 
 Panel layanan pada beranda, tepat setelah empat pintu masuk utama, memberi akses Data Bedah DIPA tanpa menambah kepadatan menu. Memakai pola monitoring-shortcut, token navy/biru dan ukuran sentuh yang sudah ada; ENERGY 3 / RHYTHM 3 / MOTION 2 tetap. Label memerlukan akun Google menjelaskan hasil pemeriksaan tautan, bukan klaim siapa yang memiliki izin. Aplikasi dibuka langsung dalam tab yang sama agar autentikasi tidak bergantung pada iframe. Tidak menyalin data aplikasi ke portal. URL pengguna berakhiran /exe memberi 404; /exec mengarah ke login Google, maka digunakan /exec. Isi dan hak akses setelah login belum diperiksa.

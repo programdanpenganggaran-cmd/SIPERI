@@ -32,7 +32,7 @@ function route() {
   document.querySelector('.intro .eyebrow').textContent = label;
   document.getElementById('page-title').textContent = title;
   document.querySelector('.intro > p:not(.eyebrow)').textContent = description;
-  document.title = `${label} | SiPERI`;
+  document.title = page === 'beranda' ? 'SiPERI ATR/BPN | Penyusunan, Revisi, dan Realisasi Anggaran' : `${label} | SiPERI`;
   document.querySelectorAll('[data-page]').forEach(link => {
     const active = link.dataset.page === page;
     link.classList.toggle('current', active);

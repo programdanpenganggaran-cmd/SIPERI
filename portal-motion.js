@@ -1,5 +1,25 @@
 'use strict';
 (() => {
+  const motionButton = document.getElementById('motion-toggle');
+  const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+  let pausedByUser = false;
+  function syncMotion() {
+    const paused = pausedByUser || reducedMotion?.matches || document.hidden;
+    document.body.toggleAttribute('data-motion-paused', Boolean(paused));
+    motionButton.disabled = Boolean(reducedMotion?.matches);
+    motionButton.textContent = reducedMotion?.matches ? 'Gerakan dikurangi perangkat' : pausedByUser ? 'Lanjutkan animasi' : 'Jeda animasi';
+    motionButton.setAttribute('aria-pressed', String(pausedByUser));
+  }
+  if (motionButton && document.body?.toggleAttribute) {
+    motionButton.hidden = false;
+    motionButton.addEventListener('click', () => {
+      pausedByUser = !pausedByUser;
+      syncMotion();
+    });
+    reducedMotion?.addEventListener?.('change', syncMotion);
+    document.addEventListener('visibilitychange', syncMotion);
+    syncMotion();
+  }
   const directory = document.getElementById('nav-directory');
   if (directory) {
     directory.addEventListener('click', event => {

@@ -1,5 +1,17 @@
 # Status terbaru: redesign SiPERI, 11 November 2026
 
+## Navigasi, animasi berulang, dan SEO, 16 November 2026
+
+Navigasi diperiksa di Chrome lokal pada 1280, 768 dan 320px. Tingginya 60px pada desktop/tablet dan 56px pada ponsel, dibanding minimum lama 76/68px. Tombol menu tetap minimal 44px, keyboard Escape menutup direktori dan mengembalikan fokus. Empat ilustrasi CSS berada di kartu layanan dengan aria-hidden agar nama layanan tetap menjadi label tautan.
+
+Gerakan latar diuji setelah 7,2 detik dan masih berubah, dengan iterasi infinite. Jeda/lanjut menghentikan dan melanjutkan latar serta ilustrasi. Perubahan prefers-reduced-motion mematikan gerakan dan menyesuaikan kontrol. Tab tidak aktif menjeda animasi. Sumber DeepBook saat pemeriksaan memuat canvas data-bars dan Lottie berulang; implementasi SiPERI memakai aliran CSS serta ilustrasi dokumen yang ditulis untuk layanan anggaran. REA dipelajari melalui README, lisensi, skill dan panduan sumber JavaScript; MCP/CLI REA tidak dijalankan.
+
+Chrome QA memeriksa tampilan normal dan ukuran teks root 200% pada tiga lebar, tanpa overflow horizontal pada keadaan yang diperiksa. Pembesaran teks mengungkap judul shortcut pengetahuan yang meluber pada 320px, lalu diperbaiki dengan min-width dan pembungkusan kata. Ini uji ukuran font root, bukan klaim pengujian zoom browser atau pembaca layar. Screenshot desktop, tablet, dan ponsel ditinjau. Tidak ada pageerror pada pemeriksaan. Kontras baru tetap menggunakan token terukur: #9ac2ff/#19283c 8.180071:1 dan #c5c9d0/#24374f 7.287590:1, warna terakhir menjadi batas konservatif bagi teks pada garis dekoratif.
+
+Halaman produksi HTTPS awal mengembalikan 200, tidak ada header X-Robots-Tag, robots.txt dan sitemap.xml memberi 404. Ditambahkan canonical https://siperi.id/, judul/deskripsi yang menyebut SiPERI ATR/BPN, Open Graph, schema WebSite, robots.txt dan sitemap halaman utama. Sitemap tidak berisi hash menu SPA. File baru disertakan dalam build dan preview. Status indeks, canonical pilihan Google, dan kepemilikan Search Console belum diverifikasi. Pengajuan indeks memerlukan verifikasi pemilik di Search Console; tidak menjanjikan waktu atau peringkat hasil Google.
+
+Delivery Gate cakupan ini: Hard PASS, tautan dan menu nyata diuji, kontrol jeda tersedia, reduced motion/reflow/fokus diperiksa, metadata berasal dari produk. Purpose PASS, bentuk ilustrasi mengikuti fungsi anggaran dan gerak diminta pemilik. Liveliness PASS, dials ENERGY 3 / RHYTHM 3 / MOTION 3 dan motif aliran dokumen konsisten. Craftsmanship PASS, implementasi langsung di sumber, regresi katalog/buku/asisten/motion/build lulus, batas pengujian diuraikan di atas.
+
 ## Data Bedah DIPA di beranda
 
 Tautan /exe diperiksa dan memberi 404; /exec mengarah ke login Google. Panel beranda menggunakan /exec dengan keterangan memerlukan akun Google, tanpa iframe atau penyalinan data. Isi aplikasi dan izin setelah login belum diuji. Chrome lokal 1280x900 dan 320x900: panel terlihat hanya di beranda, tersembunyi pada Revisi, batas panel berada di viewport, tautan dapat difokuskan dengan keyboard dan target setinggi 48px. Tangkapan ponsel ditinjau. Pemeriksaan katalog, buku, bot, motion dan build lulus. Token warna panel memakai pasangan navy/teks/aksi yang sudah diukur sebelumnya.
