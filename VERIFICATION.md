@@ -1,3 +1,8 @@
+## Pratinjau Bidik dan PANTAU, 16 November 2026
+
+Bidik ATR/BPN memakai URL deployment yang dikoreksi pengguna. Akses anonim mengarah ke login Google; izin deployment tidak diubah. Kartu Bidik adalah representasi HTML/CSS dari gambar pengguna, berlabel pratinjau, bukan formulir unggah aktif. PANTAU memakai tangkapan halaman publik tanggal 16 November 2026; data terbaru dibuka di aplikasi. Keduanya tautan native dengan nama aksesibel dan fokus terlihat, hanya muncul di beranda.
+
+Chrome lokal menguji lebar 1280 dan 320px: fokus dan aktivasi Enter kedua tautan lulus, ukuran teks root 200% tanpa overflow horizontal, tidak ada pageerror. Screenshot kedua kartu pada dua lebar ditinjau. Pemeriksaan katalog, buku, bot, motion dan build lulus. Login Google tidak dapat dilewati melalui ALLOWALL; tidak ada pengaturan akses yang dipublikasikan ulang.
 # Status terbaru: redesign SiPERI, 11 November 2026
 
 ## Pilihan animasi desktop, 16 November 2026
@@ -47,16 +52,16 @@ Delivery Gate untuk perubahan ini:
 - Kontras terukur: #eef3fb/#0e1520 16.435949:1; #a8b5c8/#19283c 7.168669:1; #9ac2ff/#19283c 8.180071:1; batas kontrol #718096/#141e2b 4.183041:1 (syarat non-teks 3:1); warning #ffe0a0/#2c2316 12.082969:1. Hasil ini pasangan tertentu, bukan audit seluruh WCAG.
 - Daftar aset statis awal (HTML/CSS/JS, katalog, logo, maskot dan sampul) berjumlah 243.584 byte mentah; ini penjumlahan file, bukan pengukuran waterfall browser, LCP, CLS, INP atau fps. PDF diakses terpisah saat pembaca dibuka. Tidak menambah dependency atau aset gambar baru.
 - Pemeriksaan katalog, pembaca buku, asisten dan animasi tetap lulus. Tangkapan render baru ditinjau setelah deployment; keyboard/perangkat nyata dan CWV belum diukur.
-- Hasil produksi 6999c38 ditinjau melalui Firecrawl: beranda desktop 1440×2700 dan katalog PAGU 2026 pada viewport 320×900/tangkapan penuh 320×3044. Panel perpustakaan, buku dan katalog tidak lagi membentuk bidang putih besar; filter, metadata, judul, tombol dan footer terlihat pada kedua konfigurasi. Gambar sampul asli tetap terang. Review tambahan memeriksa label/error, hover dan selected reader; tidak ditemukan pasangan teks gelap di permukaan gelap pada kode yang diperiksa.
+- Hasil produksi 6999c38 ditinjau melalui Firecrawl: beranda desktop 1440Ã—2700 dan katalog PAGU 2026 pada viewport 320Ã—900/tangkapan penuh 320Ã—3044. Panel perpustakaan, buku dan katalog tidak lagi membentuk bidang putih besar; filter, metadata, judul, tombol dan footer terlihat pada kedua konfigurasi. Gambar sampul asli tetap terang. Review tambahan memeriksa label/error, hover dan selected reader; tidak ditemukan pasangan teks gelap di permukaan gelap pada kode yang diperiksa.
 
 ## Redesign 11 November 2026
 
 - Referensi DeepBook ditangkap dengan Firecrawl dan pikselnya ditinjau. Header horizontal native menu, pembuka hitam/biru, layanan gelap, area baca putih dan footer biru diterapkan di CSS portal; tidak mengimpor library Webflow atau aset pihak ketiga.
 - Pemeriksaan katalog, PDF, asisten dan motion lulus. Motion test mencakup fallback tanpa observer, konten tetap terlihat, reveal sekali, reduced-motion berubah saat berjalan, menu ditutup lewat tautan/Escape, serta pemulihan fokus.
 - Kontras diukur: putih/#1e6ef3 4.585364:1; #bcc3cc/#101113 10.629800:1; #606975/putih 5.563120:1; #9bc1ff/#191919 9.599351:1. Border kontrol #858d98/putih 3.354279:1, dipakai untuk batas bidang, bukan warna teks.
-- Tangkapan Firecrawl produksi ditinjau pada desktop 1440×1700 dan PAGU 2026 pada 320×900 (tangkapan penuh 320×3042): navigasi, judul, tombol, filter, sembilan hasil, dan footer tampil tanpa terpotong pada area yang ditangkap. Label sapaan maskot disembunyikan pada HP untuk mengurangi tutupan atas kontrol. Ini pemeriksaan piksel pada dua konfigurasi, bukan bukti seluruh ukuran/keadaan.
+- Tangkapan Firecrawl produksi ditinjau pada desktop 1440Ã—1700 dan PAGU 2026 pada 320Ã—900 (tangkapan penuh 320Ã—3042): navigasi, judul, tombol, filter, sembilan hasil, dan footer tampil tanpa terpotong pada area yang ditangkap. Label sapaan maskot disembunyikan pada HP untuk mengurangi tutupan atas kontrol. Ini pemeriksaan piksel pada dua konfigurasi, bukan bukti seluruh ukuran/keadaan.
 - Review kode memperbaiki outline maskot agar terlihat di latar gelap/terang, fokus kembali ke summary saat tautan menu mengarah ke halaman yang sama, dan dialog bot dapat digulir menyeluruh ketika visual viewport kurang dari 500px. Mock menguji perpindahan kelas compact saat viewport berubah. Keyboard fisik, penyelesaian CAPTCHA, keyboard HP dan zoom browser 200% belum diuji langsung.
-- Beranda 320×1000 juga ditinjau: judul/uraian terbungkus, tautan katalog dan menu terlihat, label balon maskot tidak lagi menutup kontrol. Header dan toolbar pembaca PDF pada halaman 22 ditinjau pada 1440×1100; viewer asli masih memuat halaman dalam tangkapan sehingga pemeriksaan ini tidak mengklaim isi PDF telah selesai dirender. File PDF dan logika pembaca tidak diganti.
+- Beranda 320Ã—1000 juga ditinjau: judul/uraian terbungkus, tautan katalog dan menu terlihat, label balon maskot tidak lagi menutup kontrol. Header dan toolbar pembaca PDF pada halaman 22 ditinjau pada 1440Ã—1100; viewer asli masih memuat halaman dalam tangkapan sehingga pemeriksaan ini tidak mengklaim isi PDF telah selesai dirender. File PDF dan logika pembaca tidak diganti.
 - Border pencarian gelap diperkuat ke #788492: 4.926093:1 terhadap #101215 dan 3.888756:1 terhadap latar tombol #24282e, memenuhi batas 3:1 untuk tanda kontrol. Teks di dalamnya memakai warna lain yang lebih terang.
 
 - Maskot `peri-asn.webp` ditinjau visual setelah generasi dan optimasi: RGBA, latar transparan, seluruh karakter/sayap/sepatu terlihat. Tetap memakai ruang tombol yang sama, tanpa animasi berulang baru.

@@ -1,5 +1,9 @@
 # SiPERI
 
+## Bidik dan pratinjau PANTAU, 16 November 2026
+
+Permintaan pemilik: nama Bidik ATR/BPN, keterangan Bedah dan Identifikasi DIPA, alamat deployment terbaru, dan halaman awal yang terlihat serta dapat diklik untuk Bidik dan PANTAU. Panel beranda memuat identitas di kiri dan satu tautan pratinjau besar di kanan; pada HP keduanya tersusun vertikal. Seluruh pratinjau merupakan satu tautan native dengan fokus yang jelas. Bidik memakai representasi HTML/CSS berdasarkan gambar pemilik, diberi label pratinjau tampilan, karena URL terbaru masih menuju login Google. PANTAU memakai tangkapan halaman publik pada 16 November 2026 dengan label tanggal agar angka pada tangkapan tidak diperlakukan sebagai pembaruan data langsung. Aplikasi dibuka melalui tautan yang diminta. Izin deployment Bidik tidak diubah. Arah navy, dials, dan animasi portal dipertahankan.
+
 ## Revisi gerakan dan navigasi, 16 November 2026
 
 Arahan pemilik: navigasi/logo lebih kecil, animasi lebih kuat dan berulang, ilustrasi di empat layanan. ENERGY 3 / RHYTHM 3 / MOTION 3. Header maksimal 960px dan tinggi 60px, logo 32px, kontrol menu tetap 44px. Aliran garis bergerak berulang dengan aksen biru dan rentang jelas, teks berdiri di atas permukaan navy yang stabil. Empat ilustrasi CSS menggambarkan lembar anggaran, pergantian dokumen, folder POK, dan batang laporan tanpa angka simulasi. Gerakan terus berjalan saat terlihat, dengan tombol jeda global, penghormatan reduced-motion, dan jeda saat tab tidak aktif.

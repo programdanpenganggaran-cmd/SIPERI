@@ -5,6 +5,7 @@ const files = {'/':'index.html','/index.html':'index.html','/styles.css':'styles
 const types = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8'};
 files['/robots.txt'] = 'robots.txt';
 files['/sitemap.xml'] = 'sitemap.xml';
+files['/pantau-preview.webp'] = 'pantau-preview.webp';
 types['.txt'] = 'text/plain; charset=utf-8';
 types['.xml'] = 'application/xml; charset=utf-8';
 files['/atr-bpn.png']='atr-bpn.png';
