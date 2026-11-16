@@ -1,5 +1,11 @@
 # SiPERI
 
+## Tiga layanan dan urutan aplikasi, 16 November 2026
+
+Arahan pemilik: tagline Satu portal. Seluruh kebutuhan penganggaran, hapus pengantar empat pintu masuk, dan tampilkan tiga kartu Penyusunan Anggaran, Revisi Anggaran, Input Dokumen Kelengkapan. Kartu unggah memakai URL aplikasi dokumen yang sudah digunakan di menu, dengan ilustrasi folder yang relevan. POK dan Realisasi tetap tersedia dalam direktori; hanya kartunya yang diganti/dihapus. Tiga kolom desktop/tablet beralih menjadi satu kolom pada ponsel agar judul dan target sentuh tetap terbaca. ENERGY 3 / RHYTHM 3 / MOTION 3 tetap, dengan aliran garis, ilustrasi bergerak serta kontrol jeda yang ada.
+
+Urutan langsung setelah kartu: PANTAU, KAWAL, BIDIK. Panel aplikasi memakai pola preview yang sama agar tautan besar dapat dipakai lewat keyboard dan sentuhan. Halaman KAWAL tidak berhasil diambil melalui Firecrawl (timeout lalu connection closed), browser terpisah (timeout), maupun GET langsung (timeout). Panel KAWAL adalah placeholder identitas yang diberi label pratinjau belum tersedia, bukan dashboard rekaan. Tautan aplikasi menggunakan alamat persis dari pengguna. Tangkapan asli KAWAL masih membutuhkan halaman yang dapat dimuat atau gambar dari pemilik.
+
 ## Bidik dan pratinjau PANTAU, 16 November 2026
 
 Permintaan pemilik: nama Bidik ATR/BPN, keterangan Bedah dan Identifikasi DIPA, alamat deployment terbaru, dan halaman awal yang terlihat serta dapat diklik untuk Bidik dan PANTAU. Panel beranda memuat identitas di kiri dan satu tautan pratinjau besar di kanan; pada HP keduanya tersusun vertikal. Seluruh pratinjau merupakan satu tautan native dengan fokus yang jelas. Bidik memakai representasi HTML/CSS berdasarkan gambar pemilik, diberi label pratinjau tampilan, karena URL terbaru masih menuju login Google. PANTAU memakai tangkapan halaman publik pada 16 November 2026 dengan label tanggal agar angka pada tangkapan tidak diperlakukan sebagai pembaruan data langsung. Aplikasi dibuka melalui tautan yang diminta. Izin deployment Bidik tidak diubah. Arah navy, dials, dan animasi portal dipertahankan.

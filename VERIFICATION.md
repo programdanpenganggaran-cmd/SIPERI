@@ -116,3 +116,10 @@ Belum ada push GitHub atau deployment. Palet adalah interpretasi awal arah ATR/B
 - Gate visual/keyboard antislop masih belum lengkap; tidak ada klaim website siap produksi.
 
 Iterasi visual kedua: pemeriksaan fungsi tetap lulus setelah perubahan hierarki beranda, sidebar gelap, panel pencarian, dan susunan layanan 4/2/1 kolom. Persiapan artefak kembali berhasil. Browser visual dan keyboard belum tersedia untuk verifikasi; status tetap purwarupa.
+## Revisi tiga kartu layanan, 16 November 2026
+
+Tagline diganti sesuai teks pemilik. Pengantar empat pintu masuk dihapus dari DOM dan routing. Beranda memiliki tiga kartu: Penyusunan Anggaran, Revisi Anggaran, dan Input Dokumen Kelengkapan. Tautan kartu unggah sama dengan URL aplikasi dokumen yang telah dipakai di direktori. Kartu POK dan Realisasi tidak lagi berada di beranda; direktori dan katalog keduanya tetap tersedia. Urutan elemen berikutnya adalah PANTAU, KAWAL, BIDIK, lalu rujukan dan buku saku.
+
+Chrome lokal pada 1280, 768 dan 320px memeriksa jumlah/nama kartu, tagline, urutan DOM, fokus dan aktivasi Enter tautan aplikasi, reflow dengan teks root 200%, serta penyembunyian semua panel aplikasi pada halaman Penyusunan. Tidak ada overflow horizontal atau pageerror pada pemeriksaan tersebut. Screenshot tiga kartu pada tiga lebar dan panel KAWAL ditinjau. Warna dan animasi menggunakan sistem yang telah diverifikasi; tidak ada warna teks baru. Pemeriksaan katalog, buku, bot, motion dan build lulus.
+
+Keterbatasan: halaman asli KAWAL belum berhasil dimuat dari sesi pengujian. Firecrawl timeout lalu ERR_CONNECTION_CLOSED, Chrome terpisah timeout, HEAD langsung 403 dan GET timeout. Panel yang diterbitkan diberi label pratinjau belum tersedia; bukan tangkapan halaman awal KAWAL. Aktivasi tautan diuji dengan pencegatan navigasi, bukan klaim operasi aplikasi tujuan berhasil. Tidak ada izin deployment atau data aplikasi yang diubah. Delivery Gate cakupan revisi UI lulus dengan placeholder eksplisit ini; tangkapan asli KAWAL masih tertunda.

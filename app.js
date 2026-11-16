@@ -16,8 +16,8 @@ const pageInfo = {
   pengetahuan: ['Pusat Pengetahuan Anggaran', 'Pengetahuan bersama, pekerjaan lebih mudah.', 'Jelajahi rujukan, contoh dokumen, dan panduan anggaran menurut kebutuhan.'],
   'buku-saku': ['Buku Saku Revisi Anggaran', 'Panduan revisi, siap dijelajahi.', 'Baca buku, telusuri topik, dan temukan halaman yang dibutuhkan.'],
   monitoring: ['PANTAU ATR/BPN', 'Pantau anggaran unit kerjamu.', 'Buka aplikasi Peta Anggaran Terintegrasi Antar Unit untuk memantau anggaran dan realisasi.'],
-  beranda: ['Ruang kerja anggaran', 'Satu portal. Seluruh kebutuhan anggaran.', 'Temukan dokumen penyusunan, revisi, POK, dan realisasi tanpa berpindah portal.'],
-  pagu: ['Penyusunan PAGU', 'Susun anggaran dengan referensi yang tepat.', 'Pilih tahun sumber dan tahap untuk menemukan pagu, template, serta dokumen pendukung.'],
+  beranda: ['Ruang kerja anggaran', 'Satu portal. Seluruh kebutuhan penganggaran', 'Temukan dokumen penyusunan, revisi, dan kelengkapan penganggaran dalam satu tempat.'],
+  pagu: ['Penyusunan Anggaran', 'Susun anggaran dengan referensi yang tepat.', 'Pilih tahun sumber dan tahap untuk menemukan pagu, template, serta dokumen pendukung.'],
   revisi: ['Revisi Anggaran', 'Dari usulan sampai penelaahan.', 'Akses dokumen proses revisi dan spreadsheet informasi progres.'],
   pok: ['POK SEKJEN', 'Rencana kegiatan, menurut unit kerja.', 'Buka dokumen Petunjuk Operasional Kegiatan Sekretariat Jenderal.'],
   realisasi: ['Realisasi Anggaran', 'Telusuri dokumen pelaksanaan anggaran.', 'Dokumen bulanan dan arsip realisasi yang tersedia dari sumber SiPERI.'],
@@ -39,9 +39,9 @@ function route() {
     if(active) link.setAttribute('aria-current','page'); else link.removeAttribute('aria-current');
   });
   document.getElementById('home-services').hidden = page !== 'beranda';
-  document.getElementById('workspace-heading').hidden = page !== 'beranda';
   document.getElementById('dipa-shortcut').hidden = page !== 'beranda';
   document.getElementById('monitoring-shortcut').hidden = page !== 'beranda';
+  document.getElementById('kawal-shortcut').hidden = page !== 'beranda';
   document.getElementById('book-shortcut').hidden = !['beranda','revisi'].includes(page);
   document.getElementById('knowledge-center').hidden = page !== 'pengetahuan';
   document.getElementById('knowledge-shortcut').hidden = page !== 'beranda';
