@@ -2,18 +2,21 @@
 (() => {
   const motionButton = document.getElementById('motion-toggle');
   const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)');
-  let pausedByUser = false;
+  let motionChoice = null;
+  try { motionChoice = localStorage.getItem('siperi-motion'); } catch {}
   function syncMotion() {
-    const paused = pausedByUser || reducedMotion?.matches || document.hidden;
-    document.body.toggleAttribute('data-motion-paused', Boolean(paused));
-    motionButton.disabled = Boolean(reducedMotion?.matches);
-    motionButton.textContent = reducedMotion?.matches ? 'Gerakan dikurangi perangkat' : pausedByUser ? 'Lanjutkan animasi' : 'Jeda animasi';
-    motionButton.setAttribute('aria-pressed', String(pausedByUser));
+    const enabled = motionChoice === 'on' || (motionChoice !== 'off' && !reducedMotion?.matches);
+    document.body.toggleAttribute('data-motion-enabled', Boolean(enabled));
+    document.body.toggleAttribute('data-motion-paused', Boolean(!enabled || document.hidden));
+    motionButton.disabled = false;
+    motionButton.textContent = enabled ? 'Jeda animasi' : 'Aktifkan animasi';
+    motionButton.setAttribute('aria-pressed', String(!enabled));
   }
   if (motionButton && document.body?.toggleAttribute) {
     motionButton.hidden = false;
     motionButton.addEventListener('click', () => {
-      pausedByUser = !pausedByUser;
+      motionChoice = document.body.hasAttribute('data-motion-enabled') ? 'off' : 'on';
+      try { localStorage.setItem('siperi-motion', motionChoice); } catch {}
       syncMotion();
     });
     reducedMotion?.addEventListener?.('change', syncMotion);

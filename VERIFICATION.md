@@ -1,5 +1,11 @@
 # Status terbaru: redesign SiPERI, 11 November 2026
 
+## Pilihan animasi desktop, 16 November 2026
+
+Keluhan perangkat desktop ditelusuri ke jalur reduced-motion yang sebelumnya mematikan animasi serta menonaktifkan tombolnya. Penyebab aktual pengaturan laptop pengguna belum dibaca langsung. Kini preferensi awal perangkat dihormati, lalu pengguna dapat memilih Aktifkan animasi atau Jeda animasi. Pilihan on/off disimpan sebagai preferensi lokal browser; kegagalan penyimpanan tidak menghentikan kontrol. Tab tersembunyi tetap dijeda. Parameter cache CSS dan motion script diperbarui.
+
+Chrome lokal menguji desktop 1280px, tablet 768px, dan ponsel 320px dengan prefers-reduced-motion reduce/no-preference. Reduced-motion awal statis; klik aktif menjalankan garis dan ikon; reload menyimpan pilihan aktif; klik jeda dan reload menyimpan pilihan jeda. Gerakan berulang, menu keyboard, font root 200%, serta tidak ada pageerror tetap lulus. Ini simulasi browser dan belum pembacaan pengaturan laptop pengguna. Delivery Gate cakupan perbaikan PASS berdasarkan kontrol nyata, pilihan gerakan eksplisit, fokus/reflow dan uji perilaku tersebut.
+
 ## Navigasi, animasi berulang, dan SEO, 16 November 2026
 
 Navigasi diperiksa di Chrome lokal pada 1280, 768 dan 320px. Tingginya 60px pada desktop/tablet dan 56px pada ponsel, dibanding minimum lama 76/68px. Tombol menu tetap minimal 44px, keyboard Escape menutup direktori dan mengembalikan fokus. Empat ilustrasi CSS berada di kartu layanan dengan aria-hidden agar nama layanan tetap menjadi label tautan.
