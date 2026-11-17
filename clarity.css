@@ -1,0 +1,9 @@
+/* Keep text out of the continuously rotated/composited layer. */
+.is-home .intro .hero-brief{animation:none;transform:none;will-change:auto}
+.hero-brief strong{font-size:.98rem;font-weight:700;letter-spacing:normal;color:var(--ink);line-height:1.55}
+.hero-brief small{font-size:.85rem;color:var(--muted);line-height:1.65}
+.hero-brief .brief-note{font-size:.85rem;color:var(--muted);line-height:1.75}
+.hero-brief .brief-note strong{font-size:.9rem;line-height:1.65}
+.hero-brief .brief-icon{font-size:.8rem}
+.hero-brief:before{animation:brief-orbit 9s ease-in-out infinite;animation-play-state:running}
+body[data-motion-paused] .hero-brief:before{animation-play-state:paused}

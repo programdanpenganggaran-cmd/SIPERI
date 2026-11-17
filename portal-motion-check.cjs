@@ -53,27 +53,17 @@ assert.equal(normal.animationCalls[0].frames[0].transform, 'translateY(14px)');
 assert.ok(!normal.observed.has(normal.first));
 normal.observer.callback([{ target: normal.first, isIntersecting: true }]);
 assert.equal(normal.animationCalls.length, 1);
-normal.media.matches = true;
-normal.media.onchange();
-assert.equal(normal.observed.size, 0);
-assert.equal(normal.animations[0].cancelled, true);
-normal.observer.callback([{ target: normal.second, isIntersecting: true }]);
-assert.equal(normal.animationCalls.length, 1);
-normal.media.matches = false;
-normal.media.onchange();
 assert.equal(normal.observed.size, 1);
 assert.ok(normal.observed.has(normal.second));
 normal.observer.callback([{ target: normal.second, isIntersecting: true }]);
 assert.equal(normal.animationCalls.length, 2);
 normal.animations[1].finish();
-normal.media.matches = true;
-normal.media.onchange();
 assert.equal(normal.animations[1].cancelled, false);
 
 const reduced = setup({ reduced: true });
-assert.equal(reduced.observed.size, 0);
+assert.equal(reduced.observed.size, 2);
 reduced.observer.callback([{ target: reduced.first, isIntersecting: true }]);
-assert.equal(reduced.animationCalls.length, 0);
+assert.equal(reduced.animationCalls.length, 1);
 assert.deepEqual(reduced.first.style, {});
 
 const unsupported = setup({ observerSupported: false });
@@ -102,4 +92,4 @@ unsupported.directory.handlers.keydown({ key: 'Escape', preventDefault() { preve
 assert.equal(prevented, false);
 assert.equal(unsupported.directory.handlers.keyup, undefined);
 assert.doesNotThrow(() => setup({ menuPresent: false }));
-console.log('PASS motion: progressive visibility, one-shot reveal, reduced-motion changes, unsupported observer, protected results/bot and native directory close/focus.');
+console.log('PASS motion: progressive visibility, one-shot automatic reveal, unsupported observer, protected results/bot and native directory close/focus.');

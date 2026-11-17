@@ -1,25 +1,10 @@
 'use strict';
 (() => {
-  const motionButton = document.getElementById('motion-toggle');
-  const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)');
-  let motionChoice = null;
-  try { motionChoice = localStorage.getItem('siperi-motion'); } catch {}
   function syncMotion() {
-    const enabled = motionChoice === 'on' || (motionChoice !== 'off' && !reducedMotion?.matches);
-    document.body.toggleAttribute('data-motion-enabled', Boolean(enabled));
-    document.body.toggleAttribute('data-motion-paused', Boolean(!enabled || document.hidden));
-    motionButton.disabled = false;
-    motionButton.textContent = enabled ? 'Jeda animasi' : 'Aktifkan animasi';
-    motionButton.setAttribute('aria-pressed', String(!enabled));
+    document.body.toggleAttribute('data-motion-enabled', true);
+    document.body.toggleAttribute('data-motion-paused', document.hidden);
   }
-  if (motionButton && document.body?.toggleAttribute) {
-    motionButton.hidden = false;
-    motionButton.addEventListener('click', () => {
-      motionChoice = document.body.hasAttribute('data-motion-enabled') ? 'off' : 'on';
-      try { localStorage.setItem('siperi-motion', motionChoice); } catch {}
-      syncMotion();
-    });
-    reducedMotion?.addEventListener?.('change', syncMotion);
+  if (document.body?.toggleAttribute) {
     document.addEventListener('visibilitychange', syncMotion);
     syncMotion();
   }
@@ -41,12 +26,10 @@
   }
 
   if (typeof window.IntersectionObserver !== 'function') return;
-  const motionPreference = window.matchMedia?.('(prefers-reduced-motion: reduce)');
   const waiting = new Set([...document.querySelectorAll('[data-reveal]')].filter(element =>
     typeof element.animate === 'function' && !element.closest('#results, .result, #bot-dialog, #bot-launcher')));
   const activeAnimations = new Set();
   const observer = new window.IntersectionObserver(entries => {
-    if (motionPreference?.matches) return;
     for (const entry of entries) {
       if (!entry.isIntersecting || !waiting.has(entry.target)) continue;
       waiting.delete(entry.target);
@@ -67,14 +50,7 @@
 
   function updateMotionPreference() {
     observer.disconnect();
-    if (motionPreference?.matches) {
-      for (const animation of activeAnimations) animation.cancel();
-      activeAnimations.clear();
-      return;
-    }
     for (const element of waiting) observer.observe(element);
   }
-  if (motionPreference?.addEventListener) motionPreference.addEventListener('change', updateMotionPreference);
-  else motionPreference?.addListener?.(updateMotionPreference);
   updateMotionPreference();
 })();

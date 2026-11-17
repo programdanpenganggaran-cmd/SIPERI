@@ -1,5 +1,11 @@
 # SiPERI
 
+## Desain light/dark disetujui, 17 November 2026
+
+Pemilik menyetujui desain terakhir dummy 4198 untuk produksi. Light memakai header/kartu putih, hero biru dan judul emas dari studi KMS kantor; dark memakai navy dan emas. Tema dipilih melalui ikon bulan/matahari 16px dalam target 44px dan disimpan pada siperi-theme. Strip identitas paling atas dihapus. Panel akses cepat memakai teks statis yang diperbesar; orbit dan garis tetap bergerak. Tidak ada kontrol jeda, sesuai pilihan eksplisit pemilik untuk gerakan otomatis; tab tersembunyi tetap berhenti. Hero tetap menghitung satu viewport termasuk header dan pencarian, tiga layanan di bawah fold, serta PANTAU/KAWAL/BIDIK tetap memakai efek stack.
+
+Referensi KMS: https://sites.google.com/view/kms-birorenks-2026/kms-birorenks. Studi screenshot/HTML tersimpan di dummy lokal; statistik dan administrasi KMS tidak disalin ke SiPERI. Implementasi berupa light.css, themes.css, clarity.css dan themes.js di atas styles dasar. Semua aset versi diberi hash saat build. Produksi mempertahankan meta index/follow, canonical siperi.id, konfigurasi AI/Turnstile dan katalog asli, bukan konfigurasi offline dummy.
+
 ## Hero satu layar, 17 November 2026
 
 Perbaikan keluhan animasi selesai sebelum scroll pada monitor besar: beranda kini mengisi setidaknya satu viewport awal termasuk header dan pencarian. Tinggi minimum intro dihitung dari 100svh dikurangi posisi dokumen intro, dengan ResizeObserver pada elemen header agar resize/font tetap tertangani. Tidak memakai fixed height, sehingga teks 200% dan layar pendek boleh menambah tinggi. Tiga kartu berada di bawah fold pada semua viewport uji. Cue Jelajahi layanan di bawah hero memindahkan fokus dan menggulir ke tiga kartu; halaman selain beranda tetap menuju katalog. Kartu tetap tegak, fade/slide pendek dan damping dipertahankan. Warna dan token kontras tidak berubah; skill ui-accessibility diterapkan untuk reflow, fokus dan cue yang tidak menutupi deskripsi.
