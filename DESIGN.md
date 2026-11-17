@@ -1,5 +1,19 @@
 # SiPERI
 
+## Pelunakan gerakan scroll, 17 November 2026
+
+Progress kartu dan shrink/fade panel kini mengikuti target scroll dengan exponential damping 115ms yang dinormalisasi delta frame. RequestAnimationFrame berlanjut sampai selisih kurang dari .0003 lalu berhenti, sehingga tidak ada loop terus-menerus ketika diam. Pembacaan geometri dikumpulkan sebelum penulisan transform untuk mengurangi layout berulang. Fokus keyboard tetap seketika, Jeda menormalkan gaya, dan tab tersembunyi menghentikan pekerjaan tanpa mengubah posisi tumpukan. Scroll halaman tetap native, tanpa mengambil alih wheel atau sentuhan. Pratinjau 4186; belum publikasi produksi.
+
+## Tumpukan panel sesuai referensi, 17 November 2026
+
+Koreksi pemilik merujuk kartu Bold Ideas/Human Stories pada Made to Disrupt. Efek translateY sebelumnya diganti tumpukan sticky dalam wrapper tersendiri. PANTAU tertahan, KAWAL naik menutupi sambil PANTAU mengecil ke .58 dan memudar ke .1, kemudian BIDIK masuk. Panel terakhir melepas pin secara alami. Transform origin top center mempertahankan pengukuran scroll stabil. Fokus keyboard mengembalikan ukuran/opasitas penuh dan mengangkat lapisan; jeda kembali ke alur statis. Pada panel lebih tinggi dari viewport, posisi sticky negatif mengizinkan bagian bawah terbaca. Acuan parameter berasal dari frontend sumber yang sudah diarsipkan dan gambar terbaru pengguna; tidak perlu mengarang efek berdasarkan nama parallax.
+
+## Kartu dibagikan dan panel naik, 17 November 2026
+
+Revisi mengikuti screenshot SiPERI utama. Tiga anchor layanan bergeser dari kanan ke posisi grid secara bertahap, dengan rotasi kecil seperti kartu dibagikan. Posisi dihitung dari scroll, dapat dibalik saat scroll naik, bukan sekadar animasi masuk sekali. PANTAU, KAWAL dan BIDIK memakai progress vertikal masing-masing agar naik bergiliran. Nama heading BIDIK menjadi kapital. Skrip scroll-scenes.js terpisah dari gerakan dekoratif agar keduanya tidak menimpa transform yang sama; data-reveal lama di empat area tersebut dihapus. ENERGY 3 / RHYTHM 3 / MOTION 3 dipertahankan. Fokus keyboard langsung menampilkan target sepenuhnya. Jeda dan preferensi gerakan memakai kontrol global yang ada.
+
+Pratinjau lokal http://localhost:4186/ disediakan untuk revisi screenshot ini. Tidak memublikasikan ulang situs aktif atau mengubah dummy Disrupt tanpa penentuan versi yang akan dipakai.
+
 ## Tiga layanan dan urutan aplikasi, 16 November 2026
 
 Arahan pemilik: tagline Satu portal. Seluruh kebutuhan penganggaran, hapus pengantar empat pintu masuk, dan tampilkan tiga kartu Penyusunan Anggaran, Revisi Anggaran, Input Dokumen Kelengkapan. Kartu unggah memakai URL aplikasi dokumen yang sudah digunakan di menu, dengan ilustrasi folder yang relevan. POK dan Realisasi tetap tersedia dalam direktori; hanya kartunya yang diganti/dihapus. Tiga kolom desktop/tablet beralih menjadi satu kolom pada ponsel agar judul dan target sentuh tetap terbaca. ENERGY 3 / RHYTHM 3 / MOTION 3 tetap, dengan aliran garis, ilustrasi bergerak serta kontrol jeda yang ada.

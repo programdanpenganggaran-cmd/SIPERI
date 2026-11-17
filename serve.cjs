@@ -6,6 +6,7 @@ const types = {'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-
 files['/robots.txt'] = 'robots.txt';
 files['/sitemap.xml'] = 'sitemap.xml';
 files['/pantau-preview.webp'] = 'pantau-preview.webp';
+files['/scroll-scenes.js'] = 'scroll-scenes.js';
 types['.txt'] = 'text/plain; charset=utf-8';
 types['.xml'] = 'application/xml; charset=utf-8';
 files['/atr-bpn.png']='atr-bpn.png';

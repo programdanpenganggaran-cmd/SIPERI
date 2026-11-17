@@ -4,13 +4,13 @@ const directory = path.join(__dirname,'public');
 fs.mkdirSync(directory,{recursive:true});
 for(const file of ['index.html','styles.css','app.js','portal-motion.js','catalog-sources.json','services.json','atr-bpn.png','buku-saku.js','buku-saku.json','buku-saku-revisi-2026.pdf','book-cover.webp','bot.js','bot-config.js','peri-asn.webp','.nojekyll']) fs.copyFileSync(path.join(__dirname,file),path.join(directory,file));
 console.log('Static website prepared in public/');
-for (const file of ['robots.txt', 'sitemap.xml', 'pantau-preview.webp']) {
+for (const file of ['robots.txt', 'sitemap.xml', 'pantau-preview.webp', 'scroll-scenes.js']) {
   fs.copyFileSync(path.join(__dirname, file), path.join(directory, file));
 }
 const crypto = require('node:crypto');
 const indexPath = path.join(directory,'index.html');
 let html = fs.readFileSync(indexPath,'utf8');
-for(const file of ['styles.css','app.js','portal-motion.js','buku-saku.js','bot-config.js','bot.js']) {
+for(const file of ['styles.css','app.js','portal-motion.js','scroll-scenes.js','buku-saku.js','bot-config.js','bot.js']) {
   const version = crypto.createHash('sha256').update(fs.readFileSync(path.join(directory,file))).digest('hex').slice(0,12);
   html = html.replace(new RegExp('(["\\\'])'+file.replaceAll('.','\\.')+'(?:\\?[^"\\\']*)?(["\\\'])','g'), '$1'+file+'?v='+version+'$2');
 }

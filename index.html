@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="styles.css?v=20261116-services">
   <script src="app.js?v=20261116-services" defer></script>
   <script src="portal-motion.js?v=20261116-motion2" defer></script>
+  <script src="scroll-scenes.js?v=20261117-stack3" defer></script>
   <script src="buku-saku.js?v=20261109-bot2" defer></script>
   <script src="bot-config.js?v=20261109-ai1" defer></script>
   <script src="bot.js?v=20261109-ai1" defer></script>
@@ -59,27 +60,28 @@
       <p>Temukan dokumen penyusunan, revisi, dan kelengkapan penganggaran dalam satu tempat.</p>
       <a class="scroll-cue" id="scroll-data" href="#katalog"><span class="scroll-symbol" aria-hidden="true">↓</span><span>Lihat katalog dokumen</span></a>
     </section>
-    <section id="home-services" class="home-services" aria-label="Layanan SiPERI" data-reveal>
+    <section id="home-services" class="home-services" aria-label="Layanan SiPERI">
       <a href="#pagu"><span class="service-label">Perencanaan</span><h2>Penyusunan<br>Anggaran</h2><p>Pagu Anggaran dan Pagu Alokasi, dari referensi sampai kelengkapan.</p><span class="service-art art-budget" aria-hidden="true"><span class="art-base"></span><i></i><i></i><i></i><b></b></span><span class="service-open">Buka penyusunan <span aria-hidden="true">↗</span></span></a>
       <a href="#revisi"><span class="service-label">Perubahan</span><h2>Revisi<br>Anggaran</h2><p>Usulan, penelitian, reviu, penelaahan, dan informasi progres.</p><span class="service-art art-revision" aria-hidden="true"><span class="art-base"></span><i></i><i></i><b></b></span><span class="service-open">Buka revisi <span aria-hidden="true">↗</span></span></a>
       <a href="https://script.google.com/macros/s/AKfycbzvBpZ_x2EGgGf6fBf2toq_4PuV1EoMbKhNT1BEmMr7xC03MaDT_r9YSRro052pGVugaQ/exec"><span class="service-label">Kelengkapan</span><h2>Input Dokumen<br>Kelengkapan</h2><p>Unggah dokumen pendukung melalui aplikasi Input Dokumen Kelengkapan.</p><span class="service-art art-folders" aria-hidden="true"><span class="art-base"></span><i></i><i></i><i></i></span><span class="service-open">Input dokumen <span aria-hidden="true">↗</span></span></a>
     </section>
-    <section id="monitoring-shortcut" class="app-showcase" aria-labelledby="pantau-title" data-reveal>
+    <div id="application-stack" class="application-stack">
+    <section id="monitoring-shortcut" class="app-showcase" aria-labelledby="pantau-title">
       <div class="app-showcase-copy"><h2 id="pantau-title">PANTAU ATR/BPN</h2><p>Peta Anggaran Terintegrasi Antar Unit</p><p class="app-access-note">Buka aplikasi untuk melihat data dan filter terbaru.</p></div>
       <a class="app-preview" href="https://script.google.com/macros/s/AKfycbw67r8qagn2VoEDXt9mXUvNV7gotQjPf9GcFMiVT2XFrWuTU4eGTQ4xqb6TgK4Qf_DR/exec" aria-label="Buka aplikasi PANTAU ATR/BPN">
         <img class="pantau-preview-image" src="pantau-preview.webp" width="1280" height="850" loading="lazy" alt="Pratinjau halaman awal PANTAU ATR/BPN, menampilkan ringkasan anggaran, filter, dan peta Indonesia.">
         <span class="app-preview-caption"><span>Tangkapan 16 November 2026 · Buka PANTAU</span><span aria-hidden="true">↗</span></span>
       </a>
     </section>
-    <section id="kawal-shortcut" class="app-showcase" aria-labelledby="kawal-title" data-reveal>
+    <section id="kawal-shortcut" class="app-showcase" aria-labelledby="kawal-title">
       <div class="app-showcase-copy"><h2 id="kawal-title">KAWAL ATR/BPN</h2><p>Kendali Akrual &amp; Kontrak ATR/BPN</p><p class="app-access-note">Buka KAWAL untuk mengakses aplikasi.</p></div>
       <a class="app-preview" href="https://script.google.com/macros/s/AKfycbw9PL2SHA8oRa4eg1j8SrW-a1kJVoj_5wi6YVbjhdzgs2ps229r35LmWx_zC-UOPwrL/exec" aria-label="Buka aplikasi KAWAL ATR/BPN">
         <span class="kawal-preview-placeholder"><img src="atr-bpn.png" width="56" height="56" alt=""><strong>KAWAL ATR/BPN</strong><span>Kendali Akrual &amp; Kontrak ATR/BPN</span><small>Pratinjau halaman aplikasi belum tersedia.</small></span>
         <span class="app-preview-caption"><span>Buka KAWAL ATR/BPN</span><span aria-hidden="true">↗</span></span>
       </a>
     </section>
-    <section id="dipa-shortcut" class="app-showcase" aria-labelledby="dipa-title" data-reveal>
-      <div class="app-showcase-copy"><h2 id="dipa-title">Bidik ATR/BPN</h2><p>Bedah dan Identifikasi DIPA</p><p class="app-access-note">Masuk dengan akun Google yang memiliki akses.</p></div>
+    <section id="dipa-shortcut" class="app-showcase" aria-labelledby="dipa-title">
+      <div class="app-showcase-copy"><h2 id="dipa-title">BIDIK ATR/BPN</h2><p>Bedah dan Identifikasi DIPA</p><p class="app-access-note">Masuk dengan akun Google yang memiliki akses.</p></div>
       <a class="app-preview" href="https://script.google.com/macros/s/AKfycbw_xb4JSWwhl--TwrRItLuWvHPLDeTDuM2DORX93IiLHONuSgl6_FNGaYiVu_v-zwO3OQ/exec" aria-label="Buka aplikasi Bidik ATR/BPN">
         <span class="bidik-screen" aria-hidden="true">
           <span class="bidik-brand"><img src="atr-bpn.png" alt="" width="40" height="40"><span><strong>BIDIK ATR/BPN</strong><small>Bedah dan Identifikasi DIPA</small></span></span>
@@ -89,6 +91,7 @@
         <span class="app-preview-caption"><span>Pratinjau tampilan · Buka Bidik ATR/BPN</span><span aria-hidden="true">↗</span></span>
       </a>
     </section>
+    </div>
     <section id="knowledge-center" class="knowledge-center" hidden aria-labelledby="knowledge-title">
       <div class="knowledge-heading"><div><p class="eyebrow">Budget Knowledge Center</p><h2 id="knowledge-title">Temukan rujukan sebelum mulai bekerja.</h2><p>Pilih topik atau cari judul pada katalog di bawah. Dokumen tetap dibuka dari sumbernya.</p></div><a href="#buku-saku">Baca Buku Saku Revisi</a></div>
       <nav class="knowledge-topics" aria-label="Topik pusat pengetahuan">
