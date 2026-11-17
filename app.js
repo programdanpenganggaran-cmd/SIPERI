@@ -56,6 +56,9 @@ function route() {
   document.getElementById('katalog').hidden = page === 'buku-saku';
   document.getElementById('search-form').hidden = page === 'buku-saku';
   document.getElementById('scroll-data').hidden = page === 'buku-saku';
+  const scrollCue = document.getElementById('scroll-data');
+  scrollCue.href = page === 'beranda' ? '#home-services' : '#katalog';
+  if (scrollCue.lastElementChild) scrollCue.lastElementChild.textContent = page === 'beranda' ? 'Jelajahi layanan' : 'Lihat katalog dokumen';
   if(page === 'buku-saku' && window.renderPocketBook) window.renderPocketBook();
   document.getElementById('stage-filter').hidden = page !== 'pagu';
   const note = document.getElementById('page-note');
@@ -195,7 +198,7 @@ async function load() {
 document.getElementById('search-form').addEventListener('submit', event => {event.preventDefault(); render(); document.getElementById('katalog').scrollIntoView({block:'start'});});
 document.getElementById('scroll-data').addEventListener('click', event => {
   event.preventDefault();
-  const target = document.getElementById('katalog');
+  const target = document.getElementById(page === 'beranda' ? 'home-services' : 'katalog');
   const reduce = !window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   target.focus({preventScroll:true});
   target.scrollIntoView({behavior:reduce ? 'auto' : 'smooth',block:'start'});

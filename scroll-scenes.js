@@ -5,6 +5,13 @@
   const cards = [...group.querySelectorAll(':scope > a')];
   const panels = [...document.querySelectorAll('.app-showcase')];
   const stack = document.getElementById('application-stack');
+  const intro = document.querySelector('.intro');
+  function sizeLanding() {
+    if (intro && intro.getClientRects().length) {
+      const top = Math.max(0, intro.getBoundingClientRect().top + scrollY);
+      intro.style.setProperty('--landing-top', `${top}px`);
+    }
+  }
   const progressState = new WeakMap();
   let frame = 0, lastTime = 0;
   const clamp = value => Math.max(0, Math.min(1, value));
@@ -62,11 +69,18 @@
   }
   function schedule() { if (!frame) frame = requestAnimationFrame(render); }
   addEventListener('scroll', schedule, { passive: true });
-  addEventListener('resize', schedule);
-  addEventListener('hashchange', schedule);
+  addEventListener('resize', () => { sizeLanding(); schedule(); });
+  addEventListener('hashchange', () => { sizeLanding(); schedule(); });
   document.addEventListener('focusin', schedule);
   document.addEventListener('focusout', schedule);
   document.addEventListener('visibilitychange', schedule);
   new MutationObserver(schedule).observe(document.body, { attributes: true, attributeFilter: ['data-motion-enabled', 'data-motion-paused'] });
+  const main = document.getElementById('main');
+  if (main) new MutationObserver(() => { sizeLanding(); schedule(); }).observe(main, { attributes: true, attributeFilter: ['class'] });
+  if (typeof ResizeObserver === 'function') {
+    const headerObserver = new ResizeObserver(() => { sizeLanding(); schedule(); });
+    document.querySelectorAll('.site-navigation, .topbar, .agency-strip').forEach(element => headerObserver.observe(element));
+  }
+  sizeLanding();
   schedule();
 })();

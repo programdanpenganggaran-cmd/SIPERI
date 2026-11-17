@@ -137,3 +137,6 @@ Chrome lokal 1280, 768 dan 320px memeriksa perpindahan scroll mendadak: transfor
 ## Kartu tegak / large desktop, 17 November 2026
 
 Uji Chrome pada 3840x2160, 2560x1440, 1920x1080, 1280x900, 768x1024 dan 320x900 memeriksa tidak ada rotate pada kartu, reveal selesai pada posisi baca, fokus menampilkan kartu penuh, Jeda menghapus opacity tambahan, tidak ada overflow horizontal atau pageerror. Pada viewport tinggi, kartu sudah berada dalam area baca pada scroll nol, sehingga tidak dipaksa tersembunyi. Pada layar lebih pendek, kartu di batas bawah disembunyikan lalu muncul dari kanan mengikuti scroll. Syntax, katalog dan build lulus. Ini simulasi viewport browser, bukan pengukuran monitor fisik pengguna.
+## Hero satu layar dan scroll awal, 17 November 2026
+
+Chrome lokal diuji pada 3840x2160, 2560x1440, 1920x1080, 1280x900, 768x1024, 320x900. Pada pembukaan scroll nol, posisi kartu di bawah viewport dan opacity awal nol; setelah cue diklik, kartu muncul dan fokus berada pada section layanan. Teks root 200% tanpa overflow horizontal, cue tidak menutupi deskripsi. Route Revisi mengembalikan tujuan cue ke katalog. Tidak ada pageerror pada pemeriksaan. Screenshot hero desktop ditinjau. Katalog, buku, bot, motion dan build lulus. Ini simulasi viewport dan pembesaran font, bukan uji monitor fisik atau audit WCAG penuh.

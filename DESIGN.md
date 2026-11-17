@@ -1,5 +1,9 @@
 # SiPERI
 
+## Hero satu layar, 17 November 2026
+
+Perbaikan keluhan animasi selesai sebelum scroll pada monitor besar: beranda kini mengisi setidaknya satu viewport awal termasuk header dan pencarian. Tinggi minimum intro dihitung dari 100svh dikurangi posisi dokumen intro, dengan ResizeObserver pada elemen header agar resize/font tetap tertangani. Tidak memakai fixed height, sehingga teks 200% dan layar pendek boleh menambah tinggi. Tiga kartu berada di bawah fold pada semua viewport uji. Cue Jelajahi layanan di bawah hero memindahkan fokus dan menggulir ke tiga kartu; halaman selain beranda tetap menuju katalog. Kartu tetap tegak, fade/slide pendek dan damping dipertahankan. Warna dan token kontras tidak berubah; skill ui-accessibility diterapkan untuk reflow, fokus dan cue yang tidak menutupi deskripsi.
+
 ## Kartu tegak pada layar besar, 17 November 2026
 
 Rotasi kartu layanan dihapus sesuai keluhan pemilik. Masuk dari kanan maksimum 110px disertai fade, progress selesai lebih awal (rentang 19% tinggi viewport) dan jeda antar kartu diperkecil. Dengan viewport tinggi yang sudah menampilkan layanan, ketiga kartu langsung berada pada posisi akhir tegak; tidak tertahan dalam sudut miring. Di bawah batas masuk, kartu transparan dan tidak menerima pointer; fokus keyboard langsung menampilkannya penuh. Jeda/reduced motion dan kegagalan JS mengembalikan kartu statis terlihat. Tidak menambah library atau mengganti template, karena permasalahannya berasal dari geometri animasi lama. Damping 115ms dan tumpukan aplikasi dipertahankan.

@@ -87,11 +87,11 @@ main { min-width: 0; }
 .document-stream i { position: absolute; top: -60px; bottom: 0; left: calc(var(--lane) * 8%); width: 2px; background: repeating-linear-gradient(180deg,#48515d 0 15px,transparent 15px 31px); transform: translateY(var(--shift,0px)); }
 .document-stream i:nth-child(1){--lane: 0;--shift:15px}.document-stream i:nth-child(2){--lane: 1;--shift:35px}.document-stream i:nth-child(3){--lane: 2;--shift:10px}.document-stream i:nth-child(4){--lane: 3;--shift:50px}.document-stream i:nth-child(5){--lane: 4;--shift:20px}.document-stream i:nth-child(6){--lane: 5;--shift:45px}.document-stream i:nth-child(7){--lane: 7;--shift:30px}.document-stream i:nth-child(8){--lane: 8;--shift:15px}.document-stream i:nth-child(9){--lane: 9;--shift:50px}.document-stream i:nth-child(10){--lane: 10;--shift:25px}.document-stream i:nth-child(11){--lane: 11;--shift:45px}.document-stream i:nth-child(12){--lane: 12;--shift:5px}
 .document-stream i:nth-child(3n)::after { content: ''; position: absolute; top: 55%; left: 0; width: 3px; height: 20px; background: #498dfb; }
-.is-home .intro { min-height: 580px; padding-top: 66px; padding-bottom: 50px; gap: 34px; }
+.is-home .intro { min-height: max(580px,calc(100svh - var(--landing-top,200px))); padding-top: 66px; padding-bottom: 110px; gap: 34px; }
 .is-home .intro .eyebrow { text-align: center; }
 .is-home .intro h1 { text-align: center; justify-self: center; font-size: clamp(3.5rem, 7vw, 6.4rem); max-width: 1120px; }
 .is-home .intro > p:not(.eyebrow) { grid-column: 2; max-width: 390px; padding: 18px 22px; background: var(--surface); border: 1px solid #434b57; border-radius: 5px; font-size: .92rem; margin: 10px 0 0; }
-.is-home .scroll-cue { grid-column: 1; grid-row: 3; align-self: end; }
+.is-home .scroll-cue { position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); white-space: nowrap; }
 .home-services { max-width: var(--container); margin: 56px auto 56px; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; overflow: clip; padding: 8px; }
 .home-services > a { position: relative; display: flex; flex-direction: column; padding: 0 22px 20px; min-height: 320px; color: #fff; text-decoration: none; border: 1px solid var(--line); background: var(--surface); overflow: hidden; }
 .service-label { margin: 0 -22px 26px; padding: 9px 15px; background: var(--raised); color: var(--muted); font-size: .68rem; border-bottom: 1px solid var(--line); }
@@ -310,7 +310,7 @@ footer :focus-visible { outline-color: #fff; }
   .intro { min-height: 340px; padding-top: 42px; padding-bottom: 35px; gap: 22px; }
   .intro h1 { font-size: clamp(2.4rem,8.5vw,3.7rem); letter-spacing: -.055em; }
   .intro > p:not(.eyebrow) { font-size: .9rem; }
-  .is-home .intro { min-height: 510px; padding-top: 46px; padding-bottom: 35px; gap: 28px; }
+  .is-home .intro { min-height: max(510px,calc(100svh - var(--landing-top,180px))); padding-top: 46px; padding-bottom: 110px; gap: 28px; }
   .is-home .intro h1 { font-size: clamp(2.7rem,9.8vw,4.5rem); }
   .is-home .intro > p:not(.eyebrow) { grid-column: 1 / -1; width: 100%; max-width: none; padding: 16px; font-size: .85rem; margin: 0; }
   .is-home .scroll-cue { grid-column: 1 / -1; grid-row: auto; }
