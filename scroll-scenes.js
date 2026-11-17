@@ -29,13 +29,17 @@
     const cardTops = cards.map(card => groupTop + card.offsetTop - groupOffset);
     const panelMetrics = panels.map(panel => ({ top: panel.getBoundingClientRect().top, height: panel.offsetHeight }));
     cards.forEach((card, index) => {
-      if (!enabled || group.hidden) { card.style.removeProperty('transform'); progressState.delete(card); return; }
+      if (!enabled || group.hidden) {
+        for (const property of ['transform', 'opacity', 'pointer-events']) card.style.removeProperty(property);
+        progressState.delete(card); return;
+      }
       const focused = card.matches(':focus-within');
-      const target = focused ? 1 : clamp((innerHeight * .95 - cardTops[index]) / (innerHeight * .55) - index * .12);
+      const target = focused ? 1 : clamp((innerHeight * .96 - cardTops[index]) / (innerHeight * .19) - index * .04);
       const progress = follow(card, target, focused);
       const remaining = 1 - progress;
-      card.style.transform = `translate3d(${remaining * Math.min(innerWidth * .7, 700)}px,0,0) rotate(${remaining * (8 - index * 2)}deg)`;
-      card.style.transformOrigin = '50% 100%';
+      card.style.transform = `translate3d(${remaining * Math.min(innerWidth * .12, 110)}px,0,0)`;
+      card.style.opacity = String(progress);
+      card.style.pointerEvents = progress > .1 ? 'auto' : 'none';
     });
     panels.forEach((panel, index) => {
       if (!enabled || panel.hidden) {

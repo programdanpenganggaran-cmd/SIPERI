@@ -134,3 +134,6 @@ Pratinjau 4186 kini memakai wrapper stack dengan sticky, skala dan fade, menggan
 ## Smooth scroll scenes, 17 November 2026
 
 Chrome lokal 1280, 768 dan 320px memeriksa perpindahan scroll mendadak: transform kartu dan opasitas panel terus berubah secara bertahap setelah input scroll berhenti, lalu mencapai nilai tetap tanpa drift. Fokus memulihkan opasitas penuh segera; Jeda mengembalikan alur static. Tidak ada overflow horizontal atau pageerror dalam pemeriksaan. Syntax, katalog dan build lulus. Yang dihaluskan adalah transform dan fade adegan, bukan mengganti perilaku scroll native atau klaim benchmark FPS.
+## Kartu tegak / large desktop, 17 November 2026
+
+Uji Chrome pada 3840x2160, 2560x1440, 1920x1080, 1280x900, 768x1024 dan 320x900 memeriksa tidak ada rotate pada kartu, reveal selesai pada posisi baca, fokus menampilkan kartu penuh, Jeda menghapus opacity tambahan, tidak ada overflow horizontal atau pageerror. Pada viewport tinggi, kartu sudah berada dalam area baca pada scroll nol, sehingga tidak dipaksa tersembunyi. Pada layar lebih pendek, kartu di batas bawah disembunyikan lalu muncul dari kanan mengikuti scroll. Syntax, katalog dan build lulus. Ini simulasi viewport browser, bukan pengukuran monitor fisik pengguna.

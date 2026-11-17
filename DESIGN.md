@@ -1,5 +1,9 @@
 # SiPERI
 
+## Kartu tegak pada layar besar, 17 November 2026
+
+Rotasi kartu layanan dihapus sesuai keluhan pemilik. Masuk dari kanan maksimum 110px disertai fade, progress selesai lebih awal (rentang 19% tinggi viewport) dan jeda antar kartu diperkecil. Dengan viewport tinggi yang sudah menampilkan layanan, ketiga kartu langsung berada pada posisi akhir tegak; tidak tertahan dalam sudut miring. Di bawah batas masuk, kartu transparan dan tidak menerima pointer; fokus keyboard langsung menampilkannya penuh. Jeda/reduced motion dan kegagalan JS mengembalikan kartu statis terlihat. Tidak menambah library atau mengganti template, karena permasalahannya berasal dari geometri animasi lama. Damping 115ms dan tumpukan aplikasi dipertahankan.
+
 ## Pelunakan gerakan scroll, 17 November 2026
 
 Progress kartu dan shrink/fade panel kini mengikuti target scroll dengan exponential damping 115ms yang dinormalisasi delta frame. RequestAnimationFrame berlanjut sampai selisih kurang dari .0003 lalu berhenti, sehingga tidak ada loop terus-menerus ketika diam. Pembacaan geometri dikumpulkan sebelum penulisan transform untuk mengurangi layout berulang. Fokus keyboard tetap seketika, Jeda menormalkan gaya, dan tab tersembunyi menghentikan pekerjaan tanpa mengubah posisi tumpukan. Scroll halaman tetap native, tanpa mengambil alih wheel atau sentuhan. Pratinjau 4186; belum publikasi produksi.
