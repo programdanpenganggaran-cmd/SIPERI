@@ -34,7 +34,13 @@
     const groupTop = group.getBoundingClientRect().top;
     const groupOffset = group.offsetTop;
     const cardTops = cards.map(card => groupTop + card.offsetTop - groupOffset);
-    const panelMetrics = panels.map(panel => ({ top: panel.getBoundingClientRect().top, height: panel.offsetHeight }));
+    // Undo the previous scale when measuring the sticky panel's layout position.
+    // Using its transformed rectangle feeds animation output back into the next target.
+    const panelMetrics = panels.map(panel => {
+      let top = 0;
+      for (let node = panel; node; node = node.offsetParent) top += node.offsetTop;
+      return { top: Math.max(top - scrollY, parseFloat(panel.style.getPropertyValue('--stack-top')) || 100), height: panel.offsetHeight };
+    });
     cards.forEach((card, index) => {
       if (!enabled || group.hidden) {
         for (const property of ['transform', 'opacity', 'pointer-events']) card.style.removeProperty(property);

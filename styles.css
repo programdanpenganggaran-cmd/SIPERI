@@ -465,7 +465,7 @@ footer :focus-visible { outline-color: #fff; }
 .art-report i:nth-of-type(2) { height: 65px; top: 47px; margin-left: 10px; background: #3979cb; }
 .art-report i:nth-of-type(3) { height: 90px; top: 22px; margin-left: 45px; background: #1e6ef3; }
 .art-report b { top: 32px; left: calc(50% - 56px); }
-.document-stream i { animation: stream-flow 3.6s linear infinite; }
+.document-stream i { top: -442px; animation: stream-flow 3.6s linear infinite; will-change: translate; }
 .document-stream i:nth-child(even) { animation-duration: 5.8s; animation-direction: reverse; }
 .document-stream i:nth-child(3n)::after { animation: stream-marker 5s linear infinite; }
 .service-art i { animation: document-lift 3.8s ease-in-out infinite; }
@@ -473,8 +473,8 @@ footer :focus-visible { outline-color: #fff; }
 .service-art i:nth-of-type(3) { animation-delay: -1.6s; }
 .art-revision b { animation: revision-pass 3s ease-in-out infinite; }
 .art-report i { animation-name: report-rise; }
-@keyframes stream-flow { to { background-position: 0 352px; } }
-@keyframes stream-marker { 0% { top: -40px; opacity: 0; } 8%,92% { opacity: 1; } 100% { top: 110%; opacity: 0; } }
+@keyframes stream-flow { from { translate: 0 0; } to { translate: 0 352px; } }
+@keyframes stream-marker { 0% { translate: 0 -300px; opacity: 0; } 8%,92% { opacity: 1; } 100% { translate: 0 700px; opacity: 0; } }
 @keyframes document-lift { 0%,100% { translate: 0 5px; } 50% { translate: 0 -9px; } }
 @keyframes revision-pass { 0%,100% { translate: -8px 0; } 50% { translate: 12px -7px; } }
 @keyframes report-rise { 0%,100% { scale: 1 .78; } 50% { scale: 1 1; } }
