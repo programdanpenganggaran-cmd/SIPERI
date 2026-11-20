@@ -230,9 +230,9 @@ footer :focus-visible { outline-color: #fff; }
 .bot-heading { display: flex; align-items: center; gap: 12px; background: #111e30; color: #fff; padding: 15px 18px; flex-shrink: 0; }
 .bot-heading img { object-fit: contain; }
 .bot-heading h2 { font-size: 1.15rem; letter-spacing: -.025em; font-weight: 600; margin-bottom: 5px; }
-.bot-heading p { font-size: .75rem; color: var(--muted); margin: 0; }
-.bot-heading button { margin-left: auto; min-width: 44px; min-height: 44px; padding: 0; background: var(--raised); color: #fff; border: 1px solid var(--control-border); font-size: 1.6rem; border-radius: 5px; }
-.bot-heading button:hover { background: var(--hover); }
+.bot-heading p { font-size: .75rem; color: #b9cbe1; margin: 0; }
+.bot-heading button { margin-left: auto; min-width: 44px; min-height: 44px; padding: 0; background: #1a3254; color: #fff; border: 1px solid var(--control-border); font-size: 1.6rem; border-radius: 5px; }
+.bot-heading button:hover { background: #244464; }
 .bot-heading button:focus-visible { outline-color: #9bc1ff; }
 .bot-content { flex: 1; overflow-y: auto; min-height: 0; overscroll-behavior: contain; padding: 18px; }
 .bot-intro { color: var(--muted); font-size: .8rem; line-height: 1.7; margin-bottom: 16px; }
@@ -247,7 +247,8 @@ footer :focus-visible { outline-color: #fff; }
 .bot-message { border: 1px solid var(--line); background: var(--raised); border-radius: 8px; padding: 13px; overflow-wrap: anywhere; }
 .bot-message strong { font-size: .66rem; color: var(--muted); }
 .bot-message p { font-size: .85rem; white-space: pre-wrap; line-height: 1.75; margin: 6px 0 0; }
-.bot-message-user { background: #1a3254; border-color: #4d78b0; margin-left: 25px; }
+.bot-message-user { background: #1a3254; color: #fff; border-color: #4d78b0; margin-left: 25px; }
+.bot-message-user strong { color: #b9cbe1; }
 .bot-message-error { background: #2c2316; border-color: #b79760; color: #ffe0a0; }
 .bot-message a { display: block; min-height: 44px; padding: 10px 0; font-size: .8rem; line-height: 1.6; border-bottom: 1px solid var(--line); }
 .bot-message small { display: block; font-size: .72rem; color: var(--muted); line-height: 1.7; margin-top: 10px; }
@@ -255,11 +256,11 @@ footer :focus-visible { outline-color: #fff; }
 .bot-latest { position: sticky; bottom: 8px; z-index: 1; flex-shrink: 0; align-self: center; min-height: 44px; margin: 0 14px 8px; padding: 8px 14px; border: 1px solid var(--control-border); border-radius: 6px; color: var(--link); background: var(--raised); font-size: .8rem; }
 .bot-latest:hover { background: var(--hover); }
 .bot-latest:active { background: #1b2e48; }
-.bot-form { padding: 14px 18px 16px; border-top: 1px solid var(--line); flex-shrink: 0; background: #101a29; }
+.bot-form { padding: 14px 18px 16px; border-top: 1px solid var(--line); flex-shrink: 0; background: var(--surface); }
 .bot-form label { font-size: .75rem; margin-bottom: 7px; }
 .bot-form > div { display: flex; gap: 8px; align-items: flex-end; }
 .bot-form textarea { font-size: 1rem; line-height: 1.5; resize: vertical; min-height: 70px; max-height: 140px; min-width: 0; flex: 1; padding: 10px; border-radius: 6px; }
-.bot-form textarea[readonly] { background: #192435; }
+.bot-form textarea[readonly] { background: var(--hover); }
 .bot-form button { padding: 10px 14px; font-size: .8rem; min-height: 46px; }
 .bot-form[aria-busy=true] button { cursor: wait; }
 .bot-keyboard-help { font-size: .7rem; color: var(--muted); line-height: 1.6; margin: 7px 0 0; }
@@ -365,7 +366,7 @@ footer :focus-visible { outline-color: #fff; }
   .bot-heading h2 { font-size: 1rem; }
   .bot-heading p { font-size: .7rem; }
   .bot-content { padding: 14px; }
-  .bot-form { padding: 12px 14px; background: #101a29; }
+  .bot-form { padding: 12px 14px; }
 }
 @media (max-width:420px) {
   .home-services { grid-template-columns: 1fr; }

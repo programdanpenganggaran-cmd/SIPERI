@@ -1,4 +1,4 @@
-import { retrieve, promptFor, knowledgeVersion } from './retrieval.mjs';
+import { retrieve, officialDirectory, promptFor, knowledgeVersion } from './retrieval.mjs';
 const encoder = new TextEncoder();
 const warning = 'Ringkasan AI dapat keliru. Periksa halaman sumber dan aturan resmi sebelum mengambil keputusan. Arsip Drive privat belum diindeks.';
 export class DailyBudget {
@@ -59,17 +59,25 @@ export default {
       if (!(await env.PER_IP.limit({ key: ip })).success || !(await env.GLOBAL_RATE.limit({ key: 'chat' })).success) return reply({ code: 'RATE_LIMIT', error: 'Terlalu banyak pertanyaan. Tunggu satu menit atau gunakan Cari rujukan.' }, 429);
       const body = await boundedJSON(request);
       const question = typeof body.question === 'string' ? body.question.trim() : '';
+      const previousQuestion = typeof body.previousQuestion === 'string' ? body.previousQuestion.trim() : '';
       if (!question || question.length > 1500) return reply({ error: 'Isi pertanyaan antara 1–1.500 karakter.' }, 400);
-      if (/\b\d{16}\b/.test(question)) return reply({ error: 'Hapus nomor identitas 16 digit sebelum mengirim.' }, 400);
+      if (previousQuestion.length > 1500) return reply({ error: 'Topik sebelumnya melebihi 1.500 karakter.' }, 400);
+      if (/\b\d{16}\b/.test(question) || /\b\d{16}\b/.test(previousQuestion)) return reply({ error: 'Hapus nomor identitas 16 digit sebelum mengirim.' }, 400);
       if (typeof body.turnstileToken !== 'string' || !body.turnstileToken || body.turnstileToken.length > 2048) return reply({ code: 'VERIFY_REQUIRED', error: 'Selesaikan verifikasi pengunjung, lalu kirim ulang.' }, 403);
       const verification = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
         method: 'POST', body: new URLSearchParams({ secret: env.TURNSTILE_SECRET_KEY, response: body.turnstileToken, remoteip: ip }), signal: AbortSignal.timeout(7000)
       });
       const verified = await verification.json();
       if (!verified.success || verified.hostname !== new URL(origin).hostname || verified.action !== 'siperi-ai') return reply({ code: 'VERIFY_REQUIRED', error: 'Verifikasi kedaluwarsa atau belum berhasil. Ulangi verifikasi lalu kirim kembali.' }, 403);
-      const sources = retrieve(question);
-      if (!sources.length) return reply({ reply: 'Belum ditemukan rujukan yang cukup untuk pertanyaan ini. Sebutkan topik, istilah, atau tahun yang dimaksud; kamu juga bisa menggunakan Cari rujukan.', sources: [], grounded: false, warning });
-      const messages = promptFor(question, sources);
+      const sources = retrieve(previousQuestion || question);
+      if (!sources.length) {
+        const directory = officialDirectory(`${previousQuestion}\n${question}`);
+        const message = directory.length
+          ? 'Belum ada rujukan yang cukup untuk menjawab. Buka naskah atau cari aturan di JDIH melalui tautan berikut. Sebutkan nomor peraturan atau tahun anggaran jika tersedia.'
+          : 'Belum ada rujukan yang cukup untuk menjawab. Sebutkan topik, istilah, atau tahun yang dimaksud.';
+        return reply({ reply: message, sources: directory, grounded: false, warning });
+      }
+      const messages = promptFor(question, sources, previousQuestion);
       if (encoder.encode(JSON.stringify(messages)).byteLength > 14000) return reply({ error: 'Pertanyaan terlalu panjang untuk konteks ini. Ringkas pertanyaan lalu coba lagi.' }, 400);
       const budget = env.DAILY_BUDGET.get(env.DAILY_BUDGET.idFromName('siperi-global'));
       if (!(await (await budget.fetch('https://budget.internal/reserve', { method: 'POST' })).json()).allowed) return reply({ code: 'DAILY_LIMIT', error: 'Jatah uji coba AI hari ini sudah terpakai. Tersedia lagi pukul 07.00 WIB. Cari rujukan tetap bisa digunakan.' }, 429);

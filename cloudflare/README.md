@@ -8,6 +8,8 @@ GitHub Pages tetap melayani website. Hanya pilihan **Tanya AI** mengirim satu pe
 
 - Model `@cf/google/gemma-4-26b-a4b-it`, reasoning dinonaktifkan, jawaban maksimum 512 token.
 - Indeks 304 potongan: isi Buku Saku Revisi Anggaran 2026 yang telah disetujui untuk publikasi dan metadata katalog publik. Tidak mengambil file tujuan Drive, data privat, atau indeks Netlify Blobs.
+- `src/public-regulations.json` menambah enam ringkasan dari JDIH Kementerian Keuangan. Entri mencatat sumber dan tanggal pemeriksaan. Pertanyaan SBM memakai tahun anggaran yang disebut pengguna. Saat bukti aturan kurang, asisten menyediakan tautan JDIH tanpa inferensi model atau panggilan layanan pencarian web.
+- `src/regulation-catalog.json` memuat tautan pemerintah untuk 34 produk hukum dari indeks referensi Drive yang sudah ditinjau. Asisten mencari nomor, tahun, atau topik untuk menampilkan naskah. Ringkasan yang sudah disiapkan tetap menjadi sumber isi jawaban AI.
 - Retrieval memilih maksimal empat kutipan. Tautan sumber disusun server; nomor rujukan jawaban harus sesuai. Pemeriksaan ini tidak menjamin kebenaran semantik jawaban. Buku panduan bukan pengganti pemeriksaan regulasi resmi.
 - Cloudflare Turnstile wajib dan diverifikasi di server, termasuk hostname dan action. Widget khusus hostname GitHub SiPERI; pengujian localhost tidak memakai sitekey produksi.
 - Pembatas per IP: 5 permintaan/menit; keseluruhan: 20 permintaan/menit per lokasi Cloudflare. Rate Limiting API bersifat perkiraan per lokasi, bukan batas global ketat.

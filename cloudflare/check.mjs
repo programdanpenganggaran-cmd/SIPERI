@@ -1,12 +1,14 @@
 import assert from 'node:assert/strict';
 import worker, { DailyBudget } from './src/worker.mjs';
-import { retrieve, promptFor } from './src/retrieval.mjs';
+import { retrieve, officialDirectory, promptFor } from './src/retrieval.mjs';
+import regulationCatalog from './src/regulation-catalog.json' with { type: 'json' };
 const origin = 'https://programdanpenganggaran-cmd.github.io';
 const originalFetch = globalThis.fetch;
 let verified = { success: true, hostname: new URL(origin).hostname, action: 'siperi-ai' }, calls = 0, budgetAllowed = true, modelResult = { choices: [{ message: { content: 'Penjelasan dari buku [1].' } }] };
+let modelMessages;
 const env = {
   ALLOWED_ORIGIN: origin, AI_MODEL: 'test-model', TURNSTILE_SECRET_KEY: 'TEST_ONLY',
-  AI: { run: async (model, input) => { calls++; assert.equal(model, 'test-model'); assert.equal(input.max_tokens, 512); assert.ok(input.messages[0].content.includes('HANYA')); return modelResult; } },
+  AI: { run: async (model, input) => { calls++; modelMessages = input.messages; assert.equal(model, 'test-model'); assert.equal(input.max_tokens, 512); assert.ok(input.messages[0].content.includes('HANYA')); return modelResult; } },
   DAILY_BUDGET: { idFromName: x=>x, get: ()=>({fetch:async()=>Response.json({allowed:budgetAllowed})}) },
   PER_IP: {limit:async()=>({success:true})}, GLOBAL_RATE: {limit:async()=>({success:true})}
 };
@@ -20,6 +22,8 @@ try {
   assert.equal((await worker.fetch(request(undefined,{}, {headers:{Origin:'https://evil.test'}}),env)).status,403);
   assert.equal((await worker.fetch(request(undefined,{turnstileToken:''}),env)).status,403);
   assert.equal((await worker.fetch(request('1234567890123456'),env)).status,400);
+  assert.equal((await worker.fetch(request('Apa aturannya?', { previousQuestion: '1234567890123456' }),env)).status,400);
+  assert.equal((await worker.fetch(request('Apa aturannya?', { previousQuestion: 'x'.repeat(1501) }),env)).status,400);
   assert.equal((await worker.fetch(request('x'.repeat(1501)),env)).status,400);
   const oversized = new Request('https://example.test/chat',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:'x'.repeat(12001)});
   assert.equal((await worker.fetch(oversized,env)).status,413);
@@ -40,14 +44,51 @@ try {
   verified.success=false; assert.equal((await worker.fetch(request(),env)).status,403); verified.success=true;
   assert.equal(calls,0);
   response=await worker.fetch(request('Siapa pemenang piala dunia?'),env); assert.equal((await response.json()).grounded,false); assert.equal(calls,0);
+  const missingRule = await (await worker.fetch(request('PMK 999 Tahun 2026'), env)).json();
+  assert.equal(missingRule.grounded, false);
+  assert.deepEqual(missingRule.sources.map(source => new URL(source.url).hostname), ['jdih.kemenkeu.go.id', 'jdih.atrbpn.go.id']);
+  assert.equal(calls, 0);
+  const catalogueRule = await (await worker.fetch(request('Jelaskan PP 6 Tahun 2023'), env)).json();
+  assert.equal(catalogueRule.grounded, false);
+  assert.deepEqual(catalogueRule.sources.map(source => source.url), ['https://jdih.kemenkeu.go.id/dok/pp-6-tahun-2023']);
+  assert.equal(calls, 0);
   response=await worker.fetch(request(),env); let data=await response.json(); assert.equal(response.status,200); assert.equal(data.grounded,true); assert.equal(data.sources[0].page,10); assert.equal(calls,1);
   budgetAllowed=false;response=await worker.fetch(request(),env);assert.equal(response.status,429);assert.equal((await response.json()).code,'DAILY_LIMIT');assert.equal(calls,1);budgetAllowed=true;
+  const shiftQuestion = 'Halo, apakah akun 51 dapat digeser ke 52, dan adakah peraturan resminya?';
+  const followUp = 'Apakah ada peraturan resminya?';
+  assert.deepEqual(retrieve(shiftQuestion).map(source => source.id), ['pmk-107-2024', 'pmk-41-2026']);
+  assert.notDeepEqual(retrieve('Apakah akun 52 bisa digeser ke 51?').map(source => source.id), ['pmk-107-2024', 'pmk-41-2026']);
+  modelResult = {response:'Rujuk Pasal 146 ayat (2) [1] dan matriks terbaru [2].'};
+  const contextual = await (await worker.fetch(request(followUp, { previousQuestion: shiftQuestion }),env)).json();
+  assert.equal(contextual.grounded, true);
+  assert.ok(contextual.sources[0].url.includes('pmk-107-tahun-2024'));
+  assert.ok(contextual.sources[1].url.includes('pmk-41-tahun-2026'));
+  assert.ok(modelMessages[1].content.includes(shiftQuestion));
+  assert.ok(modelMessages[1].content.includes(followUp));
+  assert.ok(modelMessages[1].content.includes('Pasal 146 ayat (2)'));
   modelResult={response:'Tidak ada nomor sumber.'};data=await (await worker.fetch(request(),env)).json();assert.equal(data.grounded,false);
   modelResult={response:'Nomor sumber palsu [99].'};data=await (await worker.fetch(request(),env)).json();assert.equal(data.grounded,false);
   env.AI.run=async()=>{throw Error('provider details must not leak');};data=await (await worker.fetch(request(),env)).json();assert.equal(data.code,'AI_UNAVAILABLE');assert.ok(!data.error.includes('provider details'));
   env.PER_IP.limit=async()=>({success:false});assert.equal((await worker.fetch(request(),env)).status,429);
   assert.equal(retrieve('Apa itu revisi anggaran?')[0].page,10);
   assert.ok(retrieve('Input dokumen kelengkapan').some(x=>x.id==='input-kelengkapan'));
+  assert.deepEqual(retrieve('Apa dasar SBM TA 2026?').map(item => item.id), ['pmk-32-2025']);
+  assert.deepEqual(retrieve('PMK berapa untuk SBM Tahun Anggaran 2027?').map(item => item.id), ['pmk-54-2026']);
+  assert.deepEqual(retrieve('Berapa SBM perjalanan dinas tahun anggaran 2028?'), []);
+  assert.deepEqual(retrieve('SBM mana untuk perjalanan dinas?'), []);
+  const amendment = retrieve('Isi PMK Nomor 41 Tahun 2026');
+  assert.deepEqual(amendment.map(item => item.id), ['pmk-41-2026']);
+  assert.ok(promptFor('uji', amendment)[1].content.includes('JDIH diperiksa 2026-11-19'));
+  assert.ok(retrieve('Apa itu Standar Struktur Biaya?').some(item => item.id === 'pmk-79-2025'));
+  assert.equal(regulationCatalog.records.length, 34);
+  assert.equal(new Set(regulationCatalog.records.map(item => item.id)).size, 34);
+  for (const { id, url } of regulationCatalog.records) {
+    const [, type, number, year] = id.match(/^(\w+)-(.+)-(\d{4})$/);
+    assert.ok(new URL(url).hostname.endsWith('.go.id'));
+    assert.equal(officialDirectory(`${type} ${number}/${year}`)[0]?.url, url);
+  }
+  assert.ok(officialDirectory('PER-9/PB/2023')[0]?.url.endsWith('/per-9-pb-2023/files'));
+  assert.ok(officialDirectory('pengelolaan penerimaan negara bukan pajak').some(item => item.url.includes('/pp-58-tahun-2020/')));
   assert.equal(retrieve('kucing astronot galaksi zzz').length,0);
   assert.ok(promptFor('uji',retrieve('revisi'))[0].content.includes('Metadata katalog'));
   let queue=Promise.resolve();const values=new Map();const storage={get:async k=>values.get(k),put:async(k,v)=>values.set(k,structuredClone(v))};

@@ -27,6 +27,7 @@
   }, { passive: true });
   $('bot-latest').addEventListener('click', () => { followLatest(); $('bot-question').focus({ preventScroll: true }); });
   let mode = 'catalog', pending = false, controller = null, opener = null;
+  let previousAIQuestion = '';
   let widgetId = null, verificationToken = '', turnstileLoading = null;
   if (window.visualViewport) {
     const fit = () => {
@@ -37,6 +38,12 @@
   }
   const status = text => { $('bot-status').textContent = text; syncMessages(); };
   const normalize = text => text.toLocaleLowerCase('id').replace(/[^a-z0-9]+/g, ' ').trim();
+  function isFollowUp(question) {
+    const text = normalize(question).replace(/^(?:dan|lalu|kalau|terus) /, '').replace(/ (?:ya|dong)$/, '');
+    const source = text.replace(/^(?:apakah ada|apa|adakah|ada|boleh minta|minta) /, '').replace(/ (?:apa|yang mana|ada|yang berlaku)$/, '');
+    return /^(?:(?:peraturan|aturan|regulasi|sumber|rujukan)(?:nya| resmi(?:nya)?)?|(?:dasar hukum|landasan hukum|pasal)(?:nya)?)$/.test(source)
+      || /^(?:(?:apa |bagaimana )?(?:syarat|ketentuan|prosedur|dokumen|alur|tahapan|tenggat)nya(?: (?:apa|bagaimana|kapan))?|siapa yang berwenang(?: mengesahkan)?|contohnya(?: bagaimana)?)$/.test(text);
+  }
   function line(text, kind = 'assistant') {
     const item = document.createElement('div'); item.className = 'bot-message bot-message-' + kind;
     const label = document.createElement('strong'); label.textContent = kind === 'user' ? 'Kamu' : kind === 'error' ? 'Perlu diperiksa' : 'Asisten SiPERI';
@@ -110,11 +117,15 @@
     setPending(true); status('Menyusun jawaban dari rujukan SiPERI...');
     line(question, 'user');
     $('bot-question').value = '';
+    const followUp = isFollowUp(question);
+    const previousQuestion = followUp ? previousAIQuestion : '';
     try {
-      const response = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ question, turnstileToken: verificationToken }), signal: controller.signal });
+      const body = { question, turnstileToken: verificationToken, ...(previousQuestion && { previousQuestion }) };
+      const response = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), signal: controller.signal });
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw Error(data.error || 'Layanan AI belum dapat menjawab. Coba lagi nanti atau gunakan Cari rujukan.');
       if (typeof data.reply !== 'string' || !data.reply.trim()) throw Error('Server belum memberikan jawaban teks.');
+      if (!followUp) previousAIQuestion = question;
       const item = line(data.reply);
       if (Array.isArray(data.sources)) data.sources.slice(0, 6).forEach((source, index) => sourceLink(source, item, index + 1));
       if (data.warning) { const note = document.createElement('small'); note.textContent = data.warning; item.append(note); }
