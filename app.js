@@ -16,7 +16,7 @@ const pageInfo = {
   pengetahuan: ['Pusat Pengetahuan Anggaran', 'Pengetahuan bersama, pekerjaan lebih mudah.', 'Jelajahi rujukan, contoh dokumen, dan panduan anggaran menurut kebutuhan.'],
   'buku-saku': ['Buku Saku Revisi Anggaran', 'Panduan revisi, siap dijelajahi.', 'Baca buku, telusuri topik, dan temukan halaman yang dibutuhkan.'],
   monitoring: ['PANTAU ATR/BPN', 'Pantau anggaran unit kerjamu.', 'Buka aplikasi Peta Anggaran Terintegrasi Antar Unit untuk memantau anggaran dan realisasi.'],
-  beranda: ['Ruang kerja anggaran', 'Satu portal. Seluruh kebutuhan penganggaran', 'Temukan dokumen penyusunan, revisi, dan kelengkapan penganggaran dalam satu tempat.'],
+  beranda: ['Ruang kerja anggaran', 'Anggaran ATR/BPN, dari pagu sampai realisasi.', 'Temukan dokumen penyusunan, revisi, dan kelengkapan penganggaran dalam satu tempat.'],
   pagu: ['Penyusunan Anggaran', 'Susun anggaran dengan referensi yang tepat.', 'Pilih tahun sumber dan tahap untuk menemukan pagu, template, serta dokumen pendukung.'],
   revisi: ['Revisi Anggaran', 'Dari usulan sampai penelaahan.', 'Akses dokumen proses revisi dan spreadsheet informasi progres.'],
   pok: ['POK SEKJEN', 'Rencana kegiatan, menurut unit kerja.', 'Buka dokumen Petunjuk Operasional Kegiatan Sekretariat Jenderal.'],
@@ -38,7 +38,7 @@ function route() {
     link.classList.toggle('current', active);
     if(active) link.setAttribute('aria-current','page'); else link.removeAttribute('aria-current');
   });
-  document.getElementById('home-services').hidden = page !== 'beranda';
+  document.getElementById('siklus').hidden = page !== 'beranda';
   document.getElementById('dipa-shortcut').hidden = page !== 'beranda';
   document.getElementById('monitoring-shortcut').hidden = page !== 'beranda';
   document.getElementById('application-stack').hidden = page !== 'beranda';
@@ -57,8 +57,8 @@ function route() {
   document.getElementById('search-form').hidden = page === 'buku-saku';
   document.getElementById('scroll-data').hidden = page === 'buku-saku';
   const scrollCue = document.getElementById('scroll-data');
-  scrollCue.href = page === 'beranda' ? '#home-services' : '#katalog';
-  if (scrollCue.lastElementChild) scrollCue.lastElementChild.textContent = page === 'beranda' ? 'Jelajahi layanan' : 'Lihat katalog dokumen';
+  scrollCue.href = page === 'beranda' ? '#siklus' : '#katalog';
+  if (scrollCue.lastElementChild) scrollCue.lastElementChild.textContent = page === 'beranda' ? 'Lihat siklus setahun' : 'Lihat katalog dokumen';
   if(page === 'buku-saku' && window.renderPocketBook) window.renderPocketBook();
   document.getElementById('stage-filter').hidden = page !== 'pagu';
   const note = document.getElementById('page-note');
@@ -198,7 +198,7 @@ async function load() {
 document.getElementById('search-form').addEventListener('submit', event => {event.preventDefault(); render(); document.getElementById('katalog').scrollIntoView({block:'start'});});
 document.getElementById('scroll-data').addEventListener('click', event => {
   event.preventDefault();
-  const target = document.getElementById(page === 'beranda' ? 'home-services' : 'katalog');
+  const target = document.getElementById(page === 'beranda' ? 'siklus' : 'katalog');
   const reduce = !window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   target.focus({preventScroll:true});
   target.scrollIntoView({behavior:reduce ? 'auto' : 'smooth',block:'start'});

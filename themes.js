@@ -7,7 +7,8 @@
     const label = dark ? 'Gunakan tema terang' : 'Gunakan tema gelap';
     button.setAttribute('aria-label', label); button.title = label;
     button.setAttribute('aria-pressed', String(dark));
-    document.querySelector('.brief-tag').textContent = 'SiPERI / Akses cepat';
+    const tag = document.querySelector('.brief-tag');
+    if (tag) tag.textContent = 'SiPERI / Akses cepat';
     document.querySelector('meta[name="theme-color"]').content = dark ? '#102238' : '#f5f9ff';
   }
   button.addEventListener('click', () => {

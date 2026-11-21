@@ -1,0 +1,137 @@
+/* SiPERI beranda "Satu tahun anggaran": huruf, hero peta persil, kartu Bulan ini, dan siklus dua jalur.
+   Dimuat setelah mobile-nav.css. */
+
+@font-face { font-family: "Gantari"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/gantari-latin-ext.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Gantari"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("fonts/gantari-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+:root { font-family: "Gantari", Arial, "Segoe UI", sans-serif; }
+h1, h2, h3, .brand-copy { letter-spacing: -.03em; }
+.intro h1 { letter-spacing: -.035em; }
+.brand-copy small { letter-spacing: .01em; font-size: .68rem; }
+.portal-context { font-size: .8rem; }
+.mobile-tabbar > a, .mobile-tabbar > button { font-size: .72rem; }
+@media (max-width: 359px) { .mobile-tabbar > a, .mobile-tabbar > button { font-size: .69rem; } }
+
+/* ---------- Hero ---------- */
+.is-home .intro { background: linear-gradient(165deg, #0c326a 0%, #11427f 55%, #16509a 100%); }
+.is-home .intro .eyebrow, .is-home .document-stream { display: none; }
+.is-home .intro h1 { color: #fff; font-weight: 700; font-size: clamp(2.6rem, 4.8vw, 4.9rem); line-height: 1.04; max-width: 16ch; text-wrap: balance; }
+.is-home .intro > p:not(.eyebrow) { color: #d6e5fb; }
+.hero-map { display: none; }
+.is-home .hero-map { display: block; position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
+  -webkit-mask-image: linear-gradient(100deg, #0007 0%, #0009 35%, #000 70%); mask-image: linear-gradient(100deg, #0007 0%, #0009 35%, #000 70%); }
+.map-layer { position: absolute; inset: -8% -4% -32%; background: center / cover no-repeat; }
+.map-far { background-image: url("peta-kontur.svg"); }
+.map-near { background-image: url("peta-persil.svg"); }
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .is-home .map-layer { animation: siperi-map-drift linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+    .is-home .map-far { --drift: 10vh; }
+    .is-home .map-near { --drift: 28vh; }
+  }
+}
+@keyframes siperi-map-drift { from { translate: 0 0; } to { translate: 0 var(--drift, 0); } }
+
+/* Kartu Bulan ini menggantikan daftar akses cepat yang mengulang isi halaman. */
+.now-card { display: none; }
+.is-home .now-card:not([hidden]) {
+  position: relative; z-index: 1; display: block; grid-column: 2; grid-row: 1 / -1; align-self: center; justify-self: end;
+  width: min(100%, 420px); padding: 28px; border: 1px solid #d9e8fa; border-radius: 20px;
+  background: #fff; color: #14304f; box-shadow: 0 28px 56px -18px #04183a80;
+  --lane-now: #155cb5; --lane-next: #8a5a00;
+}
+.now-card h2 { margin: 0 0 6px; font-size: clamp(1.5rem, 2vw, 1.9rem); line-height: 1.15; color: inherit; }
+.now-intro { margin: 0 0 14px; color: #4a6686; font-size: .9rem; line-height: 1.6; }
+.now-card dl { margin: 0; }
+.now-card dl > div { padding: 14px 0; border-top: 1px solid #e1ebf7; }
+.now-card dt, .lane-tag, .cycle-lanes > span { display: flex; align-items: center; gap: 8px; font-size: .74rem; font-weight: 700; letter-spacing: .01em; }
+.now-card dt::before, .lane-tag::before, .cycle-lanes > span:not(:first-child)::before { content: ''; flex: 0 0 auto; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.lane-now > dt, .lane-now > .lane-tag, .cycle-lanes .lane-now { color: var(--lane-now); }
+.lane-next > dt, .lane-next > .lane-tag, .cycle-lanes .lane-next { color: var(--lane-next); }
+.now-card dd { margin: 6px 0 0; font-size: 1rem; font-weight: 600; line-height: 1.45; }
+.now-link { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; margin-top: 8px; padding: 12px 16px; border-radius: 10px; background: #155cb5; color: #fff; font-size: .86rem; font-weight: 600; text-decoration: none; }
+.now-link:hover { background: #10458c; }
+.now-link::after, .lane-links a::after { content: ''; flex: 0 0 auto; width: 14px; height: 14px; background: currentColor;
+  -webkit-mask: var(--icon) center / contain no-repeat; mask: var(--icon) center / contain no-repeat; }
+.now-link { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 2v12M3 9l5 5 5-5' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.lane-links a { --icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 12 12 4M6 4h6v6' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+
+/* ---------- Siklus dua jalur ---------- */
+.cycle {
+  --lane-now: #155cb5; --lane-next: #8a5a00; --now-tint: #fff7e2;
+  --cycle-cols: minmax(160px, .62fr) minmax(0, 1fr) minmax(0, 1fr);
+  padding: clamp(64px, 9vw, 128px) var(--gutter) clamp(56px, 7vw, 96px);
+  background: var(--surface); color: var(--text); scroll-margin-top: 80px; outline-offset: -4px;
+}
+.cycle-head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: end; gap: 20px 64px; margin-bottom: clamp(36px, 5vw, 64px); }
+.cycle-head h2 { margin: 0; font-size: clamp(2.3rem, 4.6vw, 4.2rem); font-weight: 700; line-height: 1.02; letter-spacing: -.035em; color: var(--text); text-wrap: balance; }
+.cycle-head p { margin: 0; max-width: 52ch; color: var(--muted); font-size: 1.02rem; line-height: 1.7; }
+.cycle-lanes { position: sticky; top: 84px; z-index: 5; display: grid; grid-template-columns: var(--cycle-cols); gap: 0 44px; padding: 14px 0; background: var(--surface); border-bottom: 1px solid var(--line); }
+.cycle-lanes b { font-weight: 800; }
+.cycle-list { --cycle-progress: 0; position: relative; margin: 0; padding: 0; list-style: none; }
+.cycle-list::before, .cycle-list::after { content: ''; position: absolute; top: 0; bottom: 0; left: 6px; width: 2px; }
+.cycle-list::before { background: var(--line); }
+.cycle-list::after { background: var(--lane-now); transform-origin: top; transform: scaleY(var(--cycle-progress)); }
+.period { display: grid; grid-template-columns: var(--cycle-cols); gap: 0 44px; padding: 44px 0 52px; min-height: clamp(220px, 28vh, 320px); border-bottom: 1px solid var(--line); }
+.period-month { position: sticky; top: 150px; align-self: start; margin: 0; padding-left: 34px; font-size: clamp(1.3rem, 2vw, 1.8rem); font-weight: 700; line-height: 1.2; color: var(--muted); transition: color .3s ease; }
+.period-month::before { content: ''; position: absolute; left: 0; top: .6em; width: 14px; height: 14px; margin-top: -7px; border: 2px solid var(--line); border-radius: 50%; background: var(--surface); box-sizing: border-box; transition: background-color .3s ease, border-color .3s ease, box-shadow .3s ease; }
+.period.is-active .period-month { color: var(--text); }
+.period.is-active .period-month::before { background: var(--lane-now); border-color: var(--lane-now); box-shadow: 0 0 0 5px color-mix(in srgb, var(--lane-now) 22%, transparent); }
+.period.is-now { background: var(--now-tint); box-shadow: 0 0 0 100vmax var(--now-tint); clip-path: inset(0 -100vmax); }
+.now-badge { display: block; width: fit-content; margin-top: 10px; padding: 5px 10px; border-radius: 999px; background: #ffd67a; color: #4d3300; font-size: .72rem; font-weight: 700; letter-spacing: 0; }
+.lane-tag { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.lane-work { margin: 0 0 14px; max-width: 34ch; color: var(--text); font-size: 1.12rem; font-weight: 600; line-height: 1.5; }
+.lane-links { display: flex; flex-wrap: wrap; gap: 2px 20px; margin: 0; }
+.lane-links a { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; color: var(--link); font-size: .86rem; font-weight: 600; text-decoration: none; }
+.lane-links a:hover { text-decoration: underline; }
+.cycle-source { max-width: 80ch; margin: 28px 0 0; color: var(--muted); font-size: .82rem; line-height: 1.7; }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .period .lane { animation: siperi-lane-near linear both; animation-timeline: view(); animation-range: entry 0% entry 90%; }
+    .period .lane-next { animation-name: siperi-lane-far; }
+  }
+}
+@keyframes siperi-lane-near { from { opacity: .15; translate: 0 28px; } }
+@keyframes siperi-lane-far { from { opacity: .15; translate: 0 64px; } }
+
+/* Ikon judul di beranda tidak lagi diberi label kecil di atasnya. */
+.book-shortcut > span:first-child > small { display: none; }
+
+/* Tablet ke atas: kartu Bulan ini mengisi kolom kanan hero. */
+@media (min-width: 701px) {
+  .is-home .intro .now-card { grid-row: 1 / -1; }
+}
+@media (max-width: 1000px) and (min-width: 701px) {
+  .cycle { --cycle-cols: minmax(130px, .5fr) minmax(0, 1fr) minmax(0, 1fr); }
+  .cycle-head { grid-template-columns: 1fr; }
+  .period, .cycle-lanes { gap: 0 28px; }
+  .lane-work { font-size: 1.02rem; }
+}
+
+/* Ponsel: jalur ditumpuk, judul bulan menempel di atas saat digulir. */
+@media (max-width: 700px), (pointer: coarse) and (max-height: 500px) and (max-width: 1000px) {
+  .is-home .intro h1 { grid-row: 1; }
+  .is-home .intro > p:not(.eyebrow) { grid-row: 2; }
+  .is-home .now-card:not([hidden]) { grid-column: 1; grid-row: 3; justify-self: stretch; width: 100%; margin-top: 8px; padding: 22px; border-radius: 18px; }
+  .cycle { scroll-margin-top: 0; }
+  .cycle-head { grid-template-columns: 1fr; }
+  .cycle-lanes { display: none; }
+  .period { grid-template-columns: 1fr; gap: 20px; min-height: 0; padding: 0 0 32px 34px; }
+  .period-month { top: 0; z-index: 2; margin-left: -34px; padding: 16px 0 12px 34px; background: var(--surface); font-size: 1.3rem; }
+  .period-month::before { top: calc(16px + .6em); }
+  .period.is-now .period-month { background: var(--now-tint); }
+  .now-badge { display: inline-block; margin: 0 0 0 8px; vertical-align: 3px; }
+  .lane-tag { position: static; width: auto; height: auto; margin: 0 0 6px; overflow: visible; clip: auto; white-space: normal; }
+  .lane-work { font-size: 1.02rem; }
+  .lane-links a { min-height: 44px; }
+}
+
+/* Tema gelap. */
+[data-theme=dark] .is-home .intro h1 { color: #fff; }
+[data-theme=dark] .cycle { --lane-now: #8fc0ff; --lane-next: #ffd67a; --now-tint: #1f3a52; }
+[data-theme=dark] .is-home .now-card:not([hidden]) { background: #172f4c; color: #edf4ff; border-color: #54718e; --lane-now: #8fc0ff; --lane-next: #ffd67a; }
+[data-theme=dark] .now-intro { color: #b9cbe1; }
+[data-theme=dark] .now-card dl > div { border-color: #3e5773; }
+[data-theme=dark] .now-link { background: #286cc4; }
+[data-theme=dark] .now-link:hover { background: #1f5aa5; }
