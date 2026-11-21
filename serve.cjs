@@ -7,7 +7,7 @@ files['/robots.txt'] = 'robots.txt';
 files['/sitemap.xml'] = 'sitemap.xml';
 files['/pantau-preview.webp'] = 'pantau-preview.webp';
 files['/scroll-scenes.js'] = 'scroll-scenes.js';
-for (const file of ['light.css', 'themes.css', 'themes.js', 'clarity.css']) files['/' + file] = file;
+for (const file of ['light.css', 'themes.css', 'themes.js', 'clarity.css', 'mobile-nav.css', 'mobile-nav.js']) files['/' + file] = file;
 types['.txt'] = 'text/plain; charset=utf-8';
 types['.xml'] = 'application/xml; charset=utf-8';
 files['/atr-bpn.png']='atr-bpn.png';

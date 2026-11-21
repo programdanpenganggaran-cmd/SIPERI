@@ -1,0 +1,122 @@
+/* SiPERI: navigasi bawah untuk ponsel dan penyesuaian lintas ukuran layar.
+   Dimuat terakhir agar menimpa styles.css, light.css, themes.css, dan clarity.css. */
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); }
+a, button, summary, select, input, textarea { touch-action: manipulation; }
+::selection { background: #ffd67a; color: #14304f; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+.mobile-tabbar { display: none; }
+
+/* Tablet dan laptop: tepi navigasi sejajar dengan tepi konten. */
+@media (min-width: 701px) {
+  .site-navigation { width: calc(100% - 56px); max-width: var(--container); }
+  /* Judul, label, dan paragraf hero tetap satu kelompok di tengah, tidak ditarik
+     renggang oleh tinggi kartu akses cepat di kolom kanan. */
+  .is-home .intro { grid-template-rows: 1fr auto auto auto 1fr; align-content: stretch; row-gap: 0; }
+  .is-home .intro .eyebrow { grid-row: 2; margin-bottom: 22px; }
+  .is-home .intro h1 { grid-row: 3; margin-bottom: 28px; }
+  .is-home .intro > p:not(.eyebrow) { grid-row: 4; }
+  .is-home .intro .hero-brief { grid-row: 1 / -1; }
+}
+
+/* Monitor besar: skala huruf dan lebar konten ikut membesar, tidak sekadar menyisakan ruang kosong. */
+@media (min-width: 1600px) { :root { font-size: 17px; --container: 1320px; } }
+@media (min-width: 2200px) { :root { font-size: 18px; --container: 1480px; } }
+
+/* Ponsel (tegak) dan ponsel mendatar: navigasi pindah ke bawah, dalam jangkauan ibu jari. */
+@media (max-width: 700px), (pointer: coarse) and (max-height: 500px) and (max-width: 1000px) {
+  :root { --tabbar-h: 64px; --tabbar-space: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px)); }
+  html { scroll-padding-top: 16px; }
+  html.menu-sheet-open { overflow: hidden; }
+  .catalog { scroll-margin-top: 16px; }
+
+  /* Header atas cukup identitas dan tema; tidak lagi menempel saat menggulir. */
+  .site-navigation { position: relative; top: auto; }
+  .primary-navigation, .nav-directory summary { display: none; }
+
+  .mobile-tabbar {
+    position: fixed; inset: auto 0 0 0; z-index: 45;
+    display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px;
+    padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));
+    background: rgb(255 255 255 / .9);
+    border-top: 1px solid #d7e4f5;
+    box-shadow: 0 -4px 20px #14304f12;
+    -webkit-backdrop-filter: saturate(1.6) blur(16px);
+    backdrop-filter: saturate(1.6) blur(16px);
+  }
+  .mobile-tabbar > a, .mobile-tabbar > button {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+    min-width: 0; min-height: 52px; margin: 0; padding: 3px 2px;
+    border: 0; border-radius: 12px; background: transparent; color: #4a6686;
+    font-size: .68rem; font-weight: 600; line-height: 1.2; letter-spacing: 0; text-decoration: none;
+  }
+  .mobile-tabbar > a:hover, .mobile-tabbar > button:hover { background: transparent; color: #10458c; }
+  .tab-icon { display: grid; place-items: center; width: 54px; height: 28px; border-radius: 999px; }
+  .tab-icon svg { width: 22px; height: 22px; }
+  .tab-label { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mobile-tabbar > .current, .mobile-tabbar > button[aria-expanded=true] { color: #10458c; }
+  .mobile-tabbar > .current .tab-icon, .mobile-tabbar > button[aria-expanded=true] .tab-icon { background: #dbe9fb; }
+  .mobile-tabbar :focus-visible { outline-offset: -3px; }
+
+  /* Menu lengkap tampil sebagai lembar dari bawah, bukan dropdown di pojok atas. */
+  .nav-directory { position: static; }
+  .nav-directory[open]::before { content: ''; position: fixed; inset: 0; z-index: 1; background: #0b1a2e73; }
+  .nav-directory nav {
+    position: fixed; inset: auto 0 0 0; top: auto; right: 0; z-index: 2;
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;
+    width: auto; max-width: none; max-height: min(78dvh, 640px); overflow-y: auto; overscroll-behavior: contain;
+    padding: 30px max(14px, env(safe-area-inset-right, 0px)) calc(var(--tabbar-space) + 14px) max(14px, env(safe-area-inset-left, 0px));
+    border: 0; border-top: 1px solid #d7e4f5; border-radius: 22px 22px 0 0;
+    box-shadow: 0 -16px 48px #0b22442e;
+  }
+  .nav-directory nav::before { content: ''; position: absolute; top: 11px; left: calc(50% - 20px); width: 40px; height: 4px; border-radius: 4px; background: #b8c9de; }
+  .nav-directory nav a {
+    min-height: 58px; padding: 12px 14px;
+    border: 1px solid #dce7f5; border-radius: 14px; background: #f6f9fe;
+    font-size: .86rem; font-weight: 600; line-height: 1.35;
+  }
+  .nav-directory nav a:hover, .nav-directory nav a.current { background: #e4effd; border-color: #8fb3e0; color: #10458c; }
+
+  /* Asisten bergeser ke atas tab bar dan sedikit lebih kecil. */
+  .bot-launcher { right: 12px; bottom: calc(var(--tabbar-space) + 12px); width: 58px; min-height: 77px; }
+  .bot-launcher img { width: 58px; height: 77px; }
+  .menu-sheet-open .bot-launcher { visibility: hidden; }
+  main > footer { padding-bottom: calc(var(--tabbar-space) + 110px); }
+
+  /* Beranda: hero setinggi layar yang tersisa di atas tab bar; akses cepat tidak diulang
+     karena kartu layanan tepat di bawahnya dan tab bar sudah memuat tautan yang sama. */
+  .is-home .intro { min-height: max(460px, calc(100svh - var(--landing-top, 180px) - var(--tabbar-space))); }
+  .is-home .intro .hero-brief { display: none; }
+
+  /* Panel aplikasi bertumpuk terasa berat di layar kecil: tampilkan sebagai daftar biasa. */
+  .application-stack.stack-active { padding-bottom: 0; }
+  .stack-active > .app-showcase { position: relative; top: auto; transform: none !important; opacity: 1 !important; will-change: auto; }
+
+  [data-theme=dark] .mobile-tabbar { background: rgb(22 45 73 / .92); border-top-color: #3e5773; box-shadow: 0 -4px 20px #04142455; }
+  [data-theme=dark] .mobile-tabbar > a, [data-theme=dark] .mobile-tabbar > button { color: #b9cbe1; }
+  [data-theme=dark] .mobile-tabbar > .current, [data-theme=dark] .mobile-tabbar > button[aria-expanded=true] { color: #fff; }
+  [data-theme=dark] .mobile-tabbar > .current .tab-icon, [data-theme=dark] .mobile-tabbar > button[aria-expanded=true] .tab-icon { background: #2d5176; }
+  [data-theme=dark] .nav-directory nav { border-top-color: #3e5773; }
+  [data-theme=dark] .nav-directory nav::before { background: #58779a; }
+  [data-theme=dark] .nav-directory nav a { background: #1b3655; border-color: #3e5773; color: #edf4ff; }
+  [data-theme=dark] .nav-directory nav a:hover, [data-theme=dark] .nav-directory nav a.current { background: #264565; border-color: #809bb9; color: #fff; }
+}
+
+@media (max-width: 700px) and (prefers-reduced-motion: no-preference), (pointer: coarse) and (max-height: 500px) and (max-width: 1000px) and (prefers-reduced-motion: no-preference) {
+  .tab-icon { transition: background-color .2s ease, transform .12s ease; }
+  .mobile-tabbar > :active .tab-icon { transform: scale(.92); }
+  .nav-directory[open] nav { animation: siperi-sheet-up .34s cubic-bezier(.22, 1, .36, 1); }
+  .nav-directory[open]::before { animation: siperi-fade-in .24s ease-out; }
+}
+@keyframes siperi-sheet-up { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes siperi-fade-in { from { opacity: 0; } }
+
+/* Ponsel sangat sempit: label tab dipadatkan agar tetap terbaca. */
+@media (max-width: 359px) {
+  .mobile-tabbar { gap: 0; padding-inline: 4px; }
+  .mobile-tabbar > a, .mobile-tabbar > button { font-size: .62rem; }
+  .tab-icon { width: 44px; }
+  .nav-directory nav { grid-template-columns: 1fr; }
+}

@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#070b12">
   <meta name="description" content="SiPERI ATR/BPN, Sistem Informasi Penyusunan, Revisi, dan Realisasi Anggaran. Akses PAGU, POK, Buku Saku Revisi, dan dokumen kelengkapan anggaran.">
   <meta name="robots" content="index, follow">
@@ -25,6 +25,8 @@
   <link rel="stylesheet" href="themes.css?v=756187ed8276">
   <link rel="stylesheet" href="clarity.css?v=c46e6354d74c">
   <script src="themes.js?v=9141382f5aa7" defer></script>
+  <link rel="stylesheet" href="mobile-nav.css">
+  <script src="mobile-nav.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Lewati ke isi utama</a>
@@ -142,6 +144,13 @@
     <footer><div class="footer-identity"><strong>SiPERI</strong><span>Biro Perencanaan dan Kerja Sama</span><span class="footer-unit">Bagian Penganggaran</span></div><span>Ruang kerja penyusunan, revisi, dan realisasi anggaran. Hak akses dokumen mengikuti sumber.</span><a href="#arsip">Telusuri arsip</a></footer>
   </main>
 </div>
+<nav class="mobile-tabbar" aria-label="Navigasi cepat">
+  <a href="#beranda" data-page="beranda"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg></span><span class="tab-label">Beranda</span></a>
+  <a href="#pagu" data-page="pagu"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="m12 3.5 8.5 4.75L12 13 3.5 8.25z"/><path d="m3.5 12.5 8.5 4.75 8.5-4.75M3.5 16.25 12 21l8.5-4.75"/></svg></span><span class="tab-label">Penyusunan</span></a>
+  <a href="#revisi" data-page="revisi"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 4H6a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-6"/><path d="m17.5 3.5 3 3-7.5 7.5-3.5.5.5-3.5z"/></svg></span><span class="tab-label">Revisi</span></a>
+  <a href="#buku-saku" data-page="buku-saku"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H19v14H7.5A2.5 2.5 0 0 0 5 19.5z"/><path d="M5 19.5A1.5 1.5 0 0 0 6.5 21H19v-4M9 7.5h6"/></svg></span><span class="tab-label">Buku Saku</span></a>
+  <button type="button" id="tab-menu" aria-controls="nav-directory" aria-expanded="false"><span class="tab-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></svg></span><span class="tab-label">Menu</span></button>
+</nav>
 <button id="bot-launcher" class="bot-launcher" type="button" aria-label="Buka asisten SiPERI" aria-haspopup="dialog" aria-controls="bot-dialog" aria-expanded="false"><span class="bot-launcher-label">Butuh bantuan?</span><img src="peri-asn.webp" alt="" width="90" height="119"></button>
 <dialog id="bot-dialog" class="bot-dialog" aria-labelledby="bot-title">
   <div class="bot-heading"><img src="peri-asn.webp" alt="" width="44" height="58"><div><h2 id="bot-title">Asisten SiPERI</h2><p>Rujukan anggaran, lebih dekat.</p></div><button id="bot-close" type="button" aria-label="Tutup asisten">×</button></div>
