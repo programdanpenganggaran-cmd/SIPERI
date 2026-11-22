@@ -79,7 +79,7 @@
   }
 
   // Bagian muncul sekali saat pertama kali terlihat.
-  const entering = [...document.querySelectorAll('.cycle-head, .period')];
+  const entering = [...document.querySelectorAll('.cycle-head, .period, .app-showcase')];
   if ('IntersectionObserver' in window) {
     const reveal = new IntersectionObserver(entries => {
       for (const entry of entries) {

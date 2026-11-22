@@ -1,11 +1,14 @@
 'use strict';
 (() => {
+  // Kartu layanan lama (#home-services) kini opsional: beranda baru hanya memakai tumpukan panel aplikasi.
   const group = document.getElementById('home-services');
-  if (!group) return;
-  const cards = [...group.querySelectorAll(':scope > a')];
+  const cards = group ? [...group.querySelectorAll(':scope > a')] : [];
   const panels = [...document.querySelectorAll('.app-showcase')];
+  if (!cards.length && !panels.length) return;
   const stack = document.getElementById('application-stack');
   const intro = document.querySelector('.intro');
+  // Di ponsel tumpukan dimatikan CSS (mobile-nav.css); lewati juga perhitungannya agar tidak membebani gulir.
+  const phone = window.matchMedia ? matchMedia('(max-width: 700px), (pointer: coarse) and (max-height: 500px) and (max-width: 1000px)') : { matches: false };
   function sizeLanding() {
     if (intro && intro.getClientRects().length) {
       const top = Math.max(0, intro.getBoundingClientRect().top + scrollY);
@@ -29,10 +32,10 @@
       progressState.set(element, value);
       return value;
     }
-    const enabled = document.body.hasAttribute('data-motion-enabled') && !document.hidden;
+    const enabled = document.body.hasAttribute('data-motion-enabled') && !document.hidden && !phone.matches;
     stack?.classList.toggle('stack-active', enabled && !stack.hidden);
-    const groupTop = group.getBoundingClientRect().top;
-    const groupOffset = group.offsetTop;
+    const groupTop = group ? group.getBoundingClientRect().top : 0;
+    const groupOffset = group ? group.offsetTop : 0;
     const cardTops = cards.map(card => groupTop + card.offsetTop - groupOffset);
     // Undo the previous scale when measuring the sticky panel's layout position.
     // Using its transformed rectangle feeds animation output back into the next target.
@@ -42,7 +45,7 @@
       return { top: Math.max(top - scrollY, parseFloat(panel.style.getPropertyValue('--stack-top')) || 100), height: panel.offsetHeight };
     });
     cards.forEach((card, index) => {
-      if (!enabled || group.hidden) {
+      if (!enabled || !group || group.hidden) {
         for (const property of ['transform', 'opacity', 'pointer-events']) card.style.removeProperty(property);
         progressState.delete(card); return;
       }
@@ -56,19 +59,23 @@
     });
     panels.forEach((panel, index) => {
       if (!enabled || panel.hidden) {
-        panel.style.removeProperty('transform'); panel.style.removeProperty('opacity'); progressState.delete(panel); return;
+        panel.style.removeProperty('transform'); panel.style.removeProperty('opacity'); panel.style.removeProperty('pointer-events'); progressState.delete(panel); return;
       }
       const top = Math.min(100, innerHeight - panelMetrics[index].height - 24);
       if (panel.style.getPropertyValue('--stack-top') !== `${top}px`) panel.style.setProperty('--stack-top', `${top}px`);
       if (index === panels.length - 1 || panel.matches(':focus-within')) {
-        progressState.set(panel, 0); panel.style.transform = 'scale(1)'; panel.style.opacity = '1'; return;
+        progressState.set(panel, 0); panel.style.transform = 'scale(1)'; panel.style.opacity = '1'; panel.style.removeProperty('pointer-events'); return;
       }
       const nextTop = panelMetrics[index + 1].top;
       const progress = clamp((top + panelMetrics[index].height - nextTop) / Math.max(1, panelMetrics[index].height - 36));
       const target = Math.pow(1 - Math.pow(1 - progress, 3), 1 / 2.2);
       const eased = follow(panel, target);
       panel.style.transform = `scale(${1 - .42 * eased})`;
-      panel.style.opacity = String(1 - .9 * clamp((eased - .4) / .6));
+      // Pudar sampai habis: bayangan panel yang mundur tidak boleh menumpuk dengan bayangan panel berikutnya.
+      const opacity = 1 - clamp((eased - .35) / .55);
+      panel.style.opacity = String(opacity);
+      // Panel yang sudah tak terlihat tidak boleh menangkap klik; fokus papan ketik tetap bisa memulihkannya lewat :focus-within.
+      if (opacity < .05) panel.style.pointerEvents = 'none'; else panel.style.removeProperty('pointer-events');
     });
     if (unsettled && enabled) frame = requestAnimationFrame(render);
     else lastTime = 0;
@@ -76,6 +83,7 @@
   function schedule() { if (!frame) frame = requestAnimationFrame(render); }
   addEventListener('scroll', schedule, { passive: true });
   addEventListener('resize', () => { sizeLanding(); schedule(); });
+  phone.addEventListener?.('change', schedule);
   addEventListener('hashchange', () => { sizeLanding(); schedule(); });
   document.addEventListener('focusin', schedule);
   document.addEventListener('focusout', schedule);
