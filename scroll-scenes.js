@@ -59,7 +59,7 @@
         panel.style.removeProperty('transform'); panel.style.removeProperty('opacity'); progressState.delete(panel); return;
       }
       const top = Math.min(100, innerHeight - panelMetrics[index].height - 24);
-      panel.style.setProperty('--stack-top', `${top}px`);
+      if (panel.style.getPropertyValue('--stack-top') !== `${top}px`) panel.style.setProperty('--stack-top', `${top}px`);
       if (index === panels.length - 1 || panel.matches(':focus-within')) {
         progressState.set(panel, 0); panel.style.transform = 'scale(1)'; panel.style.opacity = '1'; return;
       }

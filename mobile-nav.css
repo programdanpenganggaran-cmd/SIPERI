@@ -40,11 +40,10 @@ html.motion-ok { scroll-behavior: smooth; }
     position: fixed; inset: auto 0 0 0; z-index: 45;
     display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px;
     padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px));
-    background: rgb(255 255 255 / .9);
+    /* Latar padat tanpa blur: blur di atas konten yang digulir sangat berat untuk HP kelas menengah. */
+    background: rgb(255 255 255 / .97);
     border-top: 1px solid #d7e4f5;
     box-shadow: 0 -4px 20px #14304f12;
-    -webkit-backdrop-filter: saturate(1.6) blur(16px);
-    backdrop-filter: saturate(1.6) blur(16px);
   }
   .mobile-tabbar > a, .mobile-tabbar > button {
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
@@ -94,7 +93,7 @@ html.motion-ok { scroll-behavior: smooth; }
   .application-stack.stack-active { padding-bottom: 0; }
   .stack-active > .app-showcase { position: relative; top: auto; transform: none !important; opacity: 1 !important; will-change: auto; }
 
-  [data-theme=dark] .mobile-tabbar { background: rgb(22 45 73 / .92); border-top-color: #3e5773; box-shadow: 0 -4px 20px #04142455; }
+  [data-theme=dark] .mobile-tabbar { background: rgb(22 45 73 / .98); border-top-color: #3e5773; box-shadow: 0 -4px 20px #04142455; }
   [data-theme=dark] .mobile-tabbar > a, [data-theme=dark] .mobile-tabbar > button { color: #b9cbe1; }
   [data-theme=dark] .mobile-tabbar > .current, [data-theme=dark] .mobile-tabbar > button[aria-expanded=true] { color: #fff; }
   [data-theme=dark] .mobile-tabbar > .current .tab-icon, [data-theme=dark] .mobile-tabbar > button[aria-expanded=true] .tab-icon { background: #2d5176; }

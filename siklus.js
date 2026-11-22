@@ -79,7 +79,7 @@
   }
 
   // Bagian muncul sekali saat pertama kali terlihat.
-  const entering = [...document.querySelectorAll('.cycle-head, .period, .app-showcase')];
+  const entering = [...document.querySelectorAll('.cycle-head, .period')];
   if ('IntersectionObserver' in window) {
     const reveal = new IntersectionObserver(entries => {
       for (const entry of entries) {
@@ -93,26 +93,58 @@
     entering.forEach(element => element.classList.add('is-in'));
   }
 
+  // Mask penyingkap judul hanya dipakai selama animasinya; setelah selesai dilepas agar judul tidak
+  // menjadi lapisan bermask yang harus disusun ulang setiap kali digulir.
+  for (const title of document.querySelectorAll('.is-home .intro h1, .cycle-head h2')) {
+    const done = event => { if (event.animationName === 'siperi-reveal') title.classList.add('is-revealed'); };
+    title.addEventListener('animationend', done);
+    title.addEventListener('animationcancel', done);
+  }
+
   const hero = document.querySelector('.intro');
+  const rail = document.createElement('li');
+  rail.className = 'cycle-rail';
+  rail.setAttribute('aria-hidden', 'true');
+  list.prepend(rail);
+  // Lapisan parallax dan kecepatannya (bagian dari tinggi layar per satu layar gulir).
+  const drift = [
+    ...[...document.querySelectorAll('.map-far')].map(node => ({ node, speed: .16, prop: 'transform' })),
+    ...[...document.querySelectorAll('.map-near')].map(node => ({ node, speed: .38, prop: 'transform' })),
+    ...[...document.querySelectorAll('.is-home .intro h1, .is-home .intro > p:not(.eyebrow)')].map(node => ({ node, speed: -.07, prop: 'translate' })),
+    ...(document.getElementById('now-card') ? [{ node: document.getElementById('now-card'), speed: -.03, prop: 'translate' }] : [])
+  ];
   let frame = 0;
   let listVisible = false;
   let heroVisible = true;
+  let viewHeight = innerHeight;
+  let lastRail = -1;
+  let lastHero = -1;
 
   function render() {
     frame = 0;
-    const middle = innerHeight * .45;
+    const middle = viewHeight * .45;
     if (listVisible) {
       const box = list.getBoundingClientRect();
-      const progress = Math.max(0, Math.min(1, (middle - box.top) / box.height));
-      list.style.setProperty('--cycle-progress', progress.toFixed(4));
+      const progress = Math.round(Math.max(0, Math.min(1, (middle - box.top) / box.height)) * 1000) / 1000;
+      if (progress !== lastRail) { rail.style.transform = `scaleY(${progress})`; lastRail = progress; }
       let active = null;
       for (const period of periods) if (period.getBoundingClientRect().top <= middle) active = period;
-      for (const period of periods) period.classList.toggle('is-active', period === active);
+      for (const period of periods) if (period.classList.contains('is-active') !== (period === active)) period.classList.toggle('is-active', period === active);
     }
-    // Kemajuan gulir di hero (0 di atas, 1 setelah satu layar) menggerakkan lapisan parallax.
+    // Kemajuan gulir di hero (0 di atas, 1 setelah satu layar) menggeser lapisan parallax secara langsung.
     if (hero && heroVisible) {
-      const progress = Math.max(0, Math.min(1, scrollY / Math.max(1, hero.offsetTop + hero.offsetHeight)));
-      hero.style.setProperty('--hero-p', progress.toFixed(4));
+      const on = motion();
+      const progress = on ? Math.max(0, Math.min(1, scrollY / Math.max(1, hero.offsetTop + hero.offsetHeight))) : 0;
+      const shift = Math.round(progress * viewHeight * 10) / 10;
+      if (shift !== lastHero) {
+        lastHero = shift;
+        for (const { node, speed, prop } of drift) {
+          const y = (shift * speed).toFixed(1);
+          if (!on) node.style[prop] = '';
+          else if (prop === 'transform') node.style.transform = `translate3d(0, ${y}px, 0)`;
+          else node.style.translate = `0 ${y}px`;
+        }
+      }
     }
   }
   const schedule = () => { if (!frame) frame = requestAnimationFrame(render); };
@@ -124,7 +156,8 @@
     listVisible = true;
   }
   addEventListener('scroll', schedule, { passive: true });
-  addEventListener('resize', schedule, { passive: true });
+  addEventListener('siperi-motion', () => { lastHero = -1; schedule(); });
+  addEventListener('resize', () => { viewHeight = innerHeight; lastHero = -1; schedule(); }, { passive: true });
   addEventListener('hashchange', schedule);
   schedule();
 })();

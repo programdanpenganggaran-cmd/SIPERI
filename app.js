@@ -83,7 +83,11 @@ function animatePage() {
   for (const id of ['page-title','katalog']) {
     const element = document.getElementById(id);
     if (!element.animate) continue;
-    if(element.getAnimations) element.getAnimations().forEach(animation => animation.cancel());
+    // Animasi CSS pembuka (judul tersingkap di beranda) dibiarkan selesai; hanya animasi perpindahan halaman yang diulang.
+    const animations = element.getAnimations ? element.getAnimations() : [];
+    const isCss = animation => typeof CSSAnimation === 'function' && animation instanceof CSSAnimation;
+    if (animations.some(animation => isCss(animation) && animation.playState === 'running')) continue;
+    animations.forEach(animation => { if (!isCss(animation)) animation.cancel(); });
     element.animate([{opacity:0.55,transform:'translateY(5px)'},{opacity:1,transform:'translateY(0)'}], {duration:180,easing:'ease-out'});
   }
 }
