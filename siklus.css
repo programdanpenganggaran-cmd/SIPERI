@@ -23,14 +23,9 @@ h1, h2, h3, .brand-copy { letter-spacing: -.03em; }
 .map-layer { position: absolute; inset: -8% -4% -32%; background: center / cover no-repeat; }
 .map-far { background-image: url("peta-kontur.svg"); }
 .map-near { background-image: url("peta-persil.svg"); }
-@supports (animation-timeline: scroll()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .is-home .map-layer { animation: siperi-map-drift linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
-    .is-home .map-far { --drift: 10vh; }
-    .is-home .map-near { --drift: 28vh; }
-  }
-}
-@keyframes siperi-map-drift { from { translate: 0 0; } to { translate: 0 var(--drift, 0); } }
+.map-layer svg { display: block; width: 100%; height: 100%; }
+/* Saat animasi diizinkan, peta menunggu versi inline agar dapat digambar dari kosong. */
+.motion-ok .map-layer:not(.is-static) { background-image: none; }
 
 /* Kartu Bulan ini menggantikan daftar akses cepat yang mengulang isi halaman. */
 .now-card { display: none; }
@@ -86,14 +81,66 @@ h1, h2, h3, .brand-copy { letter-spacing: -.03em; }
 .lane-links a:hover { text-decoration: underline; }
 .cycle-source { max-width: 80ch; margin: 28px 0 0; color: var(--muted); font-size: .82rem; line-height: 1.7; }
 
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .period .lane { animation: siperi-lane-near linear both; animation-timeline: view(); animation-range: entry 0% entry 90%; }
-    .period .lane-next { animation-name: siperi-lane-far; }
-  }
+/* ---------- Gerak ----------
+   Semua gerak hanya berlaku dengan kelas .motion-ok di <html>: diberikan saat perangkat tidak meminta
+   gerak dikurangi (atau dipaksa di dummy). Tanpa kelas itu, setiap elemen tampil diam dan utuh. */
+@property --reveal { syntax: '<percentage>'; inherits: false; initial-value: 115%; }
+.cycle { overflow-x: clip; }
+.motion-ok .is-home .intro { --ease-out: cubic-bezier(.22, 1, .36, 1); }
+
+/* Peta tergambar: blok, persil, kontur, lalu jalan; persil emas menyala setelahnya. */
+.motion-ok .map-layer.is-inline .draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: siperi-draw 2.2s cubic-bezier(.45, .05, .2, 1) forwards; }
+.motion-ok .map-layer.is-inline .d-contour { animation-duration: 3.4s; }
+.motion-ok .map-layer.is-inline .d-parcels { animation-duration: 3s; animation-delay: .5s; }
+.motion-ok .map-layer.is-inline .d-road { animation-duration: 1.6s; animation-delay: 1s; }
+.motion-ok .map-layer.is-inline .road-mark { opacity: 0; animation: siperi-fade 1s ease-out 2.2s forwards; }
+.motion-ok .map-layer.is-inline .gold { opacity: 0; animation: siperi-fade 1.2s ease-out 2.4s forwards, siperi-glow 5s ease-in-out 3.6s infinite; }
+@keyframes siperi-draw { to { stroke-dashoffset: 0; } }
+@keyframes siperi-fade { to { opacity: 1; } }
+@keyframes siperi-glow { 0%, 100% { fill-opacity: .16; } 50% { fill-opacity: .34; } }
+
+/* Parallax: --hero-p (0 sampai 1) dari siklus.js. Lapisan jauh bergerak pelan, lapisan dekat cepat dan membesar,
+   teks naik sedikit lebih cepat dari gulir sehingga terasa ada kedalaman. */
+.motion-ok .is-home .map-far { transform: translate3d(0, calc(var(--hero-p, 0) * 16vh), 0) scale(calc(1 + var(--hero-p, 0) * .06)); will-change: transform; }
+.motion-ok .is-home .map-near { transform: translate3d(0, calc(var(--hero-p, 0) * 38vh), 0) scale(calc(1 + var(--hero-p, 0) * .14)); will-change: transform; }
+.motion-ok .is-home .intro h1, .motion-ok .is-home .intro > p:not(.eyebrow) { translate: 0 calc(var(--hero-p, 0) * -7vh); }
+.motion-ok .is-home .now-card { translate: 0 calc(var(--hero-p, 0) * -3vh); }
+
+/* Pembuka hero: judul tersingkap dari atas ke bawah, lalu paragraf, kartu Bulan ini, dan petunjuk gulir. */
+.motion-ok .is-home .intro h1 {
+  -webkit-mask-image: linear-gradient(180deg, #000 calc(var(--reveal) - 15%), transparent var(--reveal));
+  mask-image: linear-gradient(180deg, #000 calc(var(--reveal) - 15%), transparent var(--reveal));
+  animation: siperi-reveal 1.4s var(--ease-out) .15s both;
 }
-@keyframes siperi-lane-near { from { opacity: .15; translate: 0 28px; } }
-@keyframes siperi-lane-far { from { opacity: .15; translate: 0 64px; } }
+.motion-ok .is-home .intro > p:not(.eyebrow) { animation: siperi-rise .9s var(--ease-out) .6s both; }
+.motion-ok .is-home .now-card:not([hidden]) { animation: siperi-card-in 1.1s var(--ease-out) .45s both; }
+.motion-ok .is-home .scroll-cue { animation: siperi-fade-up .7s ease-out 1.4s both; }
+@keyframes siperi-reveal { from { --reveal: 0%; transform: translateY(22px); } to { --reveal: 115%; transform: none; } }
+@keyframes siperi-rise { from { opacity: 0; transform: translateY(18px); } }
+@keyframes siperi-card-in { from { opacity: 0; transform: translateX(48px) rotate(2deg); } }
+@keyframes siperi-fade-up { from { opacity: 0; transform: translate(-50%, 10px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+/* Siklus: judul tersingkap, lalu tiap periode masuk; jalur tahun berjalan dari kiri, tahun depan dari kanan. */
+.motion-ok .cycle-head h2 {
+  -webkit-mask-image: linear-gradient(180deg, #000 calc(var(--reveal) - 15%), transparent var(--reveal));
+  mask-image: linear-gradient(180deg, #000 calc(var(--reveal) - 15%), transparent var(--reveal));
+}
+.motion-ok .cycle-head:not(.is-in) h2 { --reveal: 0%; }
+.motion-ok .cycle-head.is-in h2 { animation: siperi-reveal 1.2s cubic-bezier(.22, 1, .36, 1) both; }
+.motion-ok .cycle-head p { transition: opacity .9s ease .3s, transform .9s cubic-bezier(.22, 1, .36, 1) .3s; }
+.motion-ok .cycle-head:not(.is-in) p { opacity: 0; transform: translateY(20px); }
+.motion-ok .period .lane, .motion-ok .period .period-month { transition: opacity .8s ease, transform 1s cubic-bezier(.22, 1, .36, 1), color .3s ease; }
+.motion-ok .period .lane-now { transition-delay: .1s; }
+.motion-ok .period .lane-next { transition-delay: .22s; }
+.motion-ok .period:not(.is-in) .period-month { opacity: 0; transform: translateY(18px); }
+.motion-ok .period:not(.is-in) .lane-now { opacity: 0; transform: translateX(-64px); }
+.motion-ok .period:not(.is-in) .lane-next { opacity: 0; transform: translateX(64px); }
+.motion-ok .period.is-active .period-month::before { animation: siperi-pulse 2.2s ease-out infinite; }
+@keyframes siperi-pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--lane-now) 55%, transparent); } 100% { box-shadow: 0 0 0 14px transparent; } }
+
+/* Panel aplikasi naik dan membesar halus saat terlihat. */
+.motion-ok .app-showcase { transition: opacity .9s ease, transform 1.1s cubic-bezier(.22, 1, .36, 1); }
+.motion-ok .app-showcase:not(.is-in) { opacity: 0; transform: translateY(56px) scale(.96); }
 
 /* Ikon judul di beranda tidak lagi diberi label kecil di atasnya. */
 .book-shortcut > span:first-child > small { display: none; }

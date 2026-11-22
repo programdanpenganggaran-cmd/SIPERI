@@ -1,12 +1,15 @@
 'use strict';
-// Beranda "Satu tahun anggaran": periode bulan ini, kartu Bulan ini, garis kemajuan, dan parallax peta.
+// Beranda "Satu tahun anggaran": periode bulan ini, kartu Bulan ini, garis kemajuan,
+// peta persil yang tergambar, parallax hero, dan kemunculan bagian saat digulir.
 (() => {
+  const root = document.documentElement;
   const list = document.querySelector('.cycle-list');
   if (!list) return;
   const periods = [...list.querySelectorAll('.period')];
   const now = new Date();
   const month = now.getMonth() + 1;
   const year = now.getFullYear();
+  const motion = () => root.classList.contains('motion-ok');
 
   document.querySelectorAll('[data-year]').forEach(node => {
     node.textContent = String(year + Number(node.dataset.year || 0));
@@ -20,26 +23,57 @@
   const current = periods.find(period => period.dataset.months.split(' ').map(Number).includes(month));
   if (current) {
     current.classList.add('is-now');
-    const heading = current.querySelector('.period-month');
     const badge = document.createElement('span');
     badge.className = 'now-badge';
     badge.textContent = 'Bulan ini';
-    heading.append(' ', badge);
+    current.querySelector('.period-month').append(' ', badge);
     const card = document.getElementById('now-card');
-    const monthName = new Intl.DateTimeFormat('id-ID', { month: 'long', year: 'numeric' }).format(now);
     const work = lane => current.querySelector(`.${lane} .lane-work`)?.textContent || '';
     if (card) {
-      document.getElementById('now-title').textContent = monthName;
+      document.getElementById('now-title').textContent = new Intl.DateTimeFormat('id-ID', { month: 'long', year: 'numeric' }).format(now);
       document.getElementById('now-current').textContent = work('lane-now');
       document.getElementById('now-next').textContent = work('lane-next');
       card.hidden = false;
     }
   }
 
-  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)');
-  const cssTimeline = window.CSS?.supports?.('animation-timeline: scroll()');
-  const hero = document.querySelector('.intro');
+  // Peta dimuat sebagai SVG inline agar garis persil dapat digambar saat halaman dibuka.
+  // Bila gagal, lapisan kembali memakai gambar latar biasa.
   const layers = [...document.querySelectorAll('.map-layer')];
+  for (const layer of layers) {
+    const source = layer.classList.contains('map-far') ? 'peta-kontur.svg' : 'peta-persil.svg';
+    if (!motion() || !window.fetch) { layer.classList.add('is-static'); continue; }
+    const fallback = setTimeout(() => layer.classList.add('is-static'), 2500);
+    fetch(source).then(response => response.ok ? response.text() : Promise.reject())
+      .then(text => {
+        if (layer.classList.contains('is-static')) return;
+        clearTimeout(fallback);
+        const svg = new DOMParser().parseFromString(text, 'image/svg+xml').documentElement;
+        if (svg.nodeName !== 'svg') throw new Error('bukan SVG');
+        svg.setAttribute('aria-hidden', 'true');
+        svg.setAttribute('focusable', 'false');
+        layer.append(document.importNode(svg, true));
+        layer.classList.add('is-inline');
+      })
+      .catch(() => { clearTimeout(fallback); layer.classList.add('is-static'); });
+  }
+
+  // Bagian muncul sekali saat pertama kali terlihat.
+  const entering = [...document.querySelectorAll('.cycle-head, .period, .app-showcase')];
+  if ('IntersectionObserver' in window && motion()) {
+    const reveal = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add('is-in');
+        reveal.unobserve(entry.target);
+      }
+    }, { threshold: .18, rootMargin: '0px 0px -8% 0px' });
+    entering.forEach(element => reveal.observe(element));
+  } else {
+    entering.forEach(element => element.classList.add('is-in'));
+  }
+
+  const hero = document.querySelector('.intro');
   let frame = 0;
   let listVisible = false;
   let heroVisible = true;
@@ -55,27 +89,20 @@
       for (const period of periods) if (period.getBoundingClientRect().top <= middle) active = period;
       for (const period of periods) period.classList.toggle('is-active', period === active);
     }
-    // Parallax cadangan untuk browser tanpa animation-timeline; CSS menangani sisanya.
-    if (heroVisible && !cssTimeline && !reduce?.matches && document.querySelector('main.is-home')) {
-      const y = Math.max(0, scrollY);
-      for (const layer of layers) layer.style.translate = `0 ${(y * Number(layer.dataset.depth || 0)).toFixed(1)}px`;
+    // Kemajuan gulir di hero (0 di atas, 1 setelah satu layar) menggerakkan lapisan parallax.
+    if (hero && heroVisible && motion()) {
+      const progress = Math.max(0, Math.min(1, scrollY / Math.max(1, hero.offsetTop + hero.offsetHeight)));
+      hero.style.setProperty('--hero-p', progress.toFixed(4));
     }
   }
   const schedule = () => { if (!frame) frame = requestAnimationFrame(render); };
 
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(entries => {
-      for (const entry of entries) {
-        if (entry.target === list) listVisible = entry.isIntersecting;
-        if (entry.target === hero) heroVisible = entry.isIntersecting;
-      }
-      schedule();
-    }, { rootMargin: '20% 0px' }).observe(list);
-    if (hero) new IntersectionObserver(([entry]) => { heroVisible = entry.isIntersecting; }).observe(hero);
+    new IntersectionObserver(([entry]) => { listVisible = entry.isIntersecting; schedule(); }, { rootMargin: '20% 0px' }).observe(list);
+    if (hero) new IntersectionObserver(([entry]) => { heroVisible = entry.isIntersecting; schedule(); }).observe(hero);
   } else {
     listVisible = true;
   }
-  layers.forEach((layer, index) => { layer.dataset.depth = index === 0 ? '.12' : '.3'; });
   addEventListener('scroll', schedule, { passive: true });
   addEventListener('resize', schedule, { passive: true });
   addEventListener('hashchange', schedule);
