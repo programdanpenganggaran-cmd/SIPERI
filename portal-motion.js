@@ -1,11 +1,12 @@
 'use strict';
 (() => {
   function syncMotion() {
-    document.body.toggleAttribute('data-motion-enabled', true);
+    document.body.toggleAttribute('data-motion-enabled', document.documentElement.classList.contains('motion-ok'));
     document.body.toggleAttribute('data-motion-paused', document.hidden);
   }
   if (document.body?.toggleAttribute) {
     document.addEventListener('visibilitychange', syncMotion);
+    addEventListener('siperi-motion', syncMotion);
     syncMotion();
   }
   const directory = document.getElementById('nav-directory');
@@ -34,6 +35,7 @@
       if (!entry.isIntersecting || !waiting.has(entry.target)) continue;
       waiting.delete(entry.target);
       observer.unobserve(entry.target);
+      if (!document.documentElement.classList.contains('motion-ok')) continue;
       try {
         // Tidak mengubah gaya dasar: konten tetap terlihat bila animasi dibatalkan.
         const animation = entry.target.animate([

@@ -269,18 +269,17 @@ footer :focus-visible { outline-color: #fff; }
   .bot-dialog[open] { overflow-y: auto; overscroll-behavior: contain; }
   .bot-content { flex: 0 0 auto; overflow: visible; }
 }
-@media (prefers-reduced-motion:no-preference) {
-  button, .home-services > a, .primary-navigation a, .book-shortcut-action, .knowledge-shortcut-action { transition: background-color 160ms ease, border-color 160ms ease; }
-  .document-stream i { animation: document-flow 4s ease-out 1 both; }
-  .document-stream i:nth-child(even) { animation-duration: 4.5s; }
-  @keyframes document-flow { from { translate: 0 -40px; } to { translate: 0 0; } }
-  .scroll-symbol { animation: scroll-hint 1.3s ease-in-out 3; }
-  @keyframes scroll-hint { 0%,100% { transform: translateY(0); } 55% { transform: translateY(5px); } }
-  .bot-launcher img { transition: transform 160ms ease; }
-  .bot-launcher:hover img { transform: translateY(-4px); }
-  .bot-dialog[open] { animation: bot-appear 160ms ease-out; }
-  @keyframes bot-appear { from { opacity: .7; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-}
+/* Gerak mengikuti tombol jeda di header (kelas .motion-ok), bukan setelan sistem. */
+.motion-ok button, .motion-ok .home-services > a, .motion-ok .primary-navigation a, .motion-ok .book-shortcut-action, .motion-ok .knowledge-shortcut-action { transition: background-color 160ms ease, border-color 160ms ease; }
+.motion-ok .document-stream i { animation: document-flow 4s ease-out 1 both; }
+.motion-ok .document-stream i:nth-child(even) { animation-duration: 4.5s; }
+@keyframes document-flow { from { translate: 0 -40px; } to { translate: 0 0; } }
+.motion-ok .scroll-symbol { animation: scroll-hint 1.3s ease-in-out 3; }
+@keyframes scroll-hint { 0%,100% { transform: translateY(0); } 55% { transform: translateY(5px); } }
+.motion-ok .bot-launcher img { transition: transform 160ms ease; }
+.motion-ok .bot-launcher:hover img { transform: translateY(-4px); }
+.motion-ok .bot-dialog[open] { animation: bot-appear 160ms ease-out; }
+@keyframes bot-appear { from { opacity: .7; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width:1256px) {
   .topbar, .home-services { margin-left: 28px; margin-right: 28px; }
 }
@@ -379,10 +378,8 @@ footer :focus-visible { outline-color: #fff; }
   .filters > div:last-child { grid-column: auto; }
   .catalog-actions { flex-direction: column; }
 }
-@media (prefers-reduced-motion:reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; }
-  .document-stream i, .scroll-symbol, .bot-dialog[open] { animation: none; }
-}
+html:not(.motion-ok), html:not(.motion-ok) *, html:not(.motion-ok) *::before, html:not(.motion-ok) *::after { scroll-behavior: auto !important; }
+html:not(.motion-ok) .document-stream i, html:not(.motion-ok) .scroll-symbol, html:not(.motion-ok) .bot-dialog[open] { animation: none; }
 
 .site-navigation { max-width: 960px; min-height: 60px; margin-top: 12px; top: 12px; padding: 6px 12px; gap: 12px; flex-wrap: wrap; }
 .primary-navigation { flex-wrap: wrap; }
@@ -490,6 +487,4 @@ body[data-motion-enabled] .document-stream i, body[data-motion-enabled] .documen
   .home-services > a { min-height: 440px; }
   .motion-toggle { top: 4px; font-size: .68rem; }
 }
-@media (prefers-reduced-motion:reduce) {
-  body:not([data-motion-enabled]) .document-stream i, body:not([data-motion-enabled]) .document-stream i::after, body:not([data-motion-enabled]) .service-art * { animation: none !important; }
-}
+body:not([data-motion-enabled]) .document-stream i, body:not([data-motion-enabled]) .document-stream i::after, body:not([data-motion-enabled]) .service-art * { animation: none !important; }

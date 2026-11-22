@@ -11,6 +11,26 @@
   const year = now.getFullYear();
   const motion = () => root.classList.contains('motion-ok');
 
+  // Tombol jeda/jalankan animasi di samping tombol tema. Pilihan disimpan di perangkat ini.
+  const motionButton = document.getElementById('motion-toggle');
+  function syncMotionButton() {
+    const on = motion();
+    const label = on ? 'Jeda animasi' : 'Jalankan animasi';
+    motionButton.setAttribute('aria-label', label);
+    motionButton.title = label;
+    motionButton.setAttribute('aria-pressed', String(!on));
+  }
+  if (motionButton) {
+    motionButton.addEventListener('click', () => {
+      const on = !motion();
+      root.classList.toggle('motion-ok', on);
+      try { localStorage.setItem('siperi-motion', on ? 'on' : 'off'); } catch {}
+      syncMotionButton();
+      dispatchEvent(new Event('siperi-motion'));
+    });
+    syncMotionButton();
+  }
+
   document.querySelectorAll('[data-year]').forEach(node => {
     node.textContent = String(year + Number(node.dataset.year || 0));
   });
@@ -42,7 +62,7 @@
   const layers = [...document.querySelectorAll('.map-layer')];
   for (const layer of layers) {
     const source = layer.classList.contains('map-far') ? 'peta-kontur.svg' : 'peta-persil.svg';
-    if (!motion() || !window.fetch) { layer.classList.add('is-static'); continue; }
+    if (!window.fetch) { layer.classList.add('is-static'); continue; }
     const fallback = setTimeout(() => layer.classList.add('is-static'), 2500);
     fetch(source).then(response => response.ok ? response.text() : Promise.reject())
       .then(text => {
@@ -60,7 +80,7 @@
 
   // Bagian muncul sekali saat pertama kali terlihat.
   const entering = [...document.querySelectorAll('.cycle-head, .period, .app-showcase')];
-  if ('IntersectionObserver' in window && motion()) {
+  if ('IntersectionObserver' in window) {
     const reveal = new IntersectionObserver(entries => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
@@ -90,7 +110,7 @@
       for (const period of periods) period.classList.toggle('is-active', period === active);
     }
     // Kemajuan gulir di hero (0 di atas, 1 setelah satu layar) menggerakkan lapisan parallax.
-    if (hero && heroVisible && motion()) {
+    if (hero && heroVisible) {
       const progress = Math.max(0, Math.min(1, scrollY / Math.max(1, hero.offsetTop + hero.offsetHeight)));
       hero.style.setProperty('--hero-p', progress.toFixed(4));
     }

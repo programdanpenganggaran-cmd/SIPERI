@@ -79,7 +79,7 @@ function route() {
   animatePage();
 }
 function animatePage() {
-  if (!window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!document.documentElement?.classList?.contains('motion-ok')) return;
   for (const id of ['page-title','katalog']) {
     const element = document.getElementById(id);
     if (!element.animate) continue;
@@ -199,7 +199,7 @@ document.getElementById('search-form').addEventListener('submit', event => {even
 document.getElementById('scroll-data').addEventListener('click', event => {
   event.preventDefault();
   const target = document.getElementById(page === 'beranda' ? 'siklus' : 'katalog');
-  const reduce = !window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduce = !document.documentElement?.classList?.contains('motion-ok');
   target.focus({preventScroll:true});
   target.scrollIntoView({behavior:reduce ? 'auto' : 'smooth',block:'start'});
 });

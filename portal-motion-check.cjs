@@ -4,7 +4,7 @@ const path = require('node:path');
 const assert = require('node:assert/strict');
 const code = fs.readFileSync(path.join(__dirname, 'portal-motion.js'), 'utf8');
 
-function setup({ reduced = false, observerSupported = true, animationSupported = true, menuPresent = true } = {}) {
+function setup({ reduced = false, paused = false, observerSupported = true, animationSupported = true, menuPresent = true } = {}) {
   const animationCalls = [], animations = [], observed = new Set();
   const media = { matches: reduced, addEventListener(type, handler) { this.onchange = handler; } };
   function element(blocked = false) {
@@ -32,7 +32,8 @@ function setup({ reduced = false, observerSupported = true, animationSupported =
     unobserve(target) { observed.delete(target); }
     disconnect() { observed.clear(); }
   }
-  const document = { getElementById: () => menuPresent ? directory : null, querySelectorAll: () => [first, second, result, bot] };
+  const documentElement = { classList: { contains: name => name === 'motion-ok' && !paused } };
+  const document = { documentElement, getElementById: () => menuPresent ? directory : null, querySelectorAll: () => [first, second, result, bot] };
   const window = { matchMedia: () => media, ...(observerSupported ? { IntersectionObserver: Observer } : {}) };
   vm.runInNewContext(code, { document, window });
   return { directory, summary, link, outsideLink, media, first, second, result, bot, observed, animationCalls, animations, get observer() { return observer; } };
@@ -66,6 +67,12 @@ reduced.observer.callback([{ target: reduced.first, isIntersecting: true }]);
 assert.equal(reduced.animationCalls.length, 1);
 assert.deepEqual(reduced.first.style, {});
 
+// Tombol jeda di header mematikan .motion-ok: konten tetap tampil tanpa animasi.
+const paused = setup({ paused: true });
+paused.observer.callback([{ target: paused.first, isIntersecting: true }]);
+assert.equal(paused.animationCalls.length, 0);
+assert.deepEqual(paused.first.style, {});
+
 const unsupported = setup({ observerSupported: false });
 assert.equal(unsupported.observer, undefined);
 assert.equal(unsupported.animationCalls.length, 0);
@@ -92,4 +99,4 @@ unsupported.directory.handlers.keydown({ key: 'Escape', preventDefault() { preve
 assert.equal(prevented, false);
 assert.equal(unsupported.directory.handlers.keyup, undefined);
 assert.doesNotThrow(() => setup({ menuPresent: false }));
-console.log('PASS motion: progressive visibility, one-shot automatic reveal, unsupported observer, protected results/bot and native directory close/focus.');
+console.log('PASS motion: progressive visibility, pause button, one-shot automatic reveal, unsupported observer, protected results/bot and native directory close/focus.');

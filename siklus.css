@@ -24,8 +24,8 @@ h1, h2, h3, .brand-copy { letter-spacing: -.03em; }
 .map-far { background-image: url("peta-kontur.svg"); }
 .map-near { background-image: url("peta-persil.svg"); }
 .map-layer svg { display: block; width: 100%; height: 100%; }
-/* Saat animasi diizinkan, peta menunggu versi inline agar dapat digambar dari kosong. */
-.motion-ok .map-layer:not(.is-static) { background-image: none; }
+/* Saat animasi menyala, peta menunggu versi inline agar dapat digambar dari kosong. Versi inline selalu menggantikan gambar latar. */
+.motion-ok .map-layer:not(.is-static), .map-layer.is-inline { background-image: none; }
 
 /* Kartu Bulan ini menggantikan daftar akses cepat yang mengulang isi halaman. */
 .now-card { display: none; }
@@ -81,9 +81,16 @@ h1, h2, h3, .brand-copy { letter-spacing: -.03em; }
 .lane-links a:hover { text-decoration: underline; }
 .cycle-source { max-width: 80ch; margin: 28px 0 0; color: var(--muted); font-size: .82rem; line-height: 1.7; }
 
+/* ---------- Tombol jeda animasi (di samping tombol tema) ---------- */
+.site-navigation .theme-toggle.motion-switch { margin-left: auto; }
+.site-navigation .motion-switch + .theme-toggle { margin-left: 0; }
+.motion-switch .play-icon { display: none; }
+.motion-switch[aria-pressed="true"] .pause-icon { display: none; }
+.motion-switch[aria-pressed="true"] .play-icon { display: block; }
+
 /* ---------- Gerak ----------
-   Semua gerak hanya berlaku dengan kelas .motion-ok di <html>: diberikan saat perangkat tidak meminta
-   gerak dikurangi (atau dipaksa di dummy). Tanpa kelas itu, setiap elemen tampil diam dan utuh. */
+   Semua gerak hanya berlaku dengan kelas .motion-ok di <html>. Kelas ini menyala secara bawaan dan
+   dimatikan lewat tombol jeda di header. Tanpa kelas itu, setiap elemen tampil diam dan utuh. */
 @property --reveal { syntax: '<percentage>'; inherits: false; initial-value: 115%; }
 .cycle { overflow-x: clip; }
 .motion-ok .is-home .intro { --ease-out: cubic-bezier(.22, 1, .36, 1); }

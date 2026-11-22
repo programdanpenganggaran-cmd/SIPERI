@@ -5,7 +5,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); }
 a, button, summary, select, input, textarea { touch-action: manipulation; }
 ::selection { background: #ffd67a; color: #14304f; }
-@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+html.motion-ok { scroll-behavior: smooth; }
 
 .mobile-tabbar { display: none; }
 
@@ -104,11 +104,11 @@ a, button, summary, select, input, textarea { touch-action: manipulation; }
   [data-theme=dark] .nav-directory nav a:hover, [data-theme=dark] .nav-directory nav a.current { background: #264565; border-color: #809bb9; color: #fff; }
 }
 
-@media (max-width: 700px) and (prefers-reduced-motion: no-preference), (pointer: coarse) and (max-height: 500px) and (max-width: 1000px) and (prefers-reduced-motion: no-preference) {
-  .tab-icon { transition: background-color .2s ease, transform .12s ease; }
-  .mobile-tabbar > :active .tab-icon { transform: scale(.92); }
-  .nav-directory[open] nav { animation: siperi-sheet-up .34s cubic-bezier(.22, 1, .36, 1); }
-  .nav-directory[open]::before { animation: siperi-fade-in .24s ease-out; }
+@media (max-width: 700px), (pointer: coarse) and (max-height: 500px) and (max-width: 1000px) {
+  .motion-ok .tab-icon { transition: background-color .2s ease, transform .12s ease; }
+  .motion-ok .mobile-tabbar > :active .tab-icon { transform: scale(.92); }
+  .motion-ok .nav-directory[open] nav { animation: siperi-sheet-up .34s cubic-bezier(.22, 1, .36, 1); }
+  .motion-ok .nav-directory[open]::before { animation: siperi-fade-in .24s ease-out; }
 }
 @keyframes siperi-sheet-up { from { transform: translateY(100%); } to { transform: none; } }
 @keyframes siperi-fade-in { from { opacity: 0; } }
